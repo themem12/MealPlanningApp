@@ -67,9 +67,15 @@ struct TodayResumeView: View {
             .font(.system(size: 14, weight: .light))
             .padding(.top, 12)
             HStack {
-                ForEach(viewModel.meals) { meal in
-                    MealResumeCard(meal: meal)
+                ForEach(MealType.completeMealsOrdered) { mealType in
+                    if let meal = viewModel.meals.first(
+                        where: { $0.mealType == mealType }
+                    ) {
+                        MealResumeCard(
+                            meal: meal
+                        )
                         .padding(.vertical, 8)
+                    }
                 }
             }
             VStack(spacing: 8) {
