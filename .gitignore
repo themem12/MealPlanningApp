@@ -6,5 +6,5 @@ DerivedData/
 *.xcuserstate
 xcuserdata/
 
-# Swift Package Manager
+# SwiftPM
 .build/
