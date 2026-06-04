@@ -82,7 +82,7 @@ private struct DayCardView: View {
                 }
             }
             if isSelected {
-                MealsCardsView(
+                MealsCardView(
                     meals: meals,
                     mealTapped: mealTapped
                 )
@@ -142,7 +142,7 @@ private struct HeaderCardView: View {
     }
 }
 
-private struct MealsCardsView: View {
+private struct MealsCardView: View {
 
     let meals: [Meal]
     let mealTapped: (Meal) -> Void
@@ -151,52 +151,10 @@ private struct MealsCardsView: View {
         VStack(spacing: 8) {
             ForEach(MealType.completeMealsOrdered) { mealType in
                 if let meal = meals.first(where: { $0.type == mealType }) {
-                    HStack {
-                        Rectangle()
-                            .fill(meal.type.color)
-                            .frame(width: 4)
-                        Group {
-                            ZStack {
-                                Circle()
-                                    .fill(meal.type.color.opacity(0.18))
-                                    .frame(width: 30, height: 30)
-                                Image(systemName: meal.type.icon)
-                                    .font(.system(size: 16))
-                                    .foregroundStyle(meal.type.color)
-                            }
-                            VStack(alignment: .leading) {
-                                Text(meal.type.title)
-                                    .font(.system(size: 14))
-                                    .foregroundStyle(AppColors.primaryText)
-                                if meal.items.isEmpty {
-                                    Text("Add foods")
-                                        .font(.system(size: 12))
-                                        .foregroundStyle(AppColors.secondaryText.opacity(0.6))
-                                } else {
-                                    Text(
-                                        meal.items.map(\.name).joined(separator: "· ")
-                                    )
-                                    .font(.system(size: 12))
-                                    .foregroundStyle(AppColors.secondaryText)
-                                }
-                            }
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(AppColors.primaryText)
-                        }
-                        .padding(.vertical)
-                        .padding(.trailing)
-                    }
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-                    }
-                    .onTapGesture {
-                        withAnimation(.spring()) {
+                    EditWeekMealCardView(meal: meal)
+                        .onTapGesture {
                             mealTapped(meal)
                         }
-                    }
                 } else {
                     Text("Something went wrong, please try again")
                         .font(.system(size: 24, weight: .bold))
@@ -205,6 +163,53 @@ private struct MealsCardsView: View {
             }
         }
         .padding(.bottom)
+    }
+}
+
+private struct EditWeekMealCardView: View {
+    let meal: Meal
+    var body: some View {
+        HStack {
+            Rectangle()
+                .fill(meal.type.color)
+                .frame(width: 4)
+            Group {
+                ZStack {
+                    Circle()
+                        .fill(meal.type.color.opacity(0.18))
+                        .frame(width: 30, height: 30)
+                    Image(systemName: meal.type.icon)
+                        .font(.system(size: 16))
+                        .foregroundStyle(meal.type.color)
+                }
+                VStack(alignment: .leading) {
+                    Text(meal.type.title)
+                        .font(.system(size: 14))
+                        .foregroundStyle(AppColors.primaryText)
+                    if meal.items.isEmpty {
+                        Text("Add foods")
+                            .font(.system(size: 12))
+                            .foregroundStyle(AppColors.secondaryText.opacity(0.6))
+                    } else {
+                        Text(
+                            meal.items.map(\.name).joined(separator: " · ")
+                        )
+                        .font(.system(size: 12))
+                        .foregroundStyle(AppColors.secondaryText)
+                    }
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundStyle(AppColors.primaryText)
+            }
+            .padding(.vertical)
+            .padding(.trailing)
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .overlay {
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+        }
     }
 }
 

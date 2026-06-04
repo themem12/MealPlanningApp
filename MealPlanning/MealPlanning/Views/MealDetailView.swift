@@ -149,7 +149,10 @@ private struct AddMealItemCardView: View {
             }.padding()
             Spacer()
         }
-        .appSoftCardStyle(background: mealType.color.opacity(0.1))
+        .appSoftPointedCardStyle(
+            background: mealType.color.opacity(0.1),
+            strokeColor: mealType.color.opacity(0.35)
+        )
         .onTapGesture {
             newMealTapped()
         }

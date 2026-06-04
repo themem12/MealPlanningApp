@@ -57,6 +57,36 @@ struct SoftCardStyle: ViewModifier {
     }
 }
 
+struct SoftPointedCardStyle: ViewModifier {
+
+    let background: Color
+    let strokeColor: Color
+
+    func body(content: Content) -> some View {
+
+        content
+            .background(background)
+            .clipShape(
+                RoundedRectangle(cornerRadius: 24)
+            )
+            .overlay {
+                RoundedRectangle(cornerRadius: 24)
+                    .stroke(
+                        strokeColor,
+                        style: StrokeStyle(
+                            lineWidth: 1.5,
+                            dash: [8, 6]
+                        )
+                    )
+            }
+            .shadow(
+                color: .black.opacity(0.02),
+                radius: 8,
+                y: 3
+            )
+    }
+}
+
 extension View {
 
     func appCardStyle() -> some View {
@@ -65,5 +95,14 @@ extension View {
 
     func appSoftCardStyle(background: Color) -> some View {
         modifier(SoftCardStyle(background: background))
+    }
+
+    func appSoftPointedCardStyle(background: Color, strokeColor: Color) -> some View {
+        modifier(
+            SoftPointedCardStyle(
+                background: background,
+                strokeColor: strokeColor
+            )
+        )
     }
 }
