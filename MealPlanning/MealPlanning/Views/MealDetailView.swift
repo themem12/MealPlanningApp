@@ -50,8 +50,10 @@ struct MealDetailView: View {
         )
         .sheet(isPresented: $showAddFoodSheet) {
             AddFoodItemView(
-                viewModel: AddFoodItemViewModel(onSave: { foodItem in
-                    viewModel.addFoodItem(foodItem)
+                viewModel: AddFoodItemViewModel(
+                    mealType: viewModel.meal.type,
+                    onSave: { foodItem in
+                        viewModel.addFoodItem(foodItem)
                 })
             )
         }

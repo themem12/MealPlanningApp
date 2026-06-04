@@ -16,8 +16,10 @@ final class AddFoodItemViewModel {
     var didSaveFood = false
 
     private let onSave: (FoodItem) -> Void
+    private(set) var mealType: MealType
 
-    init(onSave: @escaping (FoodItem) -> Void) {
+    init(mealType: MealType, onSave: @escaping (FoodItem) -> Void) {
+        self.mealType = mealType
         self.onSave = onSave
     }
 
@@ -56,7 +58,7 @@ final class AddFoodItemViewModel {
     }
 
     private func validateCalories(_ calories: String) -> Int? {
-        guard !calories.isEmpty else { return nil }
+        guard !calories.isEmpty else { return 0 }
         let caloriesCount = Int(calories)
         return caloriesCount
     }
