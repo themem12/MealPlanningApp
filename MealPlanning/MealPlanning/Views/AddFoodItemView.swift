@@ -101,6 +101,9 @@ struct AddFoodItemView: View {
         }
         .padding()
         .presentationDetents([.medium])
+        .onAppear() {
+            focusedField = .foodName
+        }
         .onChange(of: viewModel.didSaveFood) {
             dismiss()
         }
