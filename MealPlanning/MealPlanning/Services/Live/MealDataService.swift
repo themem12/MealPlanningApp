@@ -19,6 +19,10 @@ protocol MealDataServiceProtocol {
         foodItem: FoodItem
     )
 
+    func editFoodItem(
+        _ foodItem: FoodItem
+    )
+
     func completeMeal(
         _ meal: Meal
     )
@@ -78,6 +82,10 @@ final class LiveMealDataService: MealDataServiceProtocol {
         meal.items.append(foodItem)
         
         // TODO: catch the error
+        try? context.save()
+    }
+
+    func editFoodItem(_ foodItem: FoodItem) {
         try? context.save()
     }
 

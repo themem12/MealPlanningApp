@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddFoodItemView: View {
+struct FoodItemView: View {
 
     enum Field {
         case foodName
@@ -16,14 +16,11 @@ struct AddFoodItemView: View {
     }
 
     @Environment(\.dismiss) private var dismiss
-    @State private var foodField: String = ""
-    @State private var amountField: String = ""
-    @State private var caloriesField: String = ""
-    @State private var viewModel: AddFoodItemViewModel
+    @State private var viewModel: FoodItemViewModel
     
     @FocusState private var focusedField: Field?
 
-    init(viewModel: AddFoodItemViewModel) {
+    init(viewModel: FoodItemViewModel) {
         _viewModel = State(
             initialValue: viewModel
         )
@@ -49,7 +46,7 @@ struct AddFoodItemView: View {
                 placeholder: "Food Name",
                 icon: "fork.knife",
                 accentColor: viewModel.mealType.color,
-                text: $foodField
+                text: $viewModel.foodField
             )
             .focused($focusedField, equals: .foodName)
             .submitLabel(.next)
@@ -60,7 +57,7 @@ struct AddFoodItemView: View {
                 placeholder: "Portion",
                 icon: "scalemass",
                 accentColor: viewModel.mealType.color,
-                text: $amountField
+                text: $viewModel.amountField
             )
             .focused($focusedField, equals: .portion)
             .submitLabel(.next)
@@ -72,7 +69,7 @@ struct AddFoodItemView: View {
                 icon: "flame",
                 keyboardType: .numberPad,
                 accentColor: viewModel.mealType.color,
-                text: $caloriesField
+                text: $viewModel.caloriesField
             )
             .focused($focusedField, equals: .calories)
             .submitLabel(.next)
@@ -81,13 +78,9 @@ struct AddFoodItemView: View {
             }
             Spacer()
             Button {
-                viewModel.validateValues(
-                    foodName: foodField,
-                    amount: amountField,
-                    calories: caloriesField
-                )
+                viewModel.validateValues()
             } label: {
-                Text("Add Food")
+                Text(viewModel.buttonTitle)
                     .fontWeight(.semibold)
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
@@ -119,7 +112,7 @@ struct AddFoodItemView: View {
 }
 
 #Preview {
-    AddFoodItemView(
-        viewModel: AddFoodItemViewModel(mealType: .breakfast, onSave: { _ in})
+    FoodItemView(
+        viewModel: FoodItemViewModel(mealType: .breakfast, onSave: { _ in})
     )
 }

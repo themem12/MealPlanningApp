@@ -10,8 +10,7 @@ import SwiftData
 
 struct MealDetailView: View {
 
-    @State private var showAddFoodSheet: Bool = false
-    private let viewModel: MealDetailViewModel
+    @State private var viewModel: MealDetailViewModel
 
     init(viewModel: MealDetailViewModel) {
         self.viewModel = viewModel
@@ -24,7 +23,7 @@ struct MealDetailView: View {
             if viewModel.meal.items.isEmpty {
                 Spacer()
                 EmptyMealView(mealType: viewModel.meal.type) {
-                    showAddFoodSheet = true
+                    viewModel.addFoodItemTapped()
                 }
                 Spacer()
             } else {
@@ -36,9 +35,12 @@ struct MealDetailView: View {
                         )
                         .padding(.horizontal)
                         .padding(.top)
+                        .onTapGesture {
+                            viewModel.editFoodItemTapped(foodItem)
+                        }
                     }
                     AddMealItemCardView(mealType: viewModel.meal.type) {
-                        showAddFoodSheet = true
+                        viewModel.addFoodItemTapped()
                     }
                     .padding(.horizontal)
                     .padding(.top)
@@ -48,13 +50,9 @@ struct MealDetailView: View {
         .background(
             viewModel.meal.type.color.opacity(0.1)
         )
-        .sheet(isPresented: $showAddFoodSheet) {
-            AddFoodItemView(
-                viewModel: AddFoodItemViewModel(
-                    mealType: viewModel.meal.type,
-                    onSave: { foodItem in
-                        viewModel.addFoodItem(foodItem)
-                })
+        .sheet(isPresented: $viewModel.showAddFoodSheet) {
+            FoodItemView(
+                viewModel: viewModel.getFoodItemViewModel()
             )
         }
     }

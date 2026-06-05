@@ -8,7 +8,7 @@
 import Foundation
 
 final class MockMealDataService: MealDataServiceProtocol {
-    
+
     func getOrCreatePlan(for day: WeekDay) -> DayPlan {
         DayPlan(day: .monday, meals: [
             Meal(type: .breakfast),
@@ -20,6 +20,8 @@ final class MockMealDataService: MealDataServiceProtocol {
     }
     
     func addFoodItem(to meal: Meal, foodItem: FoodItem) { }
+
+    func editFoodItem(_ foodItem: FoodItem) { }
 
     func completeMeal(_ meal: Meal) { }
 
