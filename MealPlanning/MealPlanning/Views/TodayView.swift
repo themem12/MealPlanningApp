@@ -27,7 +27,7 @@ struct TodayView: View {
                         viewModel: viewModel.makeResumeViewModel(with: dayRecord)
                     )
                 } else {
-                    if let todaysPlan = viewModel.currentDayPlan {
+                    if !viewModel.sortedMeals.isEmpty {
                         VStack(alignment: .leading) {
                             Group {
                                 HStack(spacing: 8) {
@@ -43,7 +43,7 @@ struct TodayView: View {
                                     .foregroundStyle(AppColors.primaryText)
                             }.padding(.horizontal)
                             ScrollView {
-                                ForEach(todaysPlan.meals) { meal in
+                                ForEach(viewModel.sortedMeals) { meal in
                                     Button {
                                         selectedMeal = meal
                                     } label: {
@@ -55,7 +55,7 @@ struct TodayView: View {
                                 }
                             }
                             Button {
-                                viewModel.endDay()
+                                viewModel.endDayTapped()
                             } label: {
                                 HStack(spacing: 12) {
                                     Image(systemName: "flag.pattern.checkered")
@@ -81,6 +81,7 @@ struct TodayView: View {
                     }
                 }
             }
+            .background(AppColors.background)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink {
@@ -100,7 +101,14 @@ struct TodayView: View {
                     viewModel: viewModel.makeMealDetailViewModel(for: meal)
                 )
             }
-            .background(AppColors.background)
+            .alert(
+                viewModel.alertMessage,
+                isPresented: $viewModel.showAlert) {
+                    Button(role: .confirm) {
+                        viewModel.confirmEndDay()
+                    }
+                    Button(role: .cancel, action: {})
+                }
         }
     }
 }
@@ -158,16 +166,24 @@ struct MealCard: View {
             .padding()
             Spacer()
             Button {
-                meal.isCompleted.toggle()
+                if hasItems {
+                    meal.isCompleted.toggle()
+                }
             } label: {
-                if meal.isCompleted {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundStyle(AppColors.lunch)
+                if !hasItems {
+                    Image(systemName: "circle")
+                        .foregroundStyle(Color.gray.opacity(0.2))
                         .font(.system(size: 30))
                 } else {
-                    Image(systemName: "circle")
-                        .foregroundStyle(Color.gray.opacity(0.5))
-                        .font(.system(size: 30))
+                    if meal.isCompleted {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundStyle(AppColors.lunch)
+                            .font(.system(size: 30))
+                    } else {
+                        Image(systemName: "circle")
+                            .foregroundStyle(Color.gray.opacity(0.5))
+                            .font(.system(size: 30))
+                    }
                 }
             }
             .buttonStyle(.plain)

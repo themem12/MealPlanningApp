@@ -43,8 +43,8 @@ struct MealPlanningApp: App {
 
             let debugDay = formatter.date(from: "2026/06/6")!
 
-            dateProvider = MockDateProvider(today: debugDay)
-//            dateProvider = LiveDateProvider()
+//            dateProvider = MockDateProvider(today: debugDay)
+            dateProvider = LiveDateProvider()
             
             service = LiveMealDataService(
                 context: context,

@@ -13,13 +13,21 @@ import SwiftUI
 final class TodayViewModel {
     private(set) var service: MealDataServiceProtocol
     private let dateProvider: DateProvider
-
-    var currentDayPlan: DayPlan?
+    private var currentDayPlan: DayPlan?
+    
     var title = "Good day"
     var titleIcon = ""
     var titleIconColor: Color = .clear
     var dateTitle = "Today"
     var dayRecord: DayRecord?
+    var alertMessage: String = ""
+    var showAlert: Bool = false
+
+    var sortedMeals: [Meal] {
+        currentDayPlan?.meals.sorted {
+            $0.type.order < $1.type.order
+        } ?? []
+    }
 
     init(service: MealDataServiceProtocol, dateProvider: DateProvider) {
         self.service = service
@@ -41,7 +49,18 @@ final class TodayViewModel {
         )
     }
 
-    func endDay() {
+    func endDayTapped() {
+        for meal in sortedMeals {
+            if !meal.items.isEmpty && !meal.isCompleted {
+                alertMessage = "Are you sure you want to finish the day? Some meals are not completed yet"
+                showAlert = true
+                return
+            }
+        }
+        confirmEndDay()
+    }
+    
+    func confirmEndDay() {
         guard let currentDayPlan else { return }
         service.endDay(for: currentDayPlan)
         dayRecord = service.getTodayRecord()
