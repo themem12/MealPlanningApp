@@ -35,8 +35,13 @@ struct MealDetailView: View {
                         )
                         .padding(.horizontal)
                         .padding(.top)
-                        .onTapGesture {
-                            viewModel.editFoodItemTapped(foodItem)
+                        .contextMenu {
+                            Button("Edit") {
+                                viewModel.editFoodItemTapped(foodItem)
+                            }
+                            Button("Delete", role: .destructive) {
+                                viewModel.deleteFoodItemTapped(foodItem)
+                            }
                         }
                     }
                     AddMealItemCardView(mealType: viewModel.meal.type) {
@@ -46,6 +51,18 @@ struct MealDetailView: View {
                     .padding(.top)
                 }.background(AppColors.background)
             }
+        }
+        .alert(
+            "Delete Food Item",
+            isPresented: $viewModel.showDeleteConfirmation
+        ) {
+            Button("Delete", role: .destructive) {
+                viewModel.deleteFoodItemConfirmed()
+            }
+
+            Button("Keep", role: .cancel) { }
+        } message: {
+            Text("This action cannot be undone.")
         }
         .background(
             viewModel.meal.type.color.opacity(0.1)

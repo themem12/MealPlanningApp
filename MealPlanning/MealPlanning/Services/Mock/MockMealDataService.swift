@@ -23,6 +23,8 @@ final class MockMealDataService: MealDataServiceProtocol {
 
     func editFoodItem(_ foodItem: FoodItem) { }
 
+    func deleteFoodItem(_ foodItem: FoodItem, from meal: Meal) { }
+
     func completeMeal(_ meal: Meal) { }
 
     func endDay(for dayPlan: DayPlan) { }

@@ -23,6 +23,11 @@ protocol MealDataServiceProtocol {
         _ foodItem: FoodItem
     )
 
+    func deleteFoodItem(
+        _ foodItem: FoodItem,
+        from meal: Meal
+    )
+
     func completeMeal(
         _ meal: Meal
     )
@@ -86,6 +91,12 @@ final class LiveMealDataService: MealDataServiceProtocol {
     }
 
     func editFoodItem(_ foodItem: FoodItem) {
+        try? context.save()
+    }
+
+    func deleteFoodItem(_ foodItem: FoodItem, from meal: Meal) {
+        meal.items.removeAll { $0.id == foodItem.id }
+        context.delete(foodItem)
         try? context.save()
     }
 
