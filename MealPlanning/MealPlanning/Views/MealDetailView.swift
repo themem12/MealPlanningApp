@@ -35,6 +35,9 @@ struct MealDetailView: View {
                         )
                         .padding(.horizontal)
                         .padding(.top)
+                        .onTapGesture {
+                            viewModel.editFoodItemTapped(foodItem)
+                        }
                         .contextMenu {
                             Button("Edit") {
                                 viewModel.editFoodItemTapped(foodItem)
