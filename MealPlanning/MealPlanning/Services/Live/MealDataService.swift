@@ -33,7 +33,12 @@ protocol MealDataServiceProtocol {
     )
 
     func endDay(
-        for dayPlan: DayPlan
+        for dayPlan: DayPlan,
+        date: Date
+    )
+
+    func endToday(
+        with dayPlan: DayPlan
     )
 
     func dayEnded(
@@ -43,6 +48,8 @@ protocol MealDataServiceProtocol {
     func getTodayRecord() -> DayRecord?
 
     func getMonthRecord(month: Date) -> [DayRecord]
+
+    func getLastRecord() -> DayRecord?
 }
 
 final class LiveMealDataService: MealDataServiceProtocol {
@@ -108,14 +115,18 @@ final class LiveMealDataService: MealDataServiceProtocol {
         try? context.save()
     }
 
-    func endDay(for dayPlan: DayPlan) {
-        let today = dateProvider.today
+    func endToday(with dayPlan: DayPlan) {
+        endDay(for: dayPlan, date: dateProvider.today)
+    }
 
-        guard !dayEnded(for: today) else {
+    func endDay(for dayPlan: DayPlan, date: Date) {
+        guard !dayEnded(for: date) else {
             // Day already end
             return
         }
-        let dayRecord = DayRecord(date: today, from: dayPlan, isCompleted: true)
+        print("before record: ", dayPlan.meals.filter(\.isCompleted).count)
+        let dayRecord = DayRecord(date: date, from: dayPlan, isCompleted: true)
+        print("after record: ", dayRecord.meals.filter(\.isCompleted).count)
         context.insert(dayRecord)
         try? context.save()
         dayPlan.meals = dayPlan.meals.map({ meal in
@@ -167,6 +178,18 @@ final class LiveMealDataService: MealDataServiceProtocol {
         )
 
         return (try? context.fetch(descriptor)) ?? []
+    }
+
+    func getLastRecord() -> DayRecord? {
+        var descriptor = FetchDescriptor<DayRecord>(
+            sortBy: [
+                SortDescriptor(\.date, order: .reverse)
+            ]
+        )
+        
+        descriptor.fetchLimit = 1
+        
+        return try? context.fetch(descriptor).first
     }
 
     private func createDefaultMeals() -> [Meal] {

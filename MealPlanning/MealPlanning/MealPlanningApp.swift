@@ -10,9 +10,12 @@ import SwiftData
 
 @main
 struct MealPlanningApp: App {
-    
+
+    @Environment(\.scenePhase) private var scenePhase
+
     let sharedModelContainer: ModelContainer
     let service: MealDataServiceProtocol
+    let historyMaintenanceService: HistoryMaintenanceServiceProtocol
     let dateProvider: DateProvider
     
     init() {
@@ -41,13 +44,29 @@ struct MealPlanningApp: App {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy/MM/dd"
 
-            let debugDay = formatter.date(from: "2026/06/14")!
+            let debugDay = formatter.date(from: "2026/08/03")!
 
             dateProvider = MockDateProvider(today: debugDay)
 //            dateProvider = LiveDateProvider()
             
             service = LiveMealDataService(
                 context: context,
+                dateProvider: dateProvider
+            )
+
+//            for weekDay in WeekDay.orderedCases {
+//                let dayPlan = service.getOrCreatePlan(for: weekDay)
+//                for meal in dayPlan.meals {
+//                    service.addFoodItem(
+//                        to: meal, foodItem: FoodItem(
+//                            name: "Comida", portion: "123 gr", calories: 0
+//                        )
+//                    )
+//                }
+//            }
+
+            historyMaintenanceService = LiveHistoryMaintenanceService(
+                mealService: service,
                 dateProvider: dateProvider
             )
             
@@ -65,8 +84,13 @@ struct MealPlanningApp: App {
                         dateProvider: dateProvider
                     )
             )
-                .preferredColorScheme(.light)
+            .preferredColorScheme(.light)
         }
         .modelContainer(sharedModelContainer)
+        .onChange(of: scenePhase) { _, newValue in
+            if newValue == .active {
+                historyMaintenanceService.processPendingDays()
+            }
+        }
     }
 }

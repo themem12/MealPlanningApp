@@ -11,11 +11,13 @@ struct MealCard: View {
     private let hasItems: Bool
     private let meal: Meal
     private let isRecord: Bool
+    private let onToggleCompletion: () -> Void
 
-    init(meal: Meal, isRecord: Bool = false) {
+    init(meal: Meal, isRecord: Bool = false, completeMealToggle: @escaping () -> Void) {
         self.hasItems = !meal.items.isEmpty
         self.meal = meal
         self.isRecord = isRecord
+        self.onToggleCompletion = completeMealToggle
     }
 
     var body: some View {
@@ -73,7 +75,7 @@ struct MealCard: View {
             Spacer()
             Button {
                 if hasItems && !isRecord {
-                    meal.isCompleted.toggle()
+                    onToggleCompletion()
                 }
             } label: {
                 if !hasItems {
@@ -115,5 +117,5 @@ struct MealCard: View {
     return MealCard(
         meal: meal,
         isRecord: true
-    )
+    ) { }
 }

@@ -62,7 +62,7 @@ final class TodayViewModel {
     
     func confirmEndDay() {
         guard let currentDayPlan else { return }
-        service.endDay(for: currentDayPlan)
+        service.endToday(with: currentDayPlan)
         dayRecord = service.getTodayRecord()
     }
 

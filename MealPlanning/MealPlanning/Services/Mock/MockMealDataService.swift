@@ -27,7 +27,9 @@ final class MockMealDataService: MealDataServiceProtocol {
 
     func completeMeal(_ meal: Meal) { }
 
-    func endDay(for dayPlan: DayPlan) { }
+    func endToday(with dayPlan: DayPlan) { }
+
+    func endDay(for dayPlan: DayPlan, date: Date) { }
     
     func dayEnded(for date: Date) -> Bool {
         return true
@@ -40,4 +42,6 @@ final class MockMealDataService: MealDataServiceProtocol {
     func getMonthRecord(month: Date) -> [DayRecord] {
         return []
     }
+
+    func getLastRecord() -> DayRecord? { return nil }
 }

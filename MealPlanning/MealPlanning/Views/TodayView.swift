@@ -47,7 +47,9 @@ struct TodayView: View {
                                     Button {
                                         selectedMeal = meal
                                     } label: {
-                                        MealCard(meal: meal)
+                                        MealCard(meal: meal) {
+                                            viewModel.completeMeal(meal)
+                                        }
                                     }
                                     .buttonStyle(.plain)
                                     .padding(.top)

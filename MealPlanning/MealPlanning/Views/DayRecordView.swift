@@ -51,7 +51,7 @@ struct DayRecordView: View {
 
                 ScrollView {
                     ForEach(viewModel.meals) { meal in
-                        MealCard(meal: meal, isRecord: true)
+                        MealCard(meal: meal, isRecord: true) { }
                     }
                 }
                 .padding(.top)
