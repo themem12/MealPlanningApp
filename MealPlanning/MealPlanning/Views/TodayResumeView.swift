@@ -25,6 +25,51 @@ struct TodayResumeView: View {
                 .font(.system(size: 32, weight: .bold))
                 .foregroundStyle(AppColors.primaryText)
                 .padding(.bottom, 8)
+            if viewModel.isEmptyDay {
+                Spacer()
+                EmptyRecordDayView()
+                Spacer()
+            } else {
+                DayDataView(viewModel: viewModel)
+            }
+        }
+        .padding()
+        .background(AppColors.background)
+    }
+}
+
+struct EmptyRecordDayView: View {
+    var body: some View {
+        VStack(spacing: 24) {
+            ZStack(alignment: .bottomTrailing) {
+                Image(systemName: "calendar")
+                    .font(.system(size: 170))
+                    .foregroundStyle(AppColors.primaryGreen)
+                Image(systemName: "circle.slash")
+                    .font(.system(size: 70))
+                    .foregroundStyle(AppColors.primaryGreen)
+                    .background(AppColors.background)
+                    .clipShape(Circle())
+                Image(systemName: "fork.knife")
+                    .font(.system(size: 40))
+                    .foregroundStyle(AppColors.primaryGreen)
+                    .padding(.trailing, 23)
+                    .padding(.bottom, 17)
+            }
+            Text("No meals were planned today.")
+                .font(.system(size: 24, weight: .semibold))
+                .foregroundStyle(AppColors.primaryText)
+            Text("There's nothing to review for this day")
+                .font(.system(size: 16, weight: .light))
+                .foregroundStyle(AppColors.primaryText)
+        }.frame(maxWidth: .infinity)
+    }
+}
+
+private struct DayDataView: View {
+    let viewModel: TodayResumeViewModel
+    var body: some View {
+        VStack {
             ZStack {
                 Circle()
                     .stroke(
@@ -97,9 +142,7 @@ struct TodayResumeView: View {
                 .font(.system(size: 14))
                 .padding(.top, 12)
             Spacer()
-        }
-        .padding()
-        .background(AppColors.background)
+        }.frame(maxWidth: .infinity)
     }
 }
 

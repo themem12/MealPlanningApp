@@ -34,6 +34,12 @@ class Meal {
         self.items = items
         self.isCompleted = false
     }
+
+    init(mealRecord: MealRecord) {
+        self.type = mealRecord.type
+        self.items = mealRecord.items.map({ FoodItem(foodItemRecord: $0) })
+        self.isCompleted = mealRecord.isCompleted
+    }
 }
 
 @Model
@@ -47,6 +53,12 @@ class FoodItem {
         self.name = name
         self.portion = portion
         self.calories = calories
+    }
+
+    init(foodItemRecord: FoodItemRecord) {
+        self.name = foodItemRecord.name
+        self.portion = foodItemRecord.portion
+        self.calories = foodItemRecord.calories
     }
 }
 
@@ -62,6 +74,13 @@ class DayRecord {
         self.date = date
         self.meals = dayPlan.meals.map({ MealRecord(from: $0) })
         self.isCompleted = isCompleted
+    }
+
+    // This init is for an empty day record and will be used in History for the days that doesn't have a record
+    init(date: Date) {
+        self.date = date
+        self.meals = []
+        self.isCompleted = true
     }
 }
 

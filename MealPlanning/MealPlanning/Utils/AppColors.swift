@@ -40,6 +40,12 @@ enum AppColors {
     static let snack = Color(hex: "#87A4D5")
     static let lunch = Color(hex: "#4CAF50")
     static let dinner = Color(hex: "#8E77C5")
+
+    // MARK: - Day State
+
+    static let goodDay = Color(hex: "#5A9A59")
+    static let regularDay = Color(hex: "#B88B00")
+    static let missedDay = Color(hex: "#D65A4A")
 }
 
 extension Color {

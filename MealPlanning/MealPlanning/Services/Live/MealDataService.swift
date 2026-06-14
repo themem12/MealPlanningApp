@@ -41,6 +41,8 @@ protocol MealDataServiceProtocol {
     ) -> Bool
 
     func getTodayRecord() -> DayRecord?
+
+    func getMonthRecord(month: Date) -> [DayRecord]
 }
 
 final class LiveMealDataService: MealDataServiceProtocol {
@@ -145,6 +147,26 @@ final class LiveMealDataService: MealDataServiceProtocol {
         
         let existing = try? context.fetch(descriptor)
         return existing?.first
+    }
+
+    func getMonthRecord(month: Date) -> [DayRecord] {
+        let calendar = Calendar.current
+
+        guard let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: month)) else { return [] }
+
+        guard let endOfMonth = calendar.date(
+            byAdding: DateComponents(month: 1, day: 0),
+            to: startOfMonth
+        ) else { return [] }
+        
+        let descriptor = FetchDescriptor<DayRecord>(
+            predicate: #Predicate {
+                $0.date >= startOfMonth &&
+                $0.date < endOfMonth
+            }
+        )
+
+        return (try? context.fetch(descriptor)) ?? []
     }
 
     private func createDefaultMeals() -> [Meal] {

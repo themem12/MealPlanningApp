@@ -36,4 +36,8 @@ final class MockMealDataService: MealDataServiceProtocol {
     func getTodayRecord() -> DayRecord? {
         return nil
     }
+
+    func getMonthRecord(month: Date) -> [DayRecord] {
+        return []
+    }
 }

@@ -15,6 +15,7 @@ final class TodayResumeViewModel {
     var percentage: String = ""
     var progressBarValue: Double = 0
     var calories: String = ""
+    var isEmptyDay: Bool = false
 
     init(dayRecord: DayRecord) {
         let actualMeals = dayRecord.meals.filter({ !$0.items.isEmpty })
@@ -27,6 +28,7 @@ final class TodayResumeViewModel {
             )
         }
         guard totalMeals > 0 else {
+            isEmptyDay = true
             percentage = ""
             progressBarValue = 1
             return

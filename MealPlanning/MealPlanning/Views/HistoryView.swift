@@ -1,0 +1,233 @@
+//
+//  HistoryView.swift
+//  MealPlanning
+//
+//  Created by Guillermo Saavedra Dorantes  on 08/06/26.
+//
+
+import SwiftUI
+
+struct HistoryView: View {
+    @State private var viewModel: HistoryViewModel
+    @State private var selectedDayRecord: DayRecord?
+
+    init(viewModel: HistoryViewModel) {
+        _viewModel = .init(initialValue: viewModel)
+    }
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("History")
+                .font(.system(size: 40, weight: .bold))
+            Text("Review your nutrition plan consistency")
+                .font(.system(size: 12, weight: .light))
+
+            HStack {
+                if !viewModel.isFirstMonth {
+                    Button {
+                        viewModel.fetchPreviousMonth()
+                    } label: {
+                        ArrowButton(direction: .left)
+                    }.buttonStyle(.plain)
+                }
+
+                Spacer()
+                Text(viewModel.currentDateTitle)
+                    .bold()
+                Spacer()
+                if !viewModel.isLastMonth {
+                    Button {
+                        viewModel.fetchNextMonth()
+                    } label: {
+                        ArrowButton(direction: .right)
+                    }.buttonStyle(.plain)
+                }
+            }
+            .padding(.vertical, 8)
+
+            CalendarView(days: viewModel.monthData) { dayProgress in
+                guard dayProgress.dateState != .isFuture else { return }
+                guard dayProgress.dateState != .isToday else { return }
+                if let dayRecord = dayProgress.dayRecord {
+                    selectedDayRecord = dayRecord
+                } else {
+                    selectedDayRecord = viewModel.getDayRecordFromDayNumber(dayNumber: dayProgress.day)
+                }
+            }
+
+            Spacer()
+
+            MonthOverviewCard(
+                goodDays: viewModel.monthOverview.goodDays,
+                regularDays: viewModel.monthOverview.regularDays,
+                missedDays: viewModel.monthOverview.missedDays
+            )
+        }
+        .padding()
+        .background(AppColors.background)
+        .navigationDestination(item: $selectedDayRecord) { dayRecord in
+            DayRecordView(
+                viewModel: DayRecordViewModel(dayRecord: dayRecord)
+            )
+        }
+    }
+}
+
+private struct CalendarView: View {
+    let days: [DayProgress]
+    let columns = Array(repeating: GridItem(.flexible(), spacing: 8), count: 7)
+    let dayTapped: (DayProgress) -> ()
+
+    var body: some View {
+        LazyVGrid(columns: columns, spacing: 8) {
+            ForEach(WeekDay.orderedCases) { weekDay in
+                WeekDayCardView(weekDay: weekDay.shortTitle)
+            }
+            ForEach(days) { dayProgress in
+                Button {
+                    dayTapped(dayProgress)
+                } label: {
+                    if dayProgress.day == 0 {
+                        EmptyCardView()
+                    } else {
+                        DayCardView(dayData: dayProgress)
+                    }
+                }.buttonStyle(.plain)
+            }
+        }
+    }
+}
+
+private struct MonthOverviewCard: View {
+    let goodDays: Int
+    let regularDays: Int
+    let missedDays: Int
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Month overview")
+                .bold()
+            HStack(spacing: 10) {
+                CategoryView(
+                    color: .green,
+                    numberOfDays: goodDays,
+                    categoryText: " good days"
+                )
+                CategoryView(
+                    color: .yellow,
+                    numberOfDays: regularDays,
+                    categoryText: " regular days"
+                )
+                CategoryView(
+                    color: .red,
+                    numberOfDays: missedDays,
+                    categoryText: " missed days"
+                )
+            }
+        }
+        .padding()
+        .appCardStyle()
+    }
+
+    private struct CategoryView: View {
+        let color: Color
+        let numberOfDays: Int
+        let categoryText: String
+        var body: some View {
+            HStack(spacing: 8) {
+                Circle()
+                    .fill(color)
+                    .frame(width: 10, height: 10)
+                HStack(spacing: 0) {
+                    Text("\(numberOfDays)")
+                        .foregroundStyle(color)
+                    Text(categoryText)
+                        .font(.system(size: 12, weight: .light))
+                }
+            }.frame(maxWidth: .infinity)
+        }
+    }
+}
+
+private struct WeekDayCardView: View {
+    let weekDay: String
+    var body: some View {
+        Text(weekDay)
+            .font(.system(size: 14, weight: .heavy))
+            .foregroundStyle(.black.opacity(0.4))
+    }
+}
+
+private struct EmptyCardView: View {
+    var body: some View {
+        Rectangle()
+            .fill(.clear)
+            .frame(height: 52)
+            .frame(maxWidth: .infinity)
+    }
+}
+
+private struct DayCardView: View {
+    let dayData: DayProgress
+
+    var body: some View {
+        VStack {
+            Text("\(dayData.day)")
+                .font(.system(size: 14, weight: .semibold))
+            if dayData.dateState == .isPast || dayData.dateState == .isTodayFinished {
+                Text(dayData.percentage)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(dayData.accentColor)
+                    .padding(.top, 4)
+            }
+        }
+        .frame(height: 70)
+        .frame(maxWidth: .infinity)
+        .background(dayData.accentColor.opacity(0.4))
+        .clipShape(
+            RoundedRectangle(cornerRadius: 10)
+        )
+        .overlay {
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(
+                    dayData.isToday() ? AppColors.primaryGreen :  .black.opacity(0.1),
+                    lineWidth: dayData.isToday() ? 3 : 1
+                )
+        }
+        .shadow(
+            color: .black.opacity(0.2),
+            radius: 10,
+            y: 4
+        )
+    }
+}
+
+private struct ArrowButton: View {
+    enum ArrowDirection {
+        case left
+        case right
+    }
+
+    let direction: ArrowDirection
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .fill(.white)
+                .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 2)
+            Image(
+                systemName:
+                    direction == .left ? "chevron.left" : "chevron.right"
+            )
+        }
+        .frame(width: 30, height: 30)
+    }
+}
+
+#Preview {
+    HistoryView(
+        viewModel: HistoryViewModel(
+            service: MockMealDataService(),
+            dateProvider: MockDateProvider(today: .now)
+        )
+    )
+}
