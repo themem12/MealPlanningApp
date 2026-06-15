@@ -37,7 +37,6 @@ final class TodayViewModel {
 
     func loadTodayPlan() {
         currentDayPlan = service.getOrCreatePlan(for: dateProvider.weekDay)
-        currentDayPlan?.meals = currentDayPlan?.meals.sorted(by: { $0.type.order < $1.type.order }) ?? []
         setDateTitle()
         setViewTitle()
     }

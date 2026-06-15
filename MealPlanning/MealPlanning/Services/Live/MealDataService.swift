@@ -83,8 +83,7 @@ final class LiveMealDataService: MealDataServiceProtocol {
         
         context.insert(newPlan)
 
-        // TODO: catch the error
-        try? context.save()
+        save()
         
         return newPlan
     }
@@ -95,24 +94,23 @@ final class LiveMealDataService: MealDataServiceProtocol {
         
         meal.items.append(foodItem)
         
-        // TODO: catch the error
-        try? context.save()
+        save()
     }
 
     func editFoodItem(_ foodItem: FoodItem) {
-        try? context.save()
+        save()
     }
 
     func deleteFoodItem(_ foodItem: FoodItem, from meal: Meal) {
         meal.items.removeAll { $0.id == foodItem.id }
         context.delete(foodItem)
-        try? context.save()
+        save()
     }
 
     func completeMeal(_ meal: Meal) {
         meal.isCompleted.toggle()
 
-        try? context.save()
+        save()
     }
 
     func endToday(with dayPlan: DayPlan) {
@@ -128,12 +126,12 @@ final class LiveMealDataService: MealDataServiceProtocol {
         let dayRecord = DayRecord(date: date, from: dayPlan, isCompleted: true)
         print("after record: ", dayRecord.meals.filter(\.isCompleted).count)
         context.insert(dayRecord)
-        try? context.save()
+        save()
         dayPlan.meals = dayPlan.meals.map({ meal in
             meal.isCompleted = false
             return meal
         })
-        try? context.save()
+        save()
     }
 
     func dayEnded(for date: Date) -> Bool {
@@ -190,6 +188,14 @@ final class LiveMealDataService: MealDataServiceProtocol {
         descriptor.fetchLimit = 1
         
         return try? context.fetch(descriptor).first
+    }
+
+    private func save() {
+        do {
+            try context.save()
+        } catch {
+            print(error)
+        }
     }
 
     private func createDefaultMeals() -> [Meal] {

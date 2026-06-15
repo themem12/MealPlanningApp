@@ -38,22 +38,17 @@ final class HistoryViewModel {
     }
 
     func fetchNextMonth() {
-        selectedMonth = Calendar.current.date(byAdding: .month, value: 1, to: selectedMonth)!
-//        loadMonth()
+        selectedMonth = selectedMonth.addToDate(1, to: .month) ?? selectedMonth
     }
 
     func fetchPreviousMonth() {
-        selectedMonth = Calendar.current.date(byAdding: .month, value: -1, to: selectedMonth)!
-//        loadMonth()
+        selectedMonth = selectedMonth.addToDate(-1, to: .month) ?? selectedMonth
     }
 
     func getDayRecordFromDayNumber(dayNumber: Int) -> DayRecord {
-        let calendar = Calendar.current
 
-        let components = calendar.dateComponents([.year, .month], from: selectedMonth)
-
-        let date = calendar.date(
-            from: DateComponents(year: components.year, month: components.month, day: dayNumber)
+        let date = Calendar.current.date(
+            from: DateComponents(year: selectedMonth.year, month: selectedMonth.month, day: dayNumber)
         ) ?? .now
 
         return DayRecord(date: date)
@@ -71,18 +66,11 @@ final class HistoryViewModel {
         var badDays = 0
         var goodDays = 0
         var regularDays = 0
-        guard let daysInMonth = Calendar.current.range(
-            of: .day,
-            in: .month,
-            for: selectedMonth
-        )?.count else {
-            return
-        }
 
         getEmptySpaces()
 
-        for day in 1...daysInMonth {
-            if let dayRecord = records.filter({ Calendar.current.component(.day, from: $0.date) == day }).first {
+        for day in 1...selectedMonth.daysInMonth {
+            if let dayRecord = records.filter({ $0.date.day == day }).first {
                 var percentage = "-"
                 var accentColor: Color = .gray
 
@@ -118,8 +106,8 @@ final class HistoryViewModel {
             } else {
                 let cellDate = Calendar.current.date(
                     from: DateComponents(
-                        year: Calendar.current.component(.year, from: selectedMonth),
-                        month: Calendar.current.component(.month, from: selectedMonth),
+                        year: selectedMonth.year,
+                        month: selectedMonth.month,
                         day: day
                     )
                 )!
@@ -148,16 +136,11 @@ final class HistoryViewModel {
     }
 
     private func getEmptySpaces() {
-        let firstDayOfMonth = Calendar.current.date(
-            from: Calendar.current.dateComponents(
-                [.year, .month],
-                from: selectedMonth
-            )
-        )!
+        
 
         let weekday = Calendar.current.component(
             .weekday,
-            from: firstDayOfMonth
+            from: selectedMonth.firstOfMonth()
         )
 
         var emptySpaces = 0
@@ -216,26 +199,14 @@ final class HistoryViewModel {
         isLastMonth = Calendar.current.isDate(selectedMonth, inSameDayAs: firstDayOfCurrentMonth)
 
         // For firstMonth we need to validate le previous month has at least one record
-        let previousMonth = Calendar.current.date(
-            byAdding: .month,
-            value: -1,
-            to: selectedMonth
-        )!
+        guard let previousMonth = selectedMonth.addToDate(-1, to: .month) else {
+            isFirstMonth = true
+            return
+        }
 
         let previousMonthRecords = service.getMonthRecord(month: previousMonth)
     
         isFirstMonth = previousMonthRecords.isEmpty
-    }
-}
-
-extension Date {
-    func firstOfMonth() -> Date {
-        Calendar.current.date(
-            from: Calendar.current.dateComponents(
-                [.year, .month],
-                from: self
-            )
-        )!
     }
 }
 
