@@ -29,6 +29,10 @@ final class TodayViewModel {
         } ?? []
     }
 
+    var isIpad: Bool {
+        UIDevice.layout == .ipad
+    }
+
     init(service: MealDataServiceProtocol, dateProvider: DateProvider) {
         self.service = service
         dayRecord = service.getTodayRecord()

@@ -13,6 +13,7 @@ enum AppColors {
 
     static let background = Color(hex: "#F5F6F2")
     static let card = Color(hex: "#FFFFFF")
+    static let panel = Color(hex: "#FAF9F5")
 
     // MARK: - Greens
 

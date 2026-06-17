@@ -44,7 +44,7 @@ struct MealPlanningApp: App {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy/MM/dd"
 
-            let debugDay = formatter.date(from: "2026/08/04")!
+            let debugDay = formatter.date(from: "2026/08/03")!
 
             dateProvider = MockDateProvider(today: debugDay)
 //            dateProvider = LiveDateProvider()

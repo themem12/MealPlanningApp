@@ -27,59 +27,19 @@ struct TodayView: View {
                         viewModel: viewModel.makeResumeViewModel(with: dayRecord)
                     )
                 } else {
-                    if !viewModel.sortedMeals.isEmpty {
+                    GeometryReader { geometry in
                         VStack(alignment: .leading) {
-                            Group {
-                                HStack(spacing: 8) {
-                                    Text(viewModel.title)
-                                        .font(.title2.bold())
-                                        .foregroundStyle(AppColors.secondaryText)
-                                    Image(systemName: viewModel.titleIcon)
-                                        .font(.title3)
-                                        .foregroundStyle(viewModel.titleIconColor)
+                            HeaderView(viewModel: viewModel)
+                            HStack {
+                                if geometry.size.width > 900 {
+                                    TodaySidebarView(meals: viewModel.sortedMeals)
+                                        .frame(width: 380)
                                 }
-                                Text(viewModel.dateTitle)
-                                    .font(.system(size: 12, weight: .light))
-                                    .foregroundStyle(AppColors.primaryText)
-                            }.padding(.horizontal)
-                            ScrollView {
-                                ForEach(viewModel.sortedMeals) { meal in
-                                    Button {
-                                        selectedMeal = meal
-                                    } label: {
-                                        MealCard(meal: meal) {
-                                            viewModel.completeMeal(meal)
-                                        }
-                                    }
-                                    .buttonStyle(.plain)
-                                    .padding(.top)
-                                    .padding(.horizontal)
-                                }
+                                TodayContentView(viewModel: viewModel, mealSelected: { meal in
+                                    selectedMeal = meal
+                                })
                             }
-                            Button {
-                                viewModel.endDayTapped()
-                            } label: {
-                                HStack(spacing: 12) {
-                                    Image(systemName: "flag.pattern.checkered")
-                                    Text("End Day")
-                                        .fontWeight(.semibold)
-                                }
-                                .foregroundStyle(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(
-                                    RoundedRectangle(cornerRadius: 18)
-                                        .fill(AppColors.deepGreen)
-                                )
-                            }
-                            .buttonStyle(.plain)
-                            .padding(.horizontal)
                         }
-                    } else {
-                        ContentUnavailableView(
-                            "You don't have a plan for today yet, don't go crazy",
-                            systemImage: "fork.knife"
-                        )
                     }
                 }
             }
@@ -121,6 +81,142 @@ struct TodayView: View {
                     Button(role: .cancel, action: {})
                 }
         }
+    }
+}
+
+private struct HeaderView: View {
+
+    let viewModel: TodayViewModel
+
+    var body: some View {
+        Group {
+            HStack(spacing: 8) {
+                Text(viewModel.title)
+                    .font(.title2.bold())
+                    .foregroundStyle(AppColors.secondaryText)
+                Image(systemName: viewModel.titleIcon)
+                    .font(.title3)
+                    .foregroundStyle(viewModel.titleIconColor)
+            }
+            Text(viewModel.dateTitle)
+                .font(.system(size: 12, weight: .light))
+                .foregroundStyle(AppColors.primaryText)
+        }.padding(.horizontal)
+    }
+}
+
+private struct TodayContentView: View {
+
+    let viewModel: TodayViewModel
+    let mealSelected: (Meal) -> ()
+
+    var body: some View {
+        Group {
+            if !viewModel.sortedMeals.isEmpty {
+                VStack(alignment: .leading) {
+                    ScrollView {
+                        ForEach(viewModel.sortedMeals) { meal in
+                            Button {
+                                mealSelected(meal)
+                            } label: {
+                                MealCard(meal: meal) {
+                                    viewModel.completeMeal(meal)
+                                }
+                            }
+                            .buttonStyle(.plain)
+                            .padding(.top)
+                            .padding(.horizontal)
+                        }
+                    }
+                    Button {
+                        viewModel.endDayTapped()
+                    } label: {
+                        HStack(spacing: 12) {
+                            Image(systemName: "flag.pattern.checkered")
+                            Text("End Day")
+                                .fontWeight(.semibold)
+                        }
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 18)
+                                .fill(AppColors.deepGreen)
+                        )
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.horizontal)
+                }
+            } else {
+                ContentUnavailableView(
+                    "You don't have a plan for today yet, don't go crazy",
+                    systemImage: "fork.knife"
+                )
+            }
+        }
+    }
+}
+
+private struct TodaySidebarView: View {
+    let meals: [Meal]
+    var completedMeals: Int {
+        meals.filter({ $0.isCompleted }).count
+    }
+    var totalMeals: Int {
+        meals.count
+    }
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Today")
+                .font(.system(size: 30, weight: .bold))
+            Text("Let's stay consistent with your plan.")
+                .font(.system(size: 20, weight: .regular))
+
+            Spacer()
+            HStack {
+                Spacer()
+                ProgressCircleView(
+                    mealsCompleted: completedMeals,
+                    totalMeals: totalMeals,
+                    size: 240
+                )
+                Spacer()
+            }
+
+            Spacer()
+
+            Divider()
+                .overlay(.gray.opacity(0.3))
+
+            Text("Meals status")
+                .font(.system(size: 14, weight: .bold))
+                .padding(.top)
+
+            ForEach(MealType.completeMealsOrdered) { mealType in
+                if let meal = meals.filter({ $0.type == mealType }).first {
+                    HStack {
+                        MealIconView(
+                            mealType: meal.type,
+                            size: 60
+                        )
+                        Text(mealType.title)
+                        Spacer()
+                        if meal.isCompleted {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundStyle(AppColors.lunch)
+                                .font(.system(size: 30))
+                        } else {
+                            Image(systemName: "circle")
+                                .foregroundStyle(Color.gray.opacity(0.5))
+                                .font(.system(size: 30))
+                        }
+                    }
+                }
+            }
+        }
+        .padding()
+        .appSoftCardStyle(background: AppColors.panel)
+        .padding()
     }
 }
 

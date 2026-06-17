@@ -70,38 +70,10 @@ private struct DayDataView: View {
     let viewModel: TodayResumeViewModel
     var body: some View {
         VStack {
-            ZStack {
-                Circle()
-                    .stroke(
-                        AppColors.border,
-                        lineWidth: 12
-                    )
-                Circle()
-                    .trim(from: 0, to: viewModel.progressBarValue)
-                    .stroke(
-                        AppColors.primaryGreen,
-                        style: StrokeStyle(
-                            lineWidth: 10,
-                            lineCap: .round
-                        )
-                    )
-                    .rotationEffect(.degrees(-90))
-                VStack {
-                    Text("\(viewModel.mealsCompleted)/\(viewModel.totalMeals)")
-                        .font(.system(size: 32, weight: .semibold))
-                        .foregroundStyle(AppColors.primaryText)
-                    Text("meals")
-                        .font(.system(size: 16))
-                        .foregroundStyle(AppColors.primaryText)
-                    Text(viewModel.percentage)
-                        .foregroundStyle(AppColors.primaryGreen)
-                        .font(.system(size: 16, weight: .semibold))
-                }
-            }
-            .frame(width: 160)
-            .animation(
-                .spring(duration: 1),
-                value: 0.6
+            ProgressCircleView(
+                mealsCompleted: viewModel.mealsCompleted,
+                totalMeals: viewModel.totalMeals,
+                size: 160
             )
             HStack {
                 Text("Consistency matters.")

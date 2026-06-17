@@ -1,0 +1,59 @@
+//
+//  ProgressCircleView.swift
+//  MealPlanning
+//
+//  Created by Guillermo Saavedra Dorantes  on 16/06/26.
+//
+
+import SwiftUI
+
+struct ProgressCircleView: View {
+
+    var progressBarValue: CGFloat {
+        Double(mealsCompleted) / Double(totalMeals)
+    }
+    let mealsCompleted: Int
+    let totalMeals: Int
+    let size: CGFloat
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .stroke(
+                    AppColors.border,
+                    lineWidth: 12
+                )
+            Circle()
+                .trim(from: 0, to: progressBarValue)
+                .stroke(
+                    AppColors.primaryGreen,
+                    style: StrokeStyle(
+                        lineWidth: 10,
+                        lineCap: .round
+                    )
+                )
+                .rotationEffect(.degrees(-90))
+            VStack {
+                Text("\(mealsCompleted)/\(totalMeals)")
+                    .font(.system(size: 32, weight: .semibold))
+                    .foregroundStyle(AppColors.primaryText)
+                Text("Meals Completed")
+                    .font(.system(size: 16))
+                    .foregroundStyle(AppColors.primaryText)
+            }
+        }
+        .frame(width: size)
+        .animation(
+            .spring(duration: 1),
+            value: 0.6
+        )
+    }
+}
+
+#Preview {
+    ProgressCircleView(
+        mealsCompleted: 2,
+        totalMeals: 3,
+        size: 160
+    )
+}
