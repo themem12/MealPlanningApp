@@ -94,7 +94,7 @@ private struct DayCardView: View {
     }
 }
 
-private struct HeaderCardView: View {
+struct HeaderCardView: View {
     
     let mealsCount: Int
     let weekDay: WeekDay
@@ -142,7 +142,7 @@ private struct HeaderCardView: View {
     }
 }
 
-private struct MealsCardView: View {
+struct MealsCardView: View {
 
     let meals: [Meal]
     let mealTapped: (Meal) -> Void
@@ -151,10 +151,11 @@ private struct MealsCardView: View {
         VStack(spacing: 8) {
             ForEach(MealType.completeMealsOrdered) { mealType in
                 if let meal = meals.first(where: { $0.type == mealType }) {
-                    EditWeekMealCardView(meal: meal)
-                        .onTapGesture {
-                            mealTapped(meal)
-                        }
+                    Button {
+                        mealTapped(meal)
+                    } label: {
+                        EditWeekMealCardView(meal: meal)
+                    }.buttonStyle(.plain)
                 } else {
                     Text("Something went wrong, please try again")
                         .font(.system(size: 24, weight: .bold))
@@ -205,6 +206,7 @@ private struct EditWeekMealCardView: View {
             .padding(.vertical)
             .padding(.trailing)
         }
+        .background(AppColors.card)
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .overlay {
             RoundedRectangle(cornerRadius: 10)

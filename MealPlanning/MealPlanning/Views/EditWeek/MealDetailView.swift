@@ -67,6 +67,7 @@ struct MealDetailView: View {
         } message: {
             Text("This action cannot be undone.")
         }
+        .padding(.top, 8)
         .background(
             viewModel.meal.type.color.opacity(0.1)
         )

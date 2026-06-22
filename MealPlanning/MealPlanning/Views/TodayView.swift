@@ -47,8 +47,8 @@ struct TodayView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink {
-                        EditWeekView(
-                            viewModel: viewModel.getEditWeekViewModel()
+                        EditWeekContainerView(
+                            viewModel: viewModel.getEditWeekContainerViewModel()
                         )
                     } label: {
                         Image(systemName: "slider.horizontal.3")

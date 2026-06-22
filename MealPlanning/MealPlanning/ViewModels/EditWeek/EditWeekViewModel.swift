@@ -8,7 +8,7 @@
 import Observation
 
 @Observable
-final class EditWeekViewModel {
+class EditWeekViewModel {
 
     var meals: [Meal] = []
     let service: MealDataServiceProtocol
@@ -53,5 +53,17 @@ final class EditWeekViewModel {
             service: service,
             meal: meal
         )
+    }
+}
+
+@Observable
+final class EditWeekWideViewModel: EditWeekViewModel {
+
+    func getMealsFromSelectedDay() -> [Meal] {
+        getMealsFor(weekDay: getSelectedDay())
+    }
+
+    func getSelectedDay() -> WeekDay {
+        selectedDay ?? dateProvider.weekDay
     }
 }

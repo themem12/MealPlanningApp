@@ -73,8 +73,8 @@ final class TodayViewModel {
         TodayResumeViewModel(dayRecord: dayRecord)
     }
 
-    func getEditWeekViewModel() -> EditWeekViewModel {
-        EditWeekViewModel(service: service, dateProvider: dateProvider)
+    func getEditWeekContainerViewModel() -> EditWeekContainerViewModel {
+        EditWeekContainerViewModel(service: service, dateProvider: dateProvider)
     }
 
     func getHistoryContainerViewModel() -> HistoryContainerViewModel {
