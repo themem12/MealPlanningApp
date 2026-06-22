@@ -77,8 +77,8 @@ final class TodayViewModel {
         EditWeekViewModel(service: service, dateProvider: dateProvider)
     }
 
-    func getHistoryViewModel() -> HistoryViewModel {
-        HistoryViewModel(service: service, dateProvider: dateProvider)
+    func getHistoryContainerViewModel() -> HistoryContainerViewModel {
+        HistoryContainerViewModel(service: service, dateProvider: dateProvider)
     }
 
     func completeMeal(_ meal: Meal) {

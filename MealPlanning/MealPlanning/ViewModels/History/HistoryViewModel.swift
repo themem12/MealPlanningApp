@@ -29,6 +29,7 @@ final class HistoryViewModel {
     private(set) var isFirstMonth: Bool = false
     private(set) var isLastMonth: Bool = false
     private(set) var monthOverview: MonthOverviewData = .init(missedDays: 0, goodDays: 0, regularDays: 0)
+    private(set) var selectedDayRecord: DayRecord?
 
     init(service: MealDataServiceProtocol, dateProvider: DateProvider) {
         self.service = service
@@ -52,6 +53,14 @@ final class HistoryViewModel {
         ) ?? .now
 
         return DayRecord(date: date)
+    }
+
+    func setSelectedDay(record: DayRecord) {
+        selectedDayRecord = record
+    }
+
+    func setSelectedDay(from day: Int) {
+        selectedDayRecord = getDayRecordFromDayNumber(dayNumber: day)
     }
 
     private func loadMonth() {

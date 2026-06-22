@@ -56,8 +56,8 @@ struct TodayView: View {
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     NavigationLink {
-                        HistoryView(
-                            viewModel: viewModel.getHistoryViewModel()
+                        HistoryContainerView(
+                            viewModel: viewModel.getHistoryContainerViewModel()
                         )
                     } label: {
                         Image(systemName: "calendar.badge.checkmark")

@@ -21,30 +21,7 @@ struct HistoryView: View {
             Text("Review your nutrition plan consistency")
                 .font(.system(size: 12, weight: .light))
 
-            HStack {
-                if !viewModel.isFirstMonth {
-                    Button {
-                        viewModel.fetchPreviousMonth()
-                    } label: {
-                        ArrowButton(direction: .left)
-                    }.buttonStyle(.plain)
-                }
-
-                Spacer()
-                Text(viewModel.currentDateTitle)
-                    .bold()
-                Spacer()
-                if !viewModel.isLastMonth {
-                    Button {
-                        viewModel.fetchNextMonth()
-                    } label: {
-                        ArrowButton(direction: .right)
-                    }.buttonStyle(.plain)
-                }
-            }
-            .padding(.vertical, 8)
-
-            CalendarView(days: viewModel.monthData) { dayProgress in
+            CalendarView(viewModel: viewModel) { dayProgress in
                 guard dayProgress.dateState != .isFuture else { return }
                 guard dayProgress.dateState != .isToday else { return }
                 if let dayRecord = dayProgress.dayRecord {
@@ -72,26 +49,51 @@ struct HistoryView: View {
     }
 }
 
-private struct CalendarView: View {
-    let days: [DayProgress]
+struct CalendarView: View {
+    let viewModel: HistoryViewModel
     let columns = Array(repeating: GridItem(.flexible(), spacing: 8), count: 7)
     let dayTapped: (DayProgress) -> ()
 
     var body: some View {
-        LazyVGrid(columns: columns, spacing: 8) {
-            ForEach(WeekDay.orderedCases) { weekDay in
-                WeekDayCardView(weekDay: weekDay.shortTitle)
+        VStack {
+            HStack {
+                if !viewModel.isFirstMonth {
+                    Button {
+                        viewModel.fetchPreviousMonth()
+                    } label: {
+                        ArrowButton(direction: .left)
+                    }.buttonStyle(.plain)
+                }
+
+                Spacer()
+                Text(viewModel.currentDateTitle)
+                    .bold()
+                Spacer()
+                if !viewModel.isLastMonth {
+                    Button {
+                        viewModel.fetchNextMonth()
+                    } label: {
+                        ArrowButton(direction: .right)
+                    }.buttonStyle(.plain)
+                }
             }
-            ForEach(days) { dayProgress in
-                Button {
-                    dayTapped(dayProgress)
-                } label: {
-                    if dayProgress.day == 0 {
-                        EmptyCardView()
-                    } else {
-                        DayCardView(dayData: dayProgress)
-                    }
-                }.buttonStyle(.plain)
+            .padding(.vertical, 8)
+
+            LazyVGrid(columns: columns, spacing: 8) {
+                ForEach(WeekDay.orderedCases) { weekDay in
+                    WeekDayCardView(weekDay: weekDay.shortTitle)
+                }
+                ForEach(viewModel.monthData) { dayProgress in
+                    Button {
+                        dayTapped(dayProgress)
+                    } label: {
+                        if dayProgress.day == 0 {
+                            EmptyCardView()
+                        } else {
+                            DayCardView(dayData: dayProgress)
+                        }
+                    }.buttonStyle(.plain)
+                }
             }
         }
     }
@@ -108,17 +110,17 @@ private struct MonthOverviewCard: View {
                 .bold()
             HStack(spacing: 10) {
                 CategoryView(
-                    color: .green,
+                    color: AppColors.goodDay,
                     numberOfDays: goodDays,
                     categoryText: " good days"
                 )
                 CategoryView(
-                    color: .yellow,
+                    color: AppColors.regularDay,
                     numberOfDays: regularDays,
                     categoryText: " regular days"
                 )
                 CategoryView(
-                    color: .red,
+                    color: AppColors.missedDay,
                     numberOfDays: missedDays,
                     categoryText: " missed days"
                 )
