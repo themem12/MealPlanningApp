@@ -173,6 +173,10 @@ private struct TodaySidebarView: View {
     var totalMeals: Int {
         meals.count
     }
+
+    @State private var animatedProgress: Double = 0
+    @State private var animatedColor: Color = AppColors.border
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("Today")
@@ -184,9 +188,11 @@ private struct TodaySidebarView: View {
             HStack {
                 Spacer()
                 ProgressCircleView(
+                    progressBarValue: animatedProgress,
                     mealsCompleted: completedMeals,
                     totalMeals: totalMeals,
-                    size: 240
+                    size: 240,
+                    progressBarColor: animatedColor
                 )
                 Spacer()
             }
@@ -225,6 +231,34 @@ private struct TodaySidebarView: View {
         .padding()
         .appSoftCardStyle(background: AppColors.panel)
         .padding()
+        .onChange(of: completedMeals) { oldValue, newValue in
+            withAnimation(
+                .easeInOut(duration: 1)
+            ){
+                if newValue >= totalMeals - 1 {
+                    animatedColor = AppColors.goodDay
+                } else if newValue >= 1 {
+                    animatedColor = AppColors.regularDay
+                } else {
+                    animatedColor = AppColors.border
+                }
+                animatedProgress = Double(newValue) / Double(totalMeals)
+            }
+        }
+        .onAppear {
+            withAnimation(
+                .easeInOut(duration: 1)
+            ){
+                if completedMeals >= totalMeals - 1 {
+                    animatedColor = AppColors.goodDay
+                } else if completedMeals >= 1 {
+                    animatedColor = AppColors.regularDay
+                } else {
+                    animatedColor = AppColors.border
+                }
+                animatedProgress = Double(completedMeals) / Double(totalMeals)
+            }
+        }
     }
 }
 

@@ -24,10 +24,12 @@ struct HistoryWideView: View {
             ) { dayProgress in
                 guard dayProgress.dateState != .isFuture else { return }
                 guard dayProgress.dateState != .isToday else { return }
-                if let dayRecord = dayProgress.dayRecord {
-                    historyViewModel.setSelectedDay(record: dayRecord)
-                } else {
-                    historyViewModel.setSelectedDay(from: dayProgress.day)
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    if let dayRecord = dayProgress.dayRecord {
+                        historyViewModel.setSelectedDay(record: dayRecord)
+                    } else {
+                        historyViewModel.setSelectedDay(from: dayProgress.day)
+                    }
                 }
             }
             .padding()
@@ -36,7 +38,9 @@ struct HistoryWideView: View {
             if let selectedDayRecord = historyViewModel.selectedDayRecord {
                 DayRecordView(
                     viewModel: DayRecordViewModel(dayRecord: selectedDayRecord)
-                ).id(selectedDayRecord.id)
+                )
+                .id(selectedDayRecord.id)
+                .contentTransition(.opacity)
             } else {
                 UnselectedDayView()
             }

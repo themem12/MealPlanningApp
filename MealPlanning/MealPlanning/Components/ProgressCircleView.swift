@@ -9,12 +9,11 @@ import SwiftUI
 
 struct ProgressCircleView: View {
 
-    var progressBarValue: CGFloat {
-        Double(mealsCompleted) / Double(totalMeals)
-    }
+    var progressBarValue: CGFloat
     let mealsCompleted: Int
     let totalMeals: Int
     let size: CGFloat
+    let progressBarColor: Color
 
     var body: some View {
         ZStack {
@@ -26,7 +25,7 @@ struct ProgressCircleView: View {
             Circle()
                 .trim(from: 0, to: progressBarValue)
                 .stroke(
-                    AppColors.primaryGreen,
+                    progressBarColor,
                     style: StrokeStyle(
                         lineWidth: 10,
                         lineCap: .round
@@ -43,17 +42,15 @@ struct ProgressCircleView: View {
             }
         }
         .frame(width: size)
-        .animation(
-            .spring(duration: 1),
-            value: 0.6
-        )
     }
 }
 
 #Preview {
     ProgressCircleView(
+        progressBarValue: 1,
         mealsCompleted: 2,
         totalMeals: 3,
-        size: 160
+        size: 160,
+        progressBarColor: AppColors.primaryGreen
     )
 }

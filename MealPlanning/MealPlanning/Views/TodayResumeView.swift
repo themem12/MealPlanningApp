@@ -30,7 +30,12 @@ struct TodayResumeView: View {
                 EmptyRecordDayView()
                 Spacer()
             } else {
-                DayDataView(viewModel: viewModel)
+                GeometryReader { geometry in
+                    DayDataView(
+                        viewModel: viewModel,
+                        layoutMode: geometry.size.width.layoutMode
+                    )
+                }
             }
         }
         .padding()
@@ -68,12 +73,21 @@ struct EmptyRecordDayView: View {
 
 private struct DayDataView: View {
     let viewModel: TodayResumeViewModel
+    let layoutMode: LayoutMode
+
+    @State private var animatedProgress: Double = 0
+    @State private var animatedCompletedMeals = 0
+    @State private var mealTypeHighlighted: MealType?
+    @State private var animatedColor: Color = AppColors.border
+
     var body: some View {
         VStack {
             ProgressCircleView(
-                mealsCompleted: viewModel.mealsCompleted,
+                progressBarValue: animatedProgress,
+                mealsCompleted: animatedCompletedMeals,
                 totalMeals: viewModel.totalMeals,
-                size: 160
+                size: 160,
+                progressBarColor: animatedColor
             )
             HStack {
                 Text("Consistency matters.")
@@ -89,7 +103,9 @@ private struct DayDataView: View {
                         where: { $0.mealType == mealType }
                     ) {
                         MealResumeCard(
-                            meal: meal
+                            meal: meal,
+                            canHighlight: mealType == mealTypeHighlighted,
+                            isWideLayout: layoutMode == .wide
                         )
                         .padding(.vertical, 8)
                     }
@@ -114,12 +130,47 @@ private struct DayDataView: View {
                 .font(.system(size: 14))
                 .padding(.top, 12)
             Spacer()
-        }.frame(maxWidth: .infinity)
+        }
+        .frame(maxWidth: .infinity)
+        .onAppear {
+            withAnimation(
+                .easeInOut(duration: 3)
+            ) {
+                animatedProgress = viewModel.progressBarValue
+                for index in 1...viewModel.totalMeals {
+                    DispatchQueue.main.asyncAfter(
+                        deadline: .now() + Double(index) * 0.4
+                    ) {
+                        animatedCompletedMeals = viewModel.meals[index - 1].isCompleted ? animatedCompletedMeals + 1 : animatedCompletedMeals
+                        if animatedCompletedMeals >= viewModel.totalMeals - 1 {
+                            animatedColor = AppColors.goodDay
+                        } else if animatedCompletedMeals >= 1 {
+                            animatedColor = AppColors.regularDay
+                        } else {
+                            animatedColor = AppColors.border
+                        }
+                        mealTypeHighlighted = MealType.completeMealsOrdered[index - 1]
+                        DispatchQueue.main.asyncAfter(
+                            deadline: .now() + 0.25
+                        ) {
+                            mealTypeHighlighted = nil
+                        }
+                    }
+                }
+            }
+        }
+        .onDisappear {
+            animatedProgress = 0
+            animatedCompletedMeals = 0
+        }
     }
 }
 
 private struct MealResumeCard: View {
     let meal: TodayReviewMealModel
+    let canHighlight: Bool
+    var shouldHighlight: Bool { canHighlight && meal.isCompleted }
+    let isWideLayout: Bool
     var body: some View {
         VStack(spacing: 12) {
             Group {
@@ -131,15 +182,39 @@ private struct MealResumeCard: View {
                         .foregroundStyle(.gray)
                 }
             }
-            .frame(width: 20, height: 20)
+            .iconSize(isWideLayout ? .medium : .xSmall)
             .padding(.top, 16)
             Image(systemName: meal.mealType.icon)
+                .iconSize(isWideLayout ? .medium : .xSmall)
                 .foregroundStyle(meal.mealType.color)
-                .frame(width: 24, height: 24)
-                .padding(.bottom, 16)
+                .padding(.bottom, isWideLayout ? 8 : 16)
+            if isWideLayout {
+                Text(meal.mealType.title)
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundStyle(AppColors.primaryText)
+                    .padding(.bottom)
+            }
         }
         .frame(maxWidth: .infinity)
         .appSoftCardStyle(background: meal.mealType.color.opacity(0.08))
+        .scaleEffect(
+            shouldHighlight
+            ? 1.2
+            : 1.0
+        )
+        .shadow(
+            color: .black.opacity(
+                shouldHighlight ? 0.3 : 0
+            ),
+            radius: 12
+        )
+        .animation(
+            .spring(
+                response: 0.25,
+                dampingFraction: 0.6
+            ),
+            value: shouldHighlight
+        )
     }
 }
 

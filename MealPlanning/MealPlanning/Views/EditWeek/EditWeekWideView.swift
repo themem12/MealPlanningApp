@@ -39,7 +39,9 @@ struct EditWeekWideView: View {
                 Group {
                     MealsCardView(
                         meals: editWeekViewModel.getMealsFromSelectedDay()) { meal in
-                            selectedMeal = meal
+                            withAnimation(.easeInOut(duration: 0.4)) {
+                                selectedMeal = meal
+                            }
                         }
                 }
                 .padding()
@@ -59,6 +61,7 @@ struct EditWeekWideView: View {
                     }
                     .appSoftCardStyle(background: AppColors.background)
                     .id(selectedMeal.id)
+                    .transition(.opacity)
                 } else {
                     UnselectedMealView()
                         .appSoftCardStyle(background: AppColors.background)
