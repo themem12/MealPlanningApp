@@ -50,9 +50,14 @@ struct EditWeekView: View {
         .navigationDestination(item: $selectedMeal) { meal in
             MealDetailView(
                 viewModel: viewModel.makeMealDetailViewModel(for: meal)
-            )
+            ) { foodItem in
+                viewModel.foodItemTapped(foodItem: foodItem, meal: meal)
+            }
         }
         .background(AppColors.background)
+        .sheet(isPresented: $viewModel.addFoodTapped) {
+            FoodItemView(viewModel: viewModel.getFoodItemViewModel())
+        }
     }
 }
 

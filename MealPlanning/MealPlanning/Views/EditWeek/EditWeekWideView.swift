@@ -50,7 +50,13 @@ struct EditWeekWideView: View {
                 if let selectedMeal {
                     MealDetailView(
                         viewModel: editWeekViewModel.makeMealDetailViewModel(for: selectedMeal)
-                    )
+                    ) { foodItem in
+                        editWeekViewModel
+                            .foodItemTapped(
+                                foodItem: foodItem,
+                                meal: selectedMeal
+                            )
+                    }
                     .appSoftCardStyle(background: AppColors.background)
                     .id(selectedMeal.id)
                 } else {
@@ -61,6 +67,10 @@ struct EditWeekWideView: View {
         }
         .padding()
         .background(AppColors.background)
+        .sheet(isPresented: $editWeekViewModel.addFoodTapped) {
+            FoodItemView(viewModel: editWeekViewModel.getFoodItemViewModel()
+            )
+        }
     }
 }
 

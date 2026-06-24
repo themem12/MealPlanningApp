@@ -28,10 +28,11 @@ struct TodayView: View {
                     )
                 } else {
                     GeometryReader { geometry in
+                        let layoutMode = geometry.size.width.layoutMode
                         VStack(alignment: .leading) {
                             HeaderView(viewModel: viewModel)
                             HStack {
-                                if geometry.size.width > 900 {
+                                if layoutMode == .wide {
                                     TodaySidebarView(meals: viewModel.sortedMeals)
                                         .frame(width: 380)
                                 }
@@ -39,6 +40,10 @@ struct TodayView: View {
                                     selectedMeal = meal
                                 })
                             }
+                        }
+                        .sheet(isPresented: $viewModel.addFoodTapped) {
+                            FoodItemView(viewModel: viewModel.getFoodItemViewModel()
+                            )
                         }
                     }
                 }
@@ -70,16 +75,19 @@ struct TodayView: View {
             .navigationDestination(item: $selectedMeal) { meal in
                 MealDetailView(
                     viewModel: viewModel.makeMealDetailViewModel(for: meal)
-                )
+                ) { foodItem in
+                    viewModel.foodItemTapped(foodItem: foodItem, meal: meal)
+                }
             }
             .alert(
                 viewModel.alertMessage,
-                isPresented: $viewModel.showAlert) {
-                    Button(role: .confirm) {
-                        viewModel.confirmEndDay()
-                    }
-                    Button(role: .cancel, action: {})
+                isPresented: $viewModel.showAlert
+            ) {
+                Button(role: .confirm) {
+                    viewModel.confirmEndDay()
                 }
+                Button(role: .cancel, action: {})
+            }
         }
     }
 }

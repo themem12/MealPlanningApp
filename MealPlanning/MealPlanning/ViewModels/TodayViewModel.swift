@@ -14,6 +14,9 @@ final class TodayViewModel {
     private(set) var service: MealDataServiceProtocol
     private let dateProvider: DateProvider
     private var currentDayPlan: DayPlan?
+    private var foodItemMode: FoodItemViewModel.FoodItemMode = .create
+    private var meal: Meal?
+    private(set) var selectedFoodItem: FoodItem?
     
     var title = "Good day"
     var titleIcon = ""
@@ -22,6 +25,7 @@ final class TodayViewModel {
     var dayRecord: DayRecord?
     var alertMessage: String = ""
     var showAlert: Bool = false
+    var addFoodTapped: Bool = false
 
     var sortedMeals: [Meal] {
         currentDayPlan?.meals.sorted {
@@ -83,6 +87,35 @@ final class TodayViewModel {
 
     func completeMeal(_ meal: Meal) {
         service.completeMeal(meal)
+    }
+
+    func foodItemTapped(foodItem: FoodItem?, meal: Meal) {
+        if let foodItem {
+            foodItemMode = .edit(foodItem)
+        } else {
+            foodItemMode = .create
+        }
+        self.meal = meal
+
+        addFoodTapped = true
+    }
+
+    func getFoodItemViewModel() -> FoodItemViewModel {
+        guard let meal else {
+            return FoodItemViewModel(mealType: .breakfast) { _ in }
+        }
+        return FoodItemViewModel(
+            mealType: meal.type,
+            foodItemMode: foodItemMode
+        ) { [weak self] foodItem in
+                guard let self else { return }
+                switch self.foodItemMode {
+                case .create:
+                    service.addFoodItem(to: meal, foodItem: foodItem)
+                case .edit(_):
+                    service.editFoodItem(foodItem)
+                }
+            }
     }
 
     private func setViewTitle() {

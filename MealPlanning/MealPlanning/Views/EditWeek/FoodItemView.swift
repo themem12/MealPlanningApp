@@ -41,7 +41,7 @@ struct FoodItemView: View {
                     .font(.title2.weight(.semibold))
             }
             .padding(.top)
-            Spacer()
+            
             AppInputField(
                 placeholder: "Food Name",
                 icon: "fork.knife",
@@ -76,7 +76,7 @@ struct FoodItemView: View {
             .onSubmit {
                 focusedField = nil
             }
-            Spacer()
+            
             Button {
                 viewModel.validateValues()
             } label: {
@@ -93,7 +93,6 @@ struct FoodItemView: View {
             .buttonStyle(.plain)
         }
         .padding()
-        .presentationDetents([.medium])
         .onAppear() {
             focusedField = .foodName
         }

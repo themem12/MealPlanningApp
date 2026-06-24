@@ -11,9 +11,11 @@ import SwiftData
 struct MealDetailView: View {
 
     @State private var viewModel: MealDetailViewModel
+    private let addFoodTapped: (FoodItem?) -> ()
 
-    init(viewModel: MealDetailViewModel) {
+    init(viewModel: MealDetailViewModel, addFoodTapped: @escaping (FoodItem?) -> ()) {
         self.viewModel = viewModel
+        self.addFoodTapped = addFoodTapped
     }
 
     var body: some View {
@@ -23,7 +25,7 @@ struct MealDetailView: View {
             if viewModel.meal.items.isEmpty {
                 Spacer()
                 EmptyMealView(mealType: viewModel.meal.type) {
-                    viewModel.addFoodItemTapped()
+                    addFoodTapped(nil)
                 }
                 Spacer()
             } else {
@@ -36,11 +38,11 @@ struct MealDetailView: View {
                         .padding(.horizontal)
                         .padding(.top)
                         .onTapGesture {
-                            viewModel.editFoodItemTapped(foodItem)
+                            addFoodTapped(foodItem)
                         }
                         .contextMenu {
                             Button("Edit") {
-                                viewModel.editFoodItemTapped(foodItem)
+                                addFoodTapped(foodItem)
                             }
                             Button("Delete", role: .destructive) {
                                 viewModel.deleteFoodItemTapped(foodItem)
@@ -48,7 +50,7 @@ struct MealDetailView: View {
                         }
                     }
                     AddMealItemCardView(mealType: viewModel.meal.type) {
-                        viewModel.addFoodItemTapped()
+                        addFoodTapped(nil)
                     }
                     .padding(.horizontal)
                     .padding(.top)
@@ -71,11 +73,6 @@ struct MealDetailView: View {
         .background(
             viewModel.meal.type.color.opacity(0.1)
         )
-        .sheet(isPresented: $viewModel.showAddFoodSheet) {
-            FoodItemView(
-                viewModel: viewModel.getFoodItemViewModel()
-            )
-        }
     }
 }
 

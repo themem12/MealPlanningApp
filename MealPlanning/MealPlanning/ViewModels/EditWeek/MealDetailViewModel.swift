@@ -23,16 +23,6 @@ final class MealDetailViewModel {
         self.service = service
         self.meal = meal
     }
-    
-    func addFoodItemTapped() {
-        foodItemMode = .create
-        showAddFoodSheet = true
-    }
-
-    func editFoodItemTapped(_ foodItem: FoodItem) {
-        foodItemMode = .edit(foodItem)
-        showAddFoodSheet = true
-    }
 
     func deleteFoodItemTapped(_ foodItem: FoodItem) {
         foodItemPendingDeletion = foodItem
@@ -42,19 +32,5 @@ final class MealDetailViewModel {
     func deleteFoodItemConfirmed() {
         guard let foodItem = foodItemPendingDeletion else { return }
         service.deleteFoodItem(foodItem, from: meal)
-    }
-
-    func getFoodItemViewModel() -> FoodItemViewModel {
-        FoodItemViewModel(
-            mealType: meal.type,
-            foodItemMode: foodItemMode) { [weak self] foodItem in
-                guard let self else { return }
-                switch self.foodItemMode {
-                case .create:
-                    service.addFoodItem(to: self.meal, foodItem: foodItem)
-                case .edit(_):
-                    service.editFoodItem(foodItem)
-                }
-            }
     }
 }
