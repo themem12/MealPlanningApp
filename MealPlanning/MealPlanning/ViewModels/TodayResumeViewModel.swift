@@ -5,6 +5,7 @@
 //  Created by Guillermo Saavedra Dorantes  on 24/05/26.
 //
 
+import Foundation
 import Observation
 
 @Observable
@@ -16,6 +17,7 @@ final class TodayResumeViewModel {
     var progressBarValue: Double = 0
     var calories: String = ""
     var isEmptyDay: Bool = false
+    var dateString: String = ""
 
     init(dayRecord: DayRecord) {
         let actualMeals = dayRecord.meals.filter({ !$0.items.isEmpty })
@@ -38,6 +40,13 @@ final class TodayResumeViewModel {
         progressBarValue = completion
 
         getCaloriesTotal(from: actualMeals)
+
+        dateString = dayRecord.date.formatted(
+            .dateTime
+                .weekday(.wide)
+                .month(.wide)
+                .day()
+        )
     }
 
     private func getCaloriesTotal(from meals: [MealRecord]) {

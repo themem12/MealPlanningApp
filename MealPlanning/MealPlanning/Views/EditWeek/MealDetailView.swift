@@ -94,7 +94,7 @@ private struct MealHeaderView: View {
                 Text(meal.type.title)
                     .font(.system(size: 34, weight: .bold))
                     .foregroundStyle(AppColors.primaryText)
-                Text("Start your morning strong")
+                Text(meal.type.comment)
                     .font(.system(size: 18))
                     .foregroundStyle(AppColors.secondaryText)
                 Text("• \(meal.items.count) foods added")

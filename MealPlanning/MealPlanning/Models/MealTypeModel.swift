@@ -41,6 +41,19 @@ enum MealType: String, Codable, CaseIterable, Identifiable {
         }
     }
 
+    var comment: String {
+        switch self {
+        case .breakfast:
+            return "Start your day well"
+        case .lunch:
+            return "Time to recharge"
+        case .dinner:
+            return "A calm end to the day"
+        case .collationAM, .collationPM:
+            return "A little something in between"
+        }
+    }
+
     var color: Color {
         switch self {
         case .breakfast:

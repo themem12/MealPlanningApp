@@ -128,7 +128,7 @@ final class TodayViewModel {
         case 12..<18:
             title = "Good afternoon"
             titleIcon = "sun.max"
-            titleIconColor = .green
+            titleIconColor = .orange
         case 18..<24:
             title = "Good evening"
             titleIcon = "moon.dust"
@@ -136,7 +136,7 @@ final class TodayViewModel {
         default:
             title = "Late night snack?"
             titleIcon = "moon.zzz"
-            titleIconColor = .gray
+            titleIconColor = .indigo
         }
     }
 

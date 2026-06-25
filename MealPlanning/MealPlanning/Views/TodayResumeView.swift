@@ -16,21 +16,30 @@ struct TodayResumeView: View {
     }
 
     var body: some View {
-        VStack(spacing: 12) {
-            Image(systemName: "moon.stars.fill")
-                .font(.system(size: 76))
-                .foregroundStyle(AppColors.dinner.opacity(0.9))
-                .padding(.bottom, 10)
-            Text("Day completed")
-                .font(.system(size: 32, weight: .bold))
-                .foregroundStyle(AppColors.primaryText)
-                .padding(.bottom, 8)
-            if viewModel.isEmptyDay {
-                Spacer()
-                EmptyRecordDayView()
-                Spacer()
-            } else {
-                GeometryReader { geometry in
+        GeometryReader { geometry in
+            let layoutMode = geometry.size.width.layoutMode
+            VStack(spacing: 12) {
+                Image(systemName: "moon.stars.fill")
+                    .font(.system(size: 76))
+                    .foregroundStyle(AppColors.dinner.opacity(0.9))
+                    .padding(.bottom, 10)
+                Text("Day completed")
+                    .font(.system(size: 32, weight: .bold))
+                    .foregroundStyle(AppColors.primaryText)
+                Text(viewModel.dateString)
+                    .font(
+                        .system(
+                            size: layoutMode == .compact ? 16 : 24,
+                            weight: .semibold
+                        )
+                    )
+                    .foregroundStyle(AppColors.secondaryText)
+                    .padding(.bottom, 8)
+                if viewModel.isEmptyDay {
+                    Spacer()
+                    EmptyRecordDayView()
+                    Spacer()
+                } else {
                     DayDataView(
                         viewModel: viewModel,
                         layoutMode: geometry.size.width.layoutMode
@@ -86,7 +95,7 @@ private struct DayDataView: View {
                 progressBarValue: animatedProgress,
                 mealsCompleted: animatedCompletedMeals,
                 totalMeals: viewModel.totalMeals,
-                size: 160,
+                size: layoutMode == .compact ? 160 : 200,
                 progressBarColor: animatedColor
             )
             HStack {
@@ -97,6 +106,10 @@ private struct DayDataView: View {
             }
             .font(.system(size: 14, weight: .light))
             .padding(.top, 12)
+            Label("Here's a summary of your day", systemImage: "leaf")
+                .foregroundStyle(AppColors.deepGreen)
+                .font(.system(size: 14))
+                .padding(.top, 8)
             HStack {
                 ForEach(MealType.completeMealsOrdered) { mealType in
                     if let meal = viewModel.meals.first(
@@ -125,10 +138,6 @@ private struct DayDataView: View {
                     .foregroundStyle(AppColors.secondaryText)
             }.padding(.horizontal, 32)
                 .appSoftCardStyle(background: AppColors.softSage)
-            Label("You fueled your body well today", systemImage: "leaf")
-                .foregroundStyle(AppColors.deepGreen)
-                .font(.system(size: 14))
-                .padding(.top, 12)
             Spacer()
         }
         .frame(maxWidth: .infinity)

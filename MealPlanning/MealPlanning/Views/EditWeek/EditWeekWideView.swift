@@ -32,7 +32,10 @@ struct EditWeekWideView: View {
             HStack(spacing: 8) {
                 // Week list view
                 WeekListView(viewModel: editWeekViewModel) { weekDay in
-                    editWeekViewModel.selectedDay = weekDay
+                    withAnimation(.easeInOut(duration: 0.4)) {
+                        editWeekViewModel.selectedDay = weekDay
+                        selectedMeal = nil
+                    }
                 }
 
                 // Meals list view
