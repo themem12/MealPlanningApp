@@ -124,20 +124,6 @@ private struct DayDataView: View {
                     }
                 }
             }
-            VStack(spacing: 8) {
-                Image(systemName: "flame")
-                    .foregroundStyle(.red)
-                    .font(.system(size: 14))
-                    .padding(.top, 12)
-                Text(viewModel.calories)
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundStyle(AppColors.primaryText)
-                Text("cal")
-                    .font(.system(size: 14))
-                    .padding(.bottom, 12)
-                    .foregroundStyle(AppColors.secondaryText)
-            }.padding(.horizontal, 32)
-                .appSoftCardStyle(background: AppColors.softSage)
             Spacer()
         }
         .frame(maxWidth: .infinity)

@@ -21,7 +21,6 @@ final class FoodItemViewModel {
     var didSaveFood = false
     var foodField: String = ""
     var amountField: String = ""
-    var caloriesField: String = ""
 
     var buttonTitle: String {
         switch mode {
@@ -48,7 +47,6 @@ final class FoodItemViewModel {
         case .edit(let foodItem):
             foodField = foodItem.name
             amountField = foodItem.portion
-            caloriesField = foodItem.calories == 0 ? "" : "\(foodItem.calories)"
         }
     }
 
@@ -63,21 +61,15 @@ final class FoodItemViewModel {
             showError = true
             return
         }
-        guard let caloriesCount = validateCalories(caloriesField) else {
-            errorMessage = "Calories invalid"
-            showError = true
-            return
-        }
 
         switch mode {
         case .create:
             onSave(
-                FoodItem(name: foodField, portion: amountField, calories: caloriesCount)
+                FoodItem(name: foodField, portion: amountField)
             )
         case .edit(let foodItem):
             foodItem.name = foodField
             foodItem.portion = amountField
-            foodItem.calories = caloriesCount
             onSave(foodItem)
         }
 
@@ -90,11 +82,5 @@ final class FoodItemViewModel {
 
     private func validateAmount(_ amount: String) -> Bool {
         !amount.isEmpty
-    }
-
-    private func validateCalories(_ calories: String) -> Int? {
-        guard !calories.isEmpty else { return 0 }
-        let caloriesCount = Int(calories)
-        return caloriesCount
     }
 }

@@ -130,17 +130,6 @@ private struct MealItemCardView: View {
             .padding(.leading)
             .padding(.vertical)
             Spacer()
-            Text("\(foodItem.calories) cal")
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(mealType.color)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 6)
-                .background(
-                    Capsule()
-                        .fill(mealType.color.opacity(0.12))
-                )
-                .padding(.trailing)
-                .padding(.top)
         }
         .appCardStyle()
     }
@@ -213,16 +202,5 @@ private struct EmptyMealView: View {
 }
 
 #Preview {
-//    MealDetailView(
-//        viewModel: MealDetailViewModel(
-//            service: MockMealDataService(),
-//            meal: Meal(
-//                type: .breakfast,
-//                items: [
-//                    FoodItem(name: "Chicken", portion: "123 gr", calories: 150)
-//                ]
-//            )
-//        )
-//    )
     MealHeaderView(meal: Meal(type: .breakfast, items: []))
 }

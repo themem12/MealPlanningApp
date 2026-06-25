@@ -59,7 +59,7 @@ struct MealPlanningApp: App {
 //                for meal in dayPlan.meals {
 //                    service.addFoodItem(
 //                        to: meal, foodItem: FoodItem(
-//                            name: "\(meal.type.title), \(weekDay.title)", portion: "123 gr", calories: 0
+//                            name: "\(meal.type.title), \(weekDay.title)", portion: "123 gr"
 //                        )
 //                    )
 //                }

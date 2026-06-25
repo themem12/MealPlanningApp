@@ -15,7 +15,6 @@ final class TodayResumeViewModel {
     var meals: [TodayReviewMealModel] = []
     var percentage: String = ""
     var progressBarValue: Double = 0
-    var calories: String = ""
     var isEmptyDay: Bool = false
     var dateString: String = ""
 
@@ -39,25 +38,11 @@ final class TodayResumeViewModel {
         percentage = "\(Int(completion * 100))%"
         progressBarValue = completion
 
-        getCaloriesTotal(from: actualMeals)
-
         dateString = dayRecord.date.formatted(
             .dateTime
                 .weekday(.wide)
                 .month(.wide)
                 .day()
         )
-    }
-
-    private func getCaloriesTotal(from meals: [MealRecord]) {
-        var caloriesCount: Int = 0
-        for meal in meals {
-            if meal.isCompleted {
-                for item in meal.items {
-                    caloriesCount += item.calories
-                }
-            }
-        }
-        calories = "\(caloriesCount)"
     }
 }

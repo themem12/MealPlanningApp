@@ -47,18 +47,15 @@ class FoodItem {
     var id: UUID = UUID()
     var name: String
     var portion: String
-    var calories: Int
 
-    init(name: String, portion: String, calories: Int) {
+    init(name: String, portion: String) {
         self.name = name
         self.portion = portion
-        self.calories = calories
     }
 
     init(foodItemRecord: FoodItemRecord) {
         self.name = foodItemRecord.name
         self.portion = foodItemRecord.portion
-        self.calories = foodItemRecord.calories
     }
 }
 
@@ -110,17 +107,14 @@ class FoodItemRecord {
     var id: UUID = UUID()
     var name: String
     var portion: String
-    var calories: Int
 
-    init(name: String, portion: String, calories: Int) {
+    init(name: String, portion: String) {
         self.name = name
         self.portion = portion
-        self.calories = calories
     }
 
     init(from item: FoodItem) {
         self.name = item.name
         self.portion = item.portion
-        self.calories = item.calories
     }
 }

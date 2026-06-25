@@ -12,7 +12,6 @@ struct FoodItemView: View {
     enum Field {
         case foodName
         case portion
-        case calories
     }
 
     @Environment(\.dismiss) private var dismiss
@@ -60,18 +59,6 @@ struct FoodItemView: View {
                 text: $viewModel.amountField
             )
             .focused($focusedField, equals: .portion)
-            .submitLabel(.next)
-            .onSubmit {
-                focusedField = .calories
-            }
-            AppInputField(
-                placeholder: "Calories (optional)",
-                icon: "flame",
-                keyboardType: .numberPad,
-                accentColor: viewModel.mealType.color,
-                text: $viewModel.caloriesField
-            )
-            .focused($focusedField, equals: .calories)
             .submitLabel(.next)
             .onSubmit {
                 focusedField = nil
