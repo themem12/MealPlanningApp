@@ -80,13 +80,15 @@ struct TodayView: View {
                 }
             }
             .alert(
-                viewModel.alertMessage,
+                viewModel.alertTitle,
                 isPresented: $viewModel.showAlert
             ) {
-                Button(role: .confirm) {
+                Button("Finish day") {
                     viewModel.confirmEndDay()
                 }
                 Button(role: .cancel, action: {})
+            } message: {
+                Text(viewModel.alertMessage)
             }
         }
     }

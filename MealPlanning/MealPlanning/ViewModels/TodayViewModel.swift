@@ -23,6 +23,7 @@ final class TodayViewModel {
     var titleIconColor: Color = .clear
     var dateTitle = "Today"
     var dayRecord: DayRecord?
+    var alertTitle: String = ""
     var alertMessage: String = ""
     var showAlert: Bool = false
     var addFoodTapped: Bool = false
@@ -59,7 +60,8 @@ final class TodayViewModel {
     func endDayTapped() {
         for meal in sortedMeals {
             if !meal.items.isEmpty && !meal.isCompleted {
-                alertMessage = "Are you sure you want to finish the day? Some meals are not completed yet"
+                alertTitle = "Finish day?"
+                alertMessage = "Some meals haven't been completed yet. \nYou can still finish the day if you're done."
                 showAlert = true
                 return
             }

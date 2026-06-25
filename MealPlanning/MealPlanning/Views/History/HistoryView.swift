@@ -15,31 +15,34 @@ struct HistoryView: View {
         _viewModel = .init(initialValue: viewModel)
     }
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("History")
-                .font(.system(size: 40, weight: .bold))
-            Text("Review your nutrition plan consistency")
-                .font(.system(size: 12, weight: .light))
-
-            CalendarView(viewModel: viewModel) { dayProgress in
-                guard dayProgress.dateState != .isFuture else { return }
-                guard dayProgress.dateState != .isToday else { return }
-                if let dayRecord = dayProgress.dayRecord {
-                    selectedDayRecord = dayRecord
-                } else {
-                    selectedDayRecord = viewModel.getDayRecordFromDayNumber(dayNumber: dayProgress.day)
+        ScrollView(.vertical) {
+            VStack(alignment: .leading) {
+                Text("History")
+                    .font(.system(size: 40, weight: .bold))
+                Text("Review your nutrition plan consistency")
+                    .font(.system(size: 12, weight: .light))
+                
+                CalendarView(viewModel: viewModel) { dayProgress in
+                    guard dayProgress.dateState != .isFuture else { return }
+                    guard dayProgress.dateState != .isToday else { return }
+                    if let dayRecord = dayProgress.dayRecord {
+                        selectedDayRecord = dayRecord
+                    } else {
+                        selectedDayRecord = viewModel.getDayRecordFromDayNumber(dayNumber: dayProgress.day)
+                    }
                 }
+                
+                MonthOverviewCard(
+                    goodDays: viewModel.monthOverview.goodDays,
+                    regularDays: viewModel.monthOverview.regularDays,
+                    missedDays: viewModel.monthOverview.missedDays
+                )
+                .padding(.top, 24)
             }
-
-            Spacer()
-
-            MonthOverviewCard(
-                goodDays: viewModel.monthOverview.goodDays,
-                regularDays: viewModel.monthOverview.regularDays,
-                missedDays: viewModel.monthOverview.missedDays
-            )
+            .padding()
         }
-        .padding()
+        .scrollBounceBehavior(.basedOnSize)
+        .frame(maxHeight: .infinity)
         .background(AppColors.background)
         .navigationDestination(item: $selectedDayRecord) { dayRecord in
             DayRecordView(

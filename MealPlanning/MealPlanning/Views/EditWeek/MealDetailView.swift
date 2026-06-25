@@ -58,7 +58,7 @@ struct MealDetailView: View {
             }
         }
         .alert(
-            "Delete Food Item",
+            "Delete this food?",
             isPresented: $viewModel.showDeleteConfirmation
         ) {
             Button("Delete", role: .destructive) {
