@@ -23,7 +23,7 @@ struct TodayResumeView: View {
                     .font(.system(size: 76))
                     .foregroundStyle(AppColors.dinner.opacity(0.9))
                     .padding(.bottom, 10)
-                Text("Day completed")
+                Text(.todayResumeViewTitle)
                     .font(.system(size: 32, weight: .bold))
                     .foregroundStyle(AppColors.primaryText)
                 Text(viewModel.dateString)
@@ -70,10 +70,10 @@ struct EmptyRecordDayView: View {
                     .padding(.trailing, 23)
                     .padding(.bottom, 17)
             }
-            Text("No meals were planned today.")
+            Text(.todayResumeViewEmptyTitle)
                 .font(.system(size: 24, weight: .semibold))
                 .foregroundStyle(AppColors.primaryText)
-            Text("There's nothing to review for this day")
+            Text(.todayResumeViewEmptyMessage)
                 .font(.system(size: 16, weight: .light))
                 .foregroundStyle(AppColors.primaryText)
         }.frame(maxWidth: .infinity)
@@ -99,14 +99,14 @@ private struct DayDataView: View {
                 progressBarColor: animatedColor
             )
             HStack {
-                Text("Consistency matters.")
+                Text(.todayResumeViewComment)
                     .foregroundStyle(AppColors.secondaryText)
                 Image(systemName: "heart")
                     .foregroundStyle(.yellow)
             }
             .font(.system(size: 14, weight: .light))
             .padding(.top, 12)
-            Label("Here's a summary of your day", systemImage: "leaf")
+            Label(.todayResumeViewSummaryTitle, systemImage: "leaf")
                 .foregroundStyle(AppColors.deepGreen)
                 .font(.system(size: 14))
                 .padding(.top, 8)

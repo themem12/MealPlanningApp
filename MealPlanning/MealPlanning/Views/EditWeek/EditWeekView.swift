@@ -19,10 +19,10 @@ struct EditWeekView: View {
     var body: some View {
         VStack(alignment: .leading){
             Group{
-                Text("Edit Week")
+                Text(.editWeekViewTitle)
                     .font(.largeTitle)
                     .foregroundStyle(AppColors.primaryText)
-                Text("Review and edit your meals for the week.")
+                Text(.editWeekViewSubtitle)
                     .font(.system(size: 14, weight: .light))
                     .foregroundStyle(AppColors.secondaryText)
             }.padding(.horizontal)
@@ -119,7 +119,7 @@ struct HeaderCardView: View {
                 Text(weekDay.title)
                     .font(.system(size: 16))
                 if !isSelected {
-                    Text("\(mealsCount) meals planned")
+                    Text(.editWeekViewMealsCounter(mealsCount))
                         .font(.system(size: 12, weight: .light))
                 }
             }
@@ -129,7 +129,7 @@ struct HeaderCardView: View {
                         .fill(AppColors.primaryGreen.opacity(0.6))
                         .frame(width: 60, height: 24)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
-                    Text("Today")
+                    Text(.todayTitle)
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(AppColors.primaryGreen)
                 }
@@ -162,7 +162,7 @@ struct MealsCardView: View {
                         EditWeekMealCardView(meal: meal)
                     }.buttonStyle(.plain)
                 } else {
-                    Text("Something went wrong, please try again")
+                    Text(.somethingWentWrong)
                         .font(.system(size: 24, weight: .bold))
                         .foregroundStyle(AppColors.primaryText)
                 }
@@ -193,7 +193,7 @@ private struct EditWeekMealCardView: View {
                         .font(.system(size: 14))
                         .foregroundStyle(AppColors.primaryText)
                     if meal.items.isEmpty {
-                        Text("Add foods")
+                        Text(.mealCardAddFoods)
                             .font(.system(size: 12))
                             .foregroundStyle(AppColors.secondaryText.opacity(0.6))
                     } else {

@@ -60,29 +60,6 @@ private struct CalendarSideView: View {
             )
             .padding()
             .appSoftCardStyle(background: AppColors.background)
-
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Legend")
-                    .bold()
-                CategoryView(
-                    color: AppColors.goodDay,
-                    categoryText: "Good day"
-                )
-                CategoryView(
-                    color: AppColors.regularDay,
-                    categoryText: "Regular day"
-                )
-                CategoryView(
-                    color: AppColors.missedDay,
-                    categoryText: "Missed day"
-                )
-                CategoryView(
-                    color: .gray,
-                    categoryText: "No meals planned"
-                )
-            }
-            .padding()
-            .appCardStyle()
         }
     }
 
@@ -110,10 +87,10 @@ private struct UnselectedDayView: View {
             Image(systemName: "calendar")
                 .font(.system(size: 170))
                 .foregroundStyle(AppColors.primaryGreen)
-            Text("You haven't selected any day yet")
+            Text(.unselectedDayTitle)
                 .font(.system(size: 32, weight: .bold))
                 .foregroundStyle(AppColors.primaryText)
-            Text("Tap any day to see how it went")
+            Text(.unselectedDaySubtitle)
                 .font(.system(size: 24, weight: .semibold))
                 .foregroundStyle(AppColors.secondaryText)
         }

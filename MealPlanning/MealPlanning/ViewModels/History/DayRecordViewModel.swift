@@ -26,7 +26,7 @@ final class DayRecordViewModel {
         let mealsCounts = getMealsCounts(meals: meals)
         self.isEmpty = mealsCounts.totalMeals == 0
         setDayState(completedMeals: mealsCounts.completedMeals, totalMeals: mealsCounts.totalMeals)
-        completedDaysTitle = "\(mealsCounts.completedMeals) of \(mealsCounts.totalMeals) meals completed"
+        completedDaysTitle = String(localized: .dayRecordViewCompletedMealsFraction(mealsCounts.completedMeals, mealsCounts.totalMeals))
     }
 
     private func setActualMeals(mealRecords: [MealRecord]) {
@@ -49,18 +49,18 @@ final class DayRecordViewModel {
     private func setDayState(completedMeals: Int, totalMeals: Int) {
         guard !isEmpty else {
             dayStateColor = AppColors.deepGreen
-            dayStateTitle = "Day Completed"
+            dayStateTitle = String(localized: .dayStateCompleted)
             return
         }
         if completedMeals >= totalMeals - 1 {
             dayStateColor = .green
-            dayStateTitle = "Good Day"
+            dayStateTitle = String(localized: .dayStateGood)
         } else if completedMeals >= totalMeals / 2 {
             dayStateColor = .yellow
-            dayStateTitle = "Regular Day"
+            dayStateTitle = String(localized: .dayStateRegular)
         } else {
             dayStateColor = .red
-            dayStateTitle = "Missed Day"
+            dayStateTitle = String(localized: .dayStateMissed)
         }
     }
 }

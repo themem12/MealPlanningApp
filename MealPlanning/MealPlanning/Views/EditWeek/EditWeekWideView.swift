@@ -21,10 +21,10 @@ struct EditWeekWideView: View {
     var body: some View {
         VStack(alignment: .leading) {
             // Header
-            Text("Edit Week")
+            Text(.editWeekViewTitle)
                 .font(.system(size: 24, weight: .bold))
                 .foregroundStyle(AppColors.primaryText)
-            Text("Review and edit your meals for the week.")
+            Text(.editWeekViewSubtitle)
                 .font(.system(size: 16, weight: .bold))
                 .foregroundStyle(AppColors.primaryText)
 
@@ -114,10 +114,10 @@ private struct UnselectedMealView: View {
             Image(systemName: "fork.knife")
                 .font(.system(size: 170))
                 .foregroundStyle(AppColors.primaryGreen)
-            Text("You haven't selected any meal yet")
+            Text(.unselectedMealViewTitle)
                 .font(.system(size: 32, weight: .bold))
                 .foregroundStyle(AppColors.primaryText)
-            Text("Tap any meal to see in detail")
+            Text(.unselectedMealViewSubtitle)
                 .font(.system(size: 24, weight: .semibold))
                 .foregroundStyle(AppColors.secondaryText)
         }

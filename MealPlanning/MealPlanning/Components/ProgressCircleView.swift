@@ -33,12 +33,13 @@ struct ProgressCircleView: View {
                 )
                 .rotationEffect(.degrees(-90))
             VStack {
-                Text("\(mealsCompleted)/\(totalMeals)")
+                Text(.mealsFraction(mealsCompleted, totalMeals))
                     .font(.system(size: 32, weight: .semibold))
                     .foregroundStyle(AppColors.primaryText)
-                Text("Meals Completed")
+                Text(.progressCircleViewTitle)
                     .font(.system(size: 16))
                     .foregroundStyle(AppColors.primaryText)
+                    .multilineTextAlignment(.center)
             }
         }
         .frame(width: size)

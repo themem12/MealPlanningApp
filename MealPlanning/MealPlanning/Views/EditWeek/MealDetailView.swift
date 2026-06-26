@@ -41,10 +41,10 @@ struct MealDetailView: View {
                             addFoodTapped(foodItem)
                         }
                         .contextMenu {
-                            Button("Edit") {
+                            Button(.mealDetailViewContextEdit) {
                                 addFoodTapped(foodItem)
                             }
-                            Button("Delete", role: .destructive) {
+                            Button(.mealDetailViewContextDelete, role: .destructive) {
                                 viewModel.deleteFoodItemTapped(foodItem)
                             }
                         }
@@ -58,16 +58,16 @@ struct MealDetailView: View {
             }
         }
         .alert(
-            "Delete this food?",
+            .mealDetailViewDeleteWarningTitle,
             isPresented: $viewModel.showDeleteConfirmation
         ) {
-            Button("Delete", role: .destructive) {
+            Button(.mealDetailViewDeleteWarningDelete, role: .destructive) {
                 viewModel.deleteFoodItemConfirmed()
             }
 
-            Button("Keep", role: .cancel) { }
+            Button(.mealDetailViewDeleteWarningKeep, role: .cancel) { }
         } message: {
-            Text("This action cannot be undone.")
+            Text(.mealDetailViewDeleteWarningMessage)
         }
         .padding(.top, 8)
         .background(
@@ -97,7 +97,7 @@ private struct MealHeaderView: View {
                 Text(meal.type.comment)
                     .font(.system(size: 18))
                     .foregroundStyle(AppColors.secondaryText)
-                Text("• \(meal.items.count) foods added")
+                Text(.mealDetailViewFoodCounter(meal.items.count))
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundStyle(meal.type.color)
                     .padding(.horizontal, 12)
@@ -147,10 +147,10 @@ private struct AddMealItemCardView: View {
                 .font(.system(size: 30))
                 .padding(.leading)
             VStack(alignment: .leading, spacing: 10) {
-                Text("Add Food")
+                Text(.mealDetailViewAddFoodTitle)
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundStyle(mealType.color)
-                Text("Add a food to your \(mealType.title)")
+                Text(.mealDetailViewAddFoodSubtitle(mealType.title))
                     .font(.system(size: 15))
                     .foregroundStyle(AppColors.secondaryText)
             }.padding()
@@ -175,16 +175,16 @@ private struct EmptyMealView: View {
         HStack {
             Spacer()
             VStack(alignment: .center) {
-                Text("No foods added yet")
+                Text(.mealDetailViewEmptyMealTitle)
                     .font(.system(size: 28, weight: .bold))
                     .foregroundStyle(AppColors.primaryText)
-                Text("Start building your \(mealType.title) by adding your first food.")
+                Text(.mealDetailViewEmptyMealSubtitle(mealType.title))
                     .font(.system(size: 18))
                     .foregroundStyle(AppColors.secondaryText)
                 Button {
                     newMealTapped()
                 } label: {
-                    Label("Add Food", systemImage: "plus")
+                    Label(.mealDetailViewAddFoodTitle, systemImage: "plus")
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundStyle(.white)
                         .padding(.horizontal, 12)

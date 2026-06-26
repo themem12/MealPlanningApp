@@ -17,9 +17,9 @@ struct HistoryView: View {
     var body: some View {
         ScrollView(.vertical) {
             VStack(alignment: .leading) {
-                Text("History")
+                Text(.historyViewTitle)
                     .font(.system(size: 40, weight: .bold))
-                Text("Review your nutrition plan consistency")
+                Text(.historyViewSubtitle)
                     .font(.system(size: 12, weight: .light))
                 
                 CalendarView(viewModel: viewModel) { dayProgress in
@@ -31,12 +31,6 @@ struct HistoryView: View {
                         selectedDayRecord = viewModel.getDayRecordFromDayNumber(dayNumber: dayProgress.day)
                     }
                 }
-                
-                MonthOverviewCard(
-                    goodDays: viewModel.monthOverview.goodDays,
-                    regularDays: viewModel.monthOverview.regularDays,
-                    missedDays: viewModel.monthOverview.missedDays
-                )
                 .padding(.top, 24)
             }
             .padding()
@@ -98,6 +92,11 @@ struct CalendarView: View {
                     }.buttonStyle(.plain)
                 }
             }
+            MonthOverviewCard(
+                goodDays: viewModel.monthOverview.goodDays,
+                regularDays: viewModel.monthOverview.regularDays,
+                missedDays: viewModel.monthOverview.missedDays
+            )
         }
     }
 }
@@ -109,23 +108,29 @@ private struct MonthOverviewCard: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Month overview")
+            Text(.historyViewOverviewTitle)
                 .bold()
             HStack(spacing: 10) {
                 CategoryView(
                     color: AppColors.goodDay,
                     numberOfDays: goodDays,
-                    categoryText: " good days"
+                    categoryText: String(
+                        localized: goodDays == 1 ? .dayStateGood : .dayStateGoodPlural
+                    )
                 )
                 CategoryView(
                     color: AppColors.regularDay,
                     numberOfDays: regularDays,
-                    categoryText: " regular days"
+                    categoryText: String(
+                        localized: regularDays == 1 ? .dayStateRegular : .dayStateRegularPlural
+                    )
                 )
                 CategoryView(
                     color: AppColors.missedDay,
                     numberOfDays: missedDays,
-                    categoryText: " missed days"
+                    categoryText: String(
+                        localized: missedDays == 1 ? .dayStateMissed : .dayStateMissedPlural
+                    )
                 )
             }
         }
@@ -138,14 +143,14 @@ private struct MonthOverviewCard: View {
         let numberOfDays: Int
         let categoryText: String
         var body: some View {
-            HStack(spacing: 8) {
+            HStack(spacing: 4) {
                 Circle()
                     .fill(color)
-                    .frame(width: 10, height: 10)
-                HStack(spacing: 0) {
+                    .frame(width: 8, height: 8)
+                HStack(alignment: .center, spacing: 4) {
                     Text("\(numberOfDays)")
                         .foregroundStyle(color)
-                    Text(categoryText)
+                    Text(categoryText.lowercased())
                         .font(.system(size: 12, weight: .light))
                 }
             }.frame(maxWidth: .infinity)

@@ -31,26 +31,26 @@ enum MealType: String, Codable, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .breakfast:
-            return "Breakfast"
+            return String(localized: .breakfastTitle)
         case .lunch:
-            return "Lunch"
+            return String(localized: .lunchTitle)
         case .dinner:
-            return "Dinner"
+            return String(localized: .dinnerTitle)
         case .collationAM, .collationPM:
-            return "Snack"
+            return String(localized: .snackTitle)
         }
     }
 
     var comment: String {
         switch self {
         case .breakfast:
-            return "Start your day well"
+            return String(localized: .breakfastComment)
         case .lunch:
-            return "Time to recharge"
+            return String(localized: .lunchComment)
         case .dinner:
-            return "A calm end to the day"
+            return String(localized: .dinnerComment)
         case .collationAM, .collationPM:
-            return "A little something in between"
+            return String(localized: .snackComment)
         }
     }
 

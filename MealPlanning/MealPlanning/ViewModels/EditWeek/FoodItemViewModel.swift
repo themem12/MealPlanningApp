@@ -25,10 +25,10 @@ final class FoodItemViewModel {
     var buttonTitle: String {
         switch mode {
         case .create:
-            return "Add Food"
+            return String(localized: .foodItemViewAddButton)
 
         case .edit:
-            return "Save Changes"
+            return String(localized: .foodItemViewEditButton)
         }
     }
 
@@ -52,12 +52,12 @@ final class FoodItemViewModel {
 
     func validateValues() {
         guard validateFoodName(foodField) else {
-            errorMessage = "Food name invalid"
+            errorMessage = String(localized: .foodItemViewWarningMessageName)
             showError = true
             return
         }
         guard validateAmount(amountField) else {
-            errorMessage = "Amount invalid"
+            errorMessage = String(localized: .foodItemViewWarningMessageAmount)
             showError = true
             return
         }

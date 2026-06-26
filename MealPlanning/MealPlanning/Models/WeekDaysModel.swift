@@ -24,38 +24,38 @@ enum WeekDay: Int, Codable, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .sunday:
-            return "Sunday"
+            return String(localized: .weekdayLongSunday)
         case .monday:
-            return "Monday"
+            return String(localized: .weekdayLongMonday)
         case .tuesday:
-            return "Tuesday"
+            return String(localized: .weekdayLongTuesday)
         case .wednesday:
-            return "Wednesday"
+            return String(localized: .weekdayLongWednesday)
         case .thursday:
-            return "Thursday"
+            return String(localized: .weekdayLongThursday)
         case .friday:
-            return "Friday"
+            return String(localized: .weekdayLongFriday)
         case .saturday:
-            return "Saturday"
+            return String(localized: .weekdayLongSaturday)
         }
     }
 
     var shortTitle: String {
         switch self {
         case .sunday:
-            return "S"
+            return String(localized: .weekdayShortSunday)
         case .monday:
-            return "M"
+            return String(localized: .weekdayShortMonday)
         case .tuesday:
-            return "T"
+            return String(localized: .weekdayShortTuesday)
         case .wednesday:
-            return "W"
+            return String(localized: .weekdayShortWednesday)
         case .thursday:
-            return "T"
+            return String(localized: .weekdayShortThursday)
         case .friday:
-            return "F"
+            return String(localized: .weekdayShortFriday)
         case .saturday:
-            return "S"
+            return String(localized: .weekdayShortSaturday)
         }
     }
 

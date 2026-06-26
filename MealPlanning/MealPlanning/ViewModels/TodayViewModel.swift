@@ -18,10 +18,10 @@ final class TodayViewModel {
     private var meal: Meal?
     private(set) var selectedFoodItem: FoodItem?
     
-    var title = "Good day"
+    var title = ""
     var titleIcon = ""
     var titleIconColor: Color = .clear
-    var dateTitle = "Today"
+    var dateTitle = ""
     var dayRecord: DayRecord?
     var alertTitle: String = ""
     var alertMessage: String = ""
@@ -60,8 +60,8 @@ final class TodayViewModel {
     func endDayTapped() {
         for meal in sortedMeals {
             if !meal.items.isEmpty && !meal.isCompleted {
-                alertTitle = "Finish day?"
-                alertMessage = "Some meals haven't been completed yet. \nYou can still finish the day if you're done."
+                alertTitle = String(localized: "today_view_end_day_alert_title")
+                alertMessage = String(localized: "today_view_end_day_alert_message")
                 showAlert = true
                 return
             }
@@ -124,19 +124,19 @@ final class TodayViewModel {
         let currentHour = Calendar.current.component(.hour, from: Date.now)
         switch currentHour {
         case 6..<12:
-            title = "Good morning"
+            title = String(localized: "today_view_title_morning")
             titleIcon = "sun.horizon"
             titleIconColor = .yellow
         case 12..<18:
-            title = "Good afternoon"
+            title = String(localized: "today_view_title_afternoon")
             titleIcon = "sun.max"
             titleIconColor = .orange
         case 18..<24:
-            title = "Good evening"
+            title = String(localized: "today_view_title_evening")
             titleIcon = "moon.dust"
             titleIconColor = .blue
         default:
-            title = "Late night snack?"
+            title = String(localized: "today_view_title_night")
             titleIcon = "moon.zzz"
             titleIconColor = .indigo
         }

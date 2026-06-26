@@ -47,7 +47,7 @@ struct MealCard: View {
                     .font(.system(size: 18, weight: .bold))
                     .foregroundStyle(AppColors.primaryText)
                 if !hasItems {
-                    Text("Add foods")
+                    Text(.mealCardAddFoods)
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundStyle(AppColors.secondaryText.opacity(0.7))
                 } else {

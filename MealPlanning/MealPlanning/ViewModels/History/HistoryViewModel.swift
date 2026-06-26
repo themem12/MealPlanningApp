@@ -87,7 +87,7 @@ final class HistoryViewModel {
                 if actualMeals.count > 0 {
                     let completedMeals = actualMeals.filter({ $0.isCompleted }).count
                     let totalMeals = actualMeals.count
-                    percentage = "\(completedMeals) / \(totalMeals)"
+                    percentage = String(localized: .mealsFraction(completedMeals, totalMeals))
                     if completedMeals == 0 {
                         accentColor = AppColors.missedDay
                         badDays += 1

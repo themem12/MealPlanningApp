@@ -83,7 +83,7 @@ struct TodayView: View {
                 viewModel.alertTitle,
                 isPresented: $viewModel.showAlert
             ) {
-                Button("Finish day") {
+                Button(.finishDay) {
                     viewModel.confirmEndDay()
                 }
                 Button(role: .cancel, action: {})
@@ -143,7 +143,7 @@ private struct TodayContentView: View {
                     } label: {
                         HStack(spacing: 12) {
                             Image(systemName: "flag.pattern.checkered")
-                            Text("End Day")
+                            Text(.finishDay)
                                 .fontWeight(.semibold)
                         }
                         .foregroundStyle(.white)
@@ -159,7 +159,7 @@ private struct TodayContentView: View {
                 }
             } else {
                 ContentUnavailableView(
-                    "You don't have a plan for today yet, don't go crazy",
+                    String(localized: .todayViewEmptyPlanTitle),
                     systemImage: "fork.knife"
                 )
             }
@@ -181,9 +181,9 @@ private struct TodaySidebarView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Today")
+            Text(.todayTitle)
                 .font(.system(size: 30, weight: .bold))
-            Text("Let's stay consistent with your plan.")
+            Text(.todayViewSidebarSubtitle)
                 .font(.system(size: 20, weight: .regular))
 
             Spacer()
@@ -204,7 +204,7 @@ private struct TodaySidebarView: View {
             Divider()
                 .overlay(.gray.opacity(0.3))
 
-            Text("Meals status")
+            Text(.todayViewSidebarMealsTitle)
                 .font(.system(size: 14, weight: .bold))
                 .padding(.top)
 

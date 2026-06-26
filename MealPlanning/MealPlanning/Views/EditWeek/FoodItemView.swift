@@ -42,7 +42,7 @@ struct FoodItemView: View {
             .padding(.top)
             
             AppInputField(
-                placeholder: "Food Name",
+                placeholder: String(localized: .foodItemViewFieldName),
                 icon: "fork.knife",
                 accentColor: viewModel.mealType.color,
                 text: $viewModel.foodField
@@ -53,7 +53,7 @@ struct FoodItemView: View {
                 focusedField = .portion
             }
             AppInputField(
-                placeholder: "Portion",
+                placeholder: String(localized: .foodItemViewFieldName),
                 icon: "scalemass",
                 accentColor: viewModel.mealType.color,
                 text: $viewModel.amountField
@@ -87,10 +87,10 @@ struct FoodItemView: View {
             dismiss()
         }
         .alert(
-            "Error",
+            String(localized: .foodItemViewWarningTitle),
             isPresented: $viewModel.showError
         ){
-            Button("OK", role: .cancel) { }
+            Button(.foodItemViewWarningOk, role: .cancel) { }
         } message: {
             Text(viewModel.errorMessage ?? "")
         }
