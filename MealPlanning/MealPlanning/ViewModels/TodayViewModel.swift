@@ -42,6 +42,7 @@ final class TodayViewModel {
         self.service = service
         dayRecord = service.getTodayRecord()
         self.dateProvider = dateProvider
+        loadTodayPlan()
     }
 
     func loadTodayPlan() {
@@ -124,19 +125,19 @@ final class TodayViewModel {
         let currentHour = Calendar.current.component(.hour, from: Date.now)
         switch currentHour {
         case 6..<12:
-            title = String(localized: "today_view_title_morning")
+            title = String(localized: .todayViewTitleMorning)
             titleIcon = "sun.horizon"
             titleIconColor = .yellow
         case 12..<18:
-            title = String(localized: "today_view_title_afternoon")
+            title = String(localized: .todayViewTitleAfternoon)
             titleIcon = "sun.max"
             titleIconColor = .orange
         case 18..<24:
-            title = String(localized: "today_view_title_evening")
+            title = String(localized: .todayViewTitleEvening)
             titleIcon = "moon.dust"
             titleIconColor = .blue
         default:
-            title = String(localized: "today_view_title_night")
+            title = String(localized: .todayViewTitleNight)
             titleIcon = "moon.zzz"
             titleIconColor = .indigo
         }

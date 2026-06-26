@@ -71,9 +71,6 @@ struct TodayView: View {
                     }
                 }
             }
-            .task {
-                viewModel.loadTodayPlan()
-            }
             .navigationDestination(item: $selectedMeal) { meal in
                 MealDetailView(
                     viewModel: viewModel.makeMealDetailViewModel(for: meal)

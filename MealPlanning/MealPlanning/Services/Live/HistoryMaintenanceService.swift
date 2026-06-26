@@ -21,8 +21,6 @@ final class LiveHistoryMaintenanceService: HistoryMaintenanceServiceProtocol {
     }
 
     func processPendingDays() {
-        print("Process pending days")
-        print("Today: ", dateProvider.today)
         let calendar = Calendar.current
         guard let lastRecord = mealService.getLastRecord() else {
             // This can mean the is the first time the user enters the app or he never end a day manually, for both cases we should create an empty record for the day before
@@ -34,8 +32,6 @@ final class LiveHistoryMaintenanceService: HistoryMaintenanceServiceProtocol {
             return
         }
 
-        print("Last record: ", lastRecord.date)
-
         var currentDate = calendar.date(
             byAdding: .day,
             value: 1,
@@ -43,7 +39,6 @@ final class LiveHistoryMaintenanceService: HistoryMaintenanceServiceProtocol {
         )!
         
         while currentDate < calendar.startOfDay(for: dateProvider.today) {
-            print("Creating record for:", currentDate)
             createRecord(for: currentDate)
 
             currentDate = calendar.date(
@@ -58,17 +53,10 @@ final class LiveHistoryMaintenanceService: HistoryMaintenanceServiceProtocol {
         guard let weekDay = WeekDay(
             rawValue: Calendar.current.component(.weekday, from: date)
         ) else {
-            print("Error while getting weekDay")
             return
         }
-        let dayPlan = mealService.getOrCreatePlan(for: weekDay)
 
-        for meal in dayPlan.meals {
-            print(
-                meal.type,
-                meal.isCompleted
-            )
-        }
+        let dayPlan = mealService.getOrCreatePlan(for: weekDay)
 
         mealService.endDay(for: dayPlan, date: date)
     }

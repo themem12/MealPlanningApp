@@ -1071,7 +1071,7 @@
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Buenas noches"
+            "value" : "Buenas tardes"
           }
         }
       }
@@ -1088,7 +1088,7 @@
         "es-419" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Buenas tardes"
+            "value" : "Buenas noches"
           }
         }
       }

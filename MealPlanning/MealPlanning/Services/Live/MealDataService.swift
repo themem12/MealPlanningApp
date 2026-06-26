@@ -122,9 +122,7 @@ final class LiveMealDataService: MealDataServiceProtocol {
             // Day already end
             return
         }
-        print("before record: ", dayPlan.meals.filter(\.isCompleted).count)
         let dayRecord = DayRecord(date: date, from: dayPlan, isCompleted: true)
-        print("after record: ", dayRecord.meals.filter(\.isCompleted).count)
         context.insert(dayRecord)
         save()
         dayPlan.meals = dayPlan.meals.map({ meal in
@@ -193,9 +191,7 @@ final class LiveMealDataService: MealDataServiceProtocol {
     private func save() {
         do {
             try context.save()
-        } catch {
-            print(error)
-        }
+        } catch { }
     }
 
     private func createDefaultMeals() -> [Meal] {
