@@ -96,7 +96,7 @@ struct CalendarView: View {
                 goodDays: viewModel.monthOverview.goodDays,
                 regularDays: viewModel.monthOverview.regularDays,
                 missedDays: viewModel.monthOverview.missedDays
-            )
+            ).padding(.top, 24)
         }
     }
 }

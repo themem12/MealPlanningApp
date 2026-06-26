@@ -33,8 +33,10 @@ struct TodayView: View {
                             HeaderView(viewModel: viewModel)
                             HStack {
                                 if layoutMode == .wide {
-                                    TodaySidebarView(meals: viewModel.sortedMeals)
-                                        .frame(width: 380)
+                                    ScrollView {
+                                        TodaySidebarView(meals: viewModel.sortedMeals)
+                                            .frame(width: 380)
+                                    }.scrollBounceBehavior(.basedOnSize)
                                 }
                                 TodayContentView(viewModel: viewModel, mealSelected: { meal in
                                     selectedMeal = meal
@@ -193,13 +195,12 @@ private struct TodaySidebarView: View {
                     progressBarValue: animatedProgress,
                     mealsCompleted: completedMeals,
                     totalMeals: totalMeals,
-                    size: 240,
+                    size: 180,
                     progressBarColor: animatedColor
                 )
                 Spacer()
             }
-
-            Spacer()
+            .padding(.bottom, 8)
 
             Divider()
                 .overlay(.gray.opacity(0.3))
@@ -213,7 +214,7 @@ private struct TodaySidebarView: View {
                     HStack {
                         MealIconView(
                             mealType: meal.type,
-                            size: 60
+                            size: 45
                         )
                         Text(mealType.title)
                         Spacer()

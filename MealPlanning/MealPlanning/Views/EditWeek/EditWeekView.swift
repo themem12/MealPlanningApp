@@ -39,7 +39,9 @@ struct EditWeekView: View {
                             viewModel.selectDay(weekDay)
                         },
                         mealTapped: { mealTapped in
-                            selectedMeal = mealTapped
+                            withAnimation(.easeInOut) {
+                                selectedMeal = mealTapped
+                            }
                         }
                     )
                     .padding(.top)
@@ -74,28 +76,28 @@ private struct DayCardView: View {
     @State private var selectedMeal: Meal?
     
     var body: some View {
-        VStack {
-            HeaderCardView(
-                mealsCount: mealsCount,
-                weekDay: weekDay,
-                isSelected: isSelected,
-                isToday: isToday
-            )
-            .onTapGesture {
-                withAnimation(.spring()) {
-                    selectDay()
+        Button {
+            selectDay()
+        } label: {
+            VStack {
+                HeaderCardView(
+                    mealsCount: mealsCount,
+                    weekDay: weekDay,
+                    isSelected: isSelected,
+                    isToday: isToday
+                )
+                
+                if isSelected {
+                    MealsCardView(
+                        meals: meals,
+                        mealTapped: mealTapped
+                    ).padding(.bottom, 8)
                 }
             }
-            if isSelected {
-                MealsCardView(
-                    meals: meals,
-                    mealTapped: mealTapped
-                )
-            }
-        }
-        .padding(.horizontal)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .appCardStyle()
+            .padding(.horizontal)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .appCardStyle()
+        }.buttonStyle(.plain)
     }
 }
 
@@ -168,7 +170,6 @@ struct MealsCardView: View {
                 }
             }
         }
-        .padding(.bottom)
     }
 }
 
@@ -179,7 +180,7 @@ private struct EditWeekMealCardView: View {
             Rectangle()
                 .fill(meal.type.color)
                 .frame(width: 4)
-            Group {
+            HStack {
                 ZStack {
                     Circle()
                         .fill(meal.type.color.opacity(0.18))
@@ -204,7 +205,7 @@ private struct EditWeekMealCardView: View {
                         .foregroundStyle(AppColors.secondaryText)
                     }
                 }
-                Spacer()
+                .frame(maxWidth: .infinity, alignment: .leading)
                 Image(systemName: "chevron.right")
                     .foregroundStyle(AppColors.primaryText)
             }

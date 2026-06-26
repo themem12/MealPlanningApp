@@ -31,25 +31,29 @@ struct EditWeekWideView: View {
             // Content View
             HStack(spacing: 8) {
                 // Week list view
-                WeekListView(viewModel: editWeekViewModel) { weekDay in
-                    withAnimation(.easeInOut(duration: 0.4)) {
-                        editWeekViewModel.selectedDay = weekDay
-                        selectedMeal = nil
+                ScrollView {
+                    WeekListView(viewModel: editWeekViewModel) { weekDay in
+                        withAnimation(.easeInOut(duration: 0.4)) {
+                            editWeekViewModel.selectedDay = weekDay
+                            selectedMeal = nil
+                        }
                     }
-                }
+                }.scrollBounceBehavior(.basedOnSize)
 
                 // Meals list view
-                Group {
+                ScrollView {
                     MealsCardView(
-                        meals: editWeekViewModel.getMealsFromSelectedDay()) { meal in
-                            withAnimation(.easeInOut(duration: 0.4)) {
-                                selectedMeal = meal
-                            }
+                        meals: editWeekViewModel.getMealsFromSelectedDay()
+                    ) { meal in
+                        withAnimation(.easeInOut(duration: 0.4)) {
+                            selectedMeal = meal
                         }
+                    }
                 }
                 .padding()
                 .appSoftCardStyle(background: AppColors.background)
                 .frame(width: 300)
+                .scrollBounceBehavior(.basedOnSize)
 
                 // Meal Detail view
                 if let selectedMeal {
@@ -97,10 +101,10 @@ private struct WeekListView: View {
                         isSelected: false,
                         isToday: viewModel.isCurrentDay(weekDay)
                     )
+                    .padding(.horizontal)
+                    .appSoftCardStyle(background: weekDay == viewModel.selectedDay ? AppColors.primaryGreen.opacity(0.3) : AppColors.card)
                 }
                 .buttonStyle(.plain)
-                .padding(.horizontal)
-                .appSoftCardStyle(background: weekDay == viewModel.selectedDay ? AppColors.primaryGreen.opacity(0.3) : AppColors.card)
             }
             .frame(maxHeight: .infinity)
         }

@@ -53,13 +53,13 @@ struct FoodItemView: View {
                 focusedField = .portion
             }
             AppInputField(
-                placeholder: String(localized: .foodItemViewFieldName),
+                placeholder: String(localized: .foodItemViewFieldPortion),
                 icon: "scalemass",
                 accentColor: viewModel.mealType.color,
                 text: $viewModel.amountField
             )
             .focused($focusedField, equals: .portion)
-            .submitLabel(.next)
+            .submitLabel(.done)
             .onSubmit {
                 focusedField = nil
             }

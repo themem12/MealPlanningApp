@@ -18,33 +18,37 @@ struct HistoryWideView: View {
     }
 
     var body: some View {
-        HStack {
-            CalendarSideView(
-                viewModel: historyViewModel
-            ) { dayProgress in
-                guard dayProgress.dateState != .isFuture else { return }
-                guard dayProgress.dateState != .isToday else { return }
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    if let dayRecord = dayProgress.dayRecord {
-                        historyViewModel.setSelectedDay(record: dayRecord)
-                    } else {
-                        historyViewModel.setSelectedDay(from: dayProgress.day)
+        ScrollView {
+            HStack {
+                CalendarSideView(
+                    viewModel: historyViewModel
+                ) { dayProgress in
+                    guard dayProgress.dateState != .isFuture else { return }
+                    guard dayProgress.dateState != .isToday else { return }
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        if let dayRecord = dayProgress.dayRecord {
+                            historyViewModel.setSelectedDay(record: dayRecord)
+                        } else {
+                            historyViewModel.setSelectedDay(from: dayProgress.day)
+                        }
                     }
                 }
+                .padding()
+                .frame(width: 420)
+                
+                if let selectedDayRecord = historyViewModel.selectedDayRecord {
+                    DayRecordView(
+                        viewModel: DayRecordViewModel(dayRecord: selectedDayRecord)
+                    )
+                    .id(selectedDayRecord.id)
+                    .contentTransition(.opacity)
+                } else {
+                    UnselectedDayView()
+                }
             }
-            .padding()
-            .frame(width: 420)
-
-            if let selectedDayRecord = historyViewModel.selectedDayRecord {
-                DayRecordView(
-                    viewModel: DayRecordViewModel(dayRecord: selectedDayRecord)
-                )
-                .id(selectedDayRecord.id)
-                .contentTransition(.opacity)
-            } else {
-                UnselectedDayView()
-            }
-        }.background(AppColors.background)
+        }
+        .background(AppColors.background)
+        .scrollBounceBehavior(.basedOnSize)
     }
 }
 private struct CalendarSideView: View {

@@ -12,6 +12,7 @@ import Observation
 final class TodayResumeViewModel {
     var mealsCompleted: Int = 0
     var totalMeals: Int = 0
+    var totalMealsType: [MealType]
     var meals: [TodayReviewMealModel] = []
     var percentage: String = ""
     var progressBarValue: Double = 0
@@ -20,6 +21,7 @@ final class TodayResumeViewModel {
 
     init(dayRecord: DayRecord) {
         let actualMeals = dayRecord.meals.filter({ !$0.items.isEmpty })
+        totalMealsType = actualMeals.map({ $0.type }).sorted(by: { $0.order < $1.order })
         totalMeals = actualMeals.count
         mealsCompleted = actualMeals.filter(\.isCompleted).count
         meals = actualMeals.map {
@@ -27,7 +29,7 @@ final class TodayResumeViewModel {
                 mealType: $0.type,
                 isCompleted: $0.isCompleted
             )
-        }
+        }.sorted(by: { $0.mealType.order < $1.mealType.order })
         guard totalMeals > 0 else {
             isEmptyDay = true
             percentage = ""

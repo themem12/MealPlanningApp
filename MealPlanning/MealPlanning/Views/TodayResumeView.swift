@@ -18,37 +18,40 @@ struct TodayResumeView: View {
     var body: some View {
         GeometryReader { geometry in
             let layoutMode = geometry.size.width.layoutMode
-            VStack(spacing: 12) {
-                Image(systemName: "moon.stars.fill")
-                    .font(.system(size: 76))
-                    .foregroundStyle(AppColors.dinner.opacity(0.9))
-                    .padding(.bottom, 10)
-                Text(.todayResumeViewTitle)
-                    .font(.system(size: 32, weight: .bold))
-                    .foregroundStyle(AppColors.primaryText)
-                Text(viewModel.dateString)
-                    .font(
-                        .system(
-                            size: layoutMode == .compact ? 16 : 24,
-                            weight: .semibold
+            ScrollView{
+                VStack(spacing: 12) {
+                    Image(systemName: "moon.stars.fill")
+                        .font(.system(size: 76))
+                        .foregroundStyle(AppColors.dinner.opacity(0.9))
+                        .padding(.bottom, 10)
+                    Text(.todayResumeViewTitle)
+                        .font(.system(size: 32, weight: .bold))
+                        .foregroundStyle(AppColors.primaryText)
+                    Text(viewModel.dateString)
+                        .font(
+                            .system(
+                                size: layoutMode == .compact ? 16 : 24,
+                                weight: .semibold
+                            )
                         )
-                    )
-                    .foregroundStyle(AppColors.secondaryText)
-                    .padding(.bottom, 8)
-                if viewModel.isEmptyDay {
-                    Spacer()
-                    EmptyRecordDayView()
-                    Spacer()
-                } else {
-                    DayDataView(
-                        viewModel: viewModel,
-                        layoutMode: geometry.size.width.layoutMode
-                    )
+                        .foregroundStyle(AppColors.secondaryText)
+                        .padding(.bottom, 8)
+                    if viewModel.isEmptyDay {
+                        Spacer()
+                        EmptyRecordDayView()
+                        Spacer()
+                    } else {
+                        DayDataView(
+                            viewModel: viewModel,
+                            layoutMode: geometry.size.width.layoutMode
+                        )
+                    }
                 }
+                .padding()
             }
+            .background(AppColors.background)
+            .scrollBounceBehavior(.basedOnSize)
         }
-        .padding()
-        .background(AppColors.background)
     }
 }
 
@@ -111,17 +114,13 @@ private struct DayDataView: View {
                 .font(.system(size: 14))
                 .padding(.top, 8)
             HStack {
-                ForEach(MealType.completeMealsOrdered) { mealType in
-                    if let meal = viewModel.meals.first(
-                        where: { $0.mealType == mealType }
-                    ) {
-                        MealResumeCard(
-                            meal: meal,
-                            canHighlight: mealType == mealTypeHighlighted,
-                            isWideLayout: layoutMode == .wide
-                        )
-                        .padding(.vertical, 8)
-                    }
+                ForEach(viewModel.meals) { meal in
+                    MealResumeCard(
+                        meal: meal,
+                        canHighlight: meal.mealType == mealTypeHighlighted,
+                        isWideLayout: layoutMode == .wide
+                    )
+                    .padding(.vertical, 8)
                 }
             }
             Spacer()
@@ -144,7 +143,7 @@ private struct DayDataView: View {
                         } else {
                             animatedColor = AppColors.border
                         }
-                        mealTypeHighlighted = MealType.completeMealsOrdered[index - 1]
+                        mealTypeHighlighted = viewModel.totalMealsType[index - 1]
                         DispatchQueue.main.asyncAfter(
                             deadline: .now() + 0.25
                         ) {
