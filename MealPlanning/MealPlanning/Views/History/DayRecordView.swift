@@ -31,10 +31,11 @@ struct DayRecordView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(viewModel.dayStateColor.opacity(0.2))
                     }
-            }
+            }.padding(.horizontal)
             Text(viewModel.dateTitle)
                 .font(.system(size: 18, weight: .regular))
                 .foregroundStyle(AppColors.primaryText)
+                .padding(.horizontal)
             if !viewModel.isEmpty {
                 Label(
                     viewModel.completedDaysTitle,
@@ -48,20 +49,23 @@ struct DayRecordView: View {
                     RoundedRectangle(cornerRadius: 14)
                         .fill(AppColors.primaryGreen.opacity(0.2))
                 }
+                .padding(.horizontal)
 
                 ScrollView {
                     ForEach(viewModel.meals) { meal in
                         MealCard(meal: meal, isRecord: true) { }
+                            .padding(.horizontal)
+                            .padding(.top, viewModel.meals.isFirst(meal) ? SpaceSize.medium.rawValue : SpaceSize.small.rawValue)
+                            .padding(.bottom, viewModel.meals.isLast(meal) ? SpaceSize.medium.rawValue : SpaceSize.small.rawValue)
                     }
                 }
-                .padding(.top)
             } else {
                 Spacer()
                 EmptyRecordDayView()
                 Spacer()
             }
         }
-        .padding()
+        .padding(.top)
         .background(AppColors.background)
     }
 }

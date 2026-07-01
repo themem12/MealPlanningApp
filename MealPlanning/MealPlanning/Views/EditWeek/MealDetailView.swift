@@ -36,7 +36,7 @@ struct MealDetailView: View {
                             mealType: viewModel.meal.type
                         )
                         .padding(.horizontal)
-                        .padding(.top)
+                        .padding(.top, viewModel.meal.items.isFirst(foodItem) ? SpaceSize.medium.rawValue : SpaceSize.small.rawValue)
                         .onTapGesture {
                             addFoodTapped(foodItem)
                         }

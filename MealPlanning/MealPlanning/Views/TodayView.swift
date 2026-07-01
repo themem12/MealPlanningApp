@@ -10,6 +10,8 @@ import SwiftData
 
 struct TodayView: View {
 
+    @Environment(\.scenePhase) private var scenePhase
+
     @State private var viewModel: TodayViewModel
     @State private var selectedMeal: Meal?
 
@@ -90,6 +92,11 @@ struct TodayView: View {
                 Text(viewModel.alertMessage)
             }
         }
+        .onChange(of: scenePhase) { _, newValue in
+            if newValue == .active {
+                viewModel.loadTodayPlan()
+            }
+        }
     }
 }
 
@@ -122,7 +129,7 @@ private struct TodayContentView: View {
     var body: some View {
         Group {
             if !viewModel.sortedMeals.isEmpty {
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 0) {
                     ScrollView {
                         ForEach(viewModel.sortedMeals) { meal in
                             Button {
@@ -133,7 +140,8 @@ private struct TodayContentView: View {
                                 }
                             }
                             .buttonStyle(.plain)
-                            .padding(.top)
+                            .padding(.top, viewModel.sortedMeals.isFirst(meal) ? SpaceSize.medium.rawValue : SpaceSize.xSmall.rawValue)
+                            .padding(.bottom, viewModel.sortedMeals.isLast(meal) ? SpaceSize.medium.rawValue : SpaceSize.xSmall.rawValue)
                             .padding(.horizontal)
                         }
                     }

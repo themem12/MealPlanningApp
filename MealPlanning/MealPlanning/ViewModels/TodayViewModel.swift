@@ -40,12 +40,12 @@ final class TodayViewModel {
 
     init(service: MealDataServiceProtocol, dateProvider: DateProvider) {
         self.service = service
-        dayRecord = service.getTodayRecord()
         self.dateProvider = dateProvider
         loadTodayPlan()
     }
 
     func loadTodayPlan() {
+        dayRecord = service.getTodayRecord()
         currentDayPlan = service.getOrCreatePlan(for: dateProvider.weekDay)
         setDateTitle()
         setViewTitle()

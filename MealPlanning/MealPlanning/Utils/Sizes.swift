@@ -17,3 +17,12 @@ enum IconSize: CGFloat {
     /// large: 40
     case large = 40
 }
+
+enum SpaceSize: CGFloat {
+    /// xSmall: 4
+    case xSmall = 4
+    /// small: 8
+    case small = 8
+    /// medium: 16
+    case medium = 16
+}

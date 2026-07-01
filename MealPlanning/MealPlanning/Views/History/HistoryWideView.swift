@@ -18,8 +18,8 @@ struct HistoryWideView: View {
     }
 
     var body: some View {
-        ScrollView {
-            HStack {
+        HStack(spacing: 0) {
+            ScrollView {
                 CalendarSideView(
                     viewModel: historyViewModel
                 ) { dayProgress in
@@ -35,20 +35,19 @@ struct HistoryWideView: View {
                 }
                 .padding()
                 .frame(width: 420)
-                
-                if let selectedDayRecord = historyViewModel.selectedDayRecord {
-                    DayRecordView(
-                        viewModel: DayRecordViewModel(dayRecord: selectedDayRecord)
-                    )
-                    .id(selectedDayRecord.id)
-                    .contentTransition(.opacity)
-                } else {
-                    UnselectedDayView()
-                }
             }
-        }
-        .background(AppColors.background)
-        .scrollBounceBehavior(.basedOnSize)
+            .scrollBounceBehavior(.basedOnSize)
+
+            if let selectedDayRecord = historyViewModel.selectedDayRecord {
+                DayRecordView(
+                    viewModel: DayRecordViewModel(dayRecord: selectedDayRecord)
+                )
+                .id(selectedDayRecord.id)
+                .contentTransition(.opacity)
+            } else {
+                UnselectedDayView()
+            }
+        }.background(AppColors.background)
     }
 }
 private struct CalendarSideView: View {

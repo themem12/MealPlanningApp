@@ -52,7 +52,7 @@ struct MealCard: View {
                         .foregroundStyle(AppColors.secondaryText.opacity(0.7))
                 } else {
                     Grid(alignment: .leading, horizontalSpacing: 40) {
-                        ForEach(meal.items) { item in
+                        ForEach(meal.items.sorted(by: { $0.name < $1.name })) { item in
                             GridRow {
                                 HStack {
                                     Text("•")

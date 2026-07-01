@@ -91,6 +91,7 @@ private struct DayDataView: View {
     @State private var animatedCompletedMeals = 0
     @State private var mealTypeHighlighted: MealType?
     @State private var animatedColor: Color = AppColors.border
+    @State private var animationTask: Task<Void, Never>?
 
     var body: some View {
         VStack {
@@ -127,35 +128,59 @@ private struct DayDataView: View {
         }
         .frame(maxWidth: .infinity)
         .onAppear {
-            withAnimation(
-                .easeInOut(duration: 3)
-            ) {
+            animationTask?.cancel()
+
+            animatedProgress = 0
+            animatedCompletedMeals = 0
+            animatedColor = AppColors.border
+            mealTypeHighlighted = nil
+
+            withAnimation(.easeInOut(duration: 3)) {
                 animatedProgress = viewModel.progressBarValue
-                for index in 1...viewModel.totalMeals {
-                    DispatchQueue.main.asyncAfter(
-                        deadline: .now() + Double(index) * 0.4
-                    ) {
-                        animatedCompletedMeals = viewModel.meals[index - 1].isCompleted ? animatedCompletedMeals + 1 : animatedCompletedMeals
-                        if animatedCompletedMeals >= viewModel.totalMeals - 1 {
+            }
+
+            animationTask = Task {
+                for (index, meal) in viewModel.meals.enumerated() {
+
+                    try? await Task.sleep(for: .milliseconds(400))
+
+                    guard !Task.isCancelled else { return }
+
+                    await MainActor.run {
+
+                        let completedMeals = viewModel.meals
+                            .prefix(index + 1)
+                            .filter(\.isCompleted)
+                            .count
+
+                        animatedCompletedMeals = completedMeals
+
+                        if completedMeals >= viewModel.totalMeals - 1 {
                             animatedColor = AppColors.goodDay
-                        } else if animatedCompletedMeals >= 1 {
+                        } else if completedMeals >= 1 {
                             animatedColor = AppColors.regularDay
                         } else {
                             animatedColor = AppColors.border
                         }
-                        mealTypeHighlighted = viewModel.totalMealsType[index - 1]
-                        DispatchQueue.main.asyncAfter(
-                            deadline: .now() + 0.25
-                        ) {
-                            mealTypeHighlighted = nil
-                        }
+
+                        mealTypeHighlighted = viewModel.totalMealsType[index]
+                    }
+
+                    try? await Task.sleep(for: .milliseconds(250))
+
+                    guard !Task.isCancelled else { return }
+
+                    await MainActor.run {
+                        mealTypeHighlighted = nil
                     }
                 }
             }
         }
         .onDisappear {
+            animationTask?.cancel()
             animatedProgress = 0
             animatedCompletedMeals = 0
+            mealTypeHighlighted = nil
         }
     }
 }
