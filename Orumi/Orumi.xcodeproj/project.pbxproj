@@ -47,7 +47,6 @@
 		9BBCCA972FFB6AA0007E0EA5 /* Arrays+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA432FFB6AA0007E0EA5 /* Arrays+Extensions.swift */; };
 		9BBCCA982FFB6AA0007E0EA5 /* SwiftDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA362FFB6AA0007E0EA5 /* SwiftDataModels.swift */; };
 		9BBCCA9A2FFB6AA0007E0EA5 /* DateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA3A2FFB6AA0007E0EA5 /* DateProvider.swift */; };
-		9BBCCA9B2FFB6AA0007E0EA5 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA672FFB6AA0007E0EA5 /* Item.swift */; };
 		9BBCCA9C2FFB6AA0007E0EA5 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA422FFB6AA0007E0EA5 /* AppColors.swift */; };
 		9BBCCA9E2FFB6AA0007E0EA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BBCCA652FFB6AA0007E0EA5 /* Assets.xcassets */; };
 		9BBCCA9F2FFB6AA0007E0EA5 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9BBCCA682FFB6AA0007E0EA5 /* Localizable.xcstrings */; };
@@ -97,7 +96,6 @@
 		9BBCCA632FFB6AA0007E0EA5 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		9BBCCA652FFB6AA0007E0EA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BBCCA662FFB6AA0007E0EA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9BBCCA672FFB6AA0007E0EA5 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		9BBCCA682FFB6AA0007E0EA5 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		9BBCCA692FFB6AA0007E0EA5 /* OrumiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrumiApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -276,13 +274,20 @@
 				9BBCCA4A2FFB6AA0007E0EA5 /* Utils */,
 				9BBCCA562FFB6AA0007E0EA5 /* ViewModels */,
 				9BBCCA642FFB6AA0007E0EA5 /* Views */,
-				9BBCCA652FFB6AA0007E0EA5 /* Assets.xcassets */,
-				9BBCCA662FFB6AA0007E0EA5 /* Info.plist */,
-				9BBCCA672FFB6AA0007E0EA5 /* Item.swift */,
-				9BBCCA682FFB6AA0007E0EA5 /* Localizable.xcstrings */,
+				9BBCCAA02FFB7272007E0EA5 /* Resources */,
 				9BBCCA692FFB6AA0007E0EA5 /* OrumiApp.swift */,
 			);
 			path = Orumi;
+			sourceTree = "<group>";
+		};
+		9BBCCAA02FFB7272007E0EA5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA652FFB6AA0007E0EA5 /* Assets.xcassets */,
+				9BBCCA662FFB6AA0007E0EA5 /* Info.plist */,
+				9BBCCA682FFB6AA0007E0EA5 /* Localizable.xcstrings */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -399,7 +404,6 @@
 				9BBCCA972FFB6AA0007E0EA5 /* Arrays+Extensions.swift in Sources */,
 				9BBCCA982FFB6AA0007E0EA5 /* SwiftDataModels.swift in Sources */,
 				9BBCCA9A2FFB6AA0007E0EA5 /* DateProvider.swift in Sources */,
-				9BBCCA9B2FFB6AA0007E0EA5 /* Item.swift in Sources */,
 				9BBCCA9C2FFB6AA0007E0EA5 /* AppColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,7 +544,7 @@
 				DEVELOPMENT_TEAM = 499H3YDN7T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Orumi/Info.plist;
+				INFOPLIST_FILE = Orumi/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Orumi;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -580,7 +584,7 @@
 				DEVELOPMENT_TEAM = 499H3YDN7T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Orumi/Info.plist;
+				INFOPLIST_FILE = Orumi/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Orumi;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
