@@ -50,6 +50,8 @@ protocol MealDataServiceProtocol {
     func getMonthRecord(month: Date) -> [DayRecord]
 
     func getLastRecord() -> DayRecord?
+
+    func deleteAllData()
 }
 
 final class LiveMealDataService: MealDataServiceProtocol {
@@ -69,6 +71,11 @@ final class LiveMealDataService: MealDataServiceProtocol {
         let descriptor = FetchDescriptor<DayPlan>()
 
         let fetchedPlans = (try? context.fetch(descriptor)) ?? []
+
+        print("Plans in database:")
+        fetchedPlans.forEach {
+            print($0.day)
+        }
         
         if let existingPlan = fetchedPlans.first(where: {
             $0.day == day
@@ -188,6 +195,13 @@ final class LiveMealDataService: MealDataServiceProtocol {
         return try? context.fetch(descriptor).first
     }
 
+    func deleteAllData() {
+        deleteAll(DayPlan.self)
+        deleteAll(DayRecord.self)
+
+        save()
+    }
+
     private func save() {
         do {
             try context.save()
@@ -202,5 +216,13 @@ final class LiveMealDataService: MealDataServiceProtocol {
             Meal(type: .collationPM),
             Meal(type: .dinner),
         ]
+    }
+
+    private func deleteAll<T: PersistentModel>(_ type: T.Type) {
+        let descriptor = FetchDescriptor<T>()
+
+        guard let objects = try? context.fetch(descriptor) else { return }
+
+        objects.forEach { context.delete($0) }
     }
 }

@@ -80,6 +80,10 @@ final class TodayViewModel {
         TodayResumeViewModel(dayRecord: dayRecord)
     }
 
+    func makeDebugDataService() -> DebugDataService {
+        DebugDataService(mealService: service)
+    }
+
     func getEditWeekContainerViewModel() -> EditWeekContainerViewModel {
         EditWeekContainerViewModel(service: service, dateProvider: dateProvider)
     }

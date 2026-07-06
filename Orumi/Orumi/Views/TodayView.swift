@@ -14,6 +14,7 @@ struct TodayView: View {
 
     @State private var viewModel: TodayViewModel
     @State private var selectedMeal: Meal?
+    @State private var showDebugMenu: Bool = false
 
     init(viewModel: TodayViewModel) {
         _viewModel = State(
@@ -72,7 +73,23 @@ struct TodayView: View {
                         Image(systemName: "calendar.badge.checkmark")
                     }
                 }
+                ToolbarItem(placement: .principal) {
+                    Button {
+                        showDebugMenu = true
+                    } label: {
+                        Image(systemName: "ladybug")
+                    }
+
+                }
             }
+            .sheet(isPresented: $showDebugMenu, content: {
+                DebugMenuView(
+                    debugService: viewModel.makeDebugDataService()
+                )
+            })
+            .onReceive(NotificationCenter.default.publisher(for: .mealDataDidChange), perform: { _ in
+                viewModel.loadTodayPlan()
+            })
             .navigationDestination(item: $selectedMeal) { meal in
                 MealDetailView(
                     viewModel: viewModel.makeMealDetailViewModel(for: meal)
