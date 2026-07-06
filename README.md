@@ -1,13 +1,13 @@
-# MealPlanningApp
+# OrumiApp
 
-MealPlanningApp MVP Vision
+OrumiApp MVP Vision
 Problema
 
 Las personas que siguen un plan nutricional suelen recibir la información de forma dispersa o poco práctica para consultar durante el día.
 
 Solución
 
-MealPlanningApp ayuda a consultar de forma simple y rápida un plan nutricional previamente definido y dar seguimiento al cumplimiento de las comidas planificadas.
+OrumiApp ayuda a consultar de forma simple y rápida un plan nutricional previamente definido y dar seguimiento al cumplimiento de las comidas planificadas.
 
 Usuario principal
 

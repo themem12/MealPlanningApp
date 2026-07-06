@@ -1,0 +1,637 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9BBCCA702FFB6AA0007E0EA5 /* TodayResumeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA542FFB6AA0007E0EA5 /* TodayResumeViewModel.swift */; };
+		9BBCCA712FFB6AA0007E0EA5 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA552FFB6AA0007E0EA5 /* TodayViewModel.swift */; };
+		9BBCCA722FFB6AA0007E0EA5 /* MealDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA3D2FFB6AA0007E0EA5 /* MealDataService.swift */; };
+		9BBCCA742FFB6AA0007E0EA5 /* TodayReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA372FFB6AA0007E0EA5 /* TodayReviewModel.swift */; };
+		9BBCCA752FFB6AA0007E0EA5 /* TodayResumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA622FFB6AA0007E0EA5 /* TodayResumeView.swift */; };
+		9BBCCA762FFB6AA0007E0EA5 /* HistoryContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA5E2FFB6AA0007E0EA5 /* HistoryContainerView.swift */; };
+		9BBCCA772FFB6AA0007E0EA5 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA632FFB6AA0007E0EA5 /* TodayView.swift */; };
+		9BBCCA782FFB6AA0007E0EA5 /* Image+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA472FFB6AA0007E0EA5 /* Image+Extensions.swift */; };
+		9BBCCA792FFB6AA0007E0EA5 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA452FFB6AA0007E0EA5 /* Date+Extensions.swift */; };
+		9BBCCA7A2FFB6AA0007E0EA5 /* FoodItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA4D2FFB6AA0007E0EA5 /* FoodItemViewModel.swift */; };
+		9BBCCA7B2FFB6AA0007E0EA5 /* MealIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA322FFB6AA0007E0EA5 /* MealIconView.swift */; };
+		9BBCCA7C2FFB6AA0007E0EA5 /* Device+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA462FFB6AA0007E0EA5 /* Device+Extensions.swift */; };
+		9BBCCA7D2FFB6AA0007E0EA5 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA482FFB6AA0007E0EA5 /* Layout.swift */; };
+		9BBCCA7E2FFB6AA0007E0EA5 /* OrumiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA692FFB6AA0007E0EA5 /* OrumiApp.swift */; };
+		9BBCCA7F2FFB6AA0007E0EA5 /* FoodItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA5A2FFB6AA0007E0EA5 /* FoodItemView.swift */; };
+		9BBCCA802FFB6AA0007E0EA5 /* AppInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA302FFB6AA0007E0EA5 /* AppInputField.swift */; };
+		9BBCCA812FFB6AA0007E0EA5 /* CardStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA442FFB6AA0007E0EA5 /* CardStyles.swift */; };
+		9BBCCA822FFB6AA0007E0EA5 /* MealDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA4E2FFB6AA0007E0EA5 /* MealDetailViewModel.swift */; };
+		9BBCCA832FFB6AA0007E0EA5 /* DayRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA5D2FFB6AA0007E0EA5 /* DayRecordView.swift */; };
+		9BBCCA852FFB6AA0007E0EA5 /* EditWeekViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA4C2FFB6AA0007E0EA5 /* EditWeekViewModel.swift */; };
+		9BBCCA862FFB6AA0007E0EA5 /* EditWeekContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA572FFB6AA0007E0EA5 /* EditWeekContainerView.swift */; };
+		9BBCCA872FFB6AA0007E0EA5 /* WeekDaysModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA382FFB6AA0007E0EA5 /* WeekDaysModel.swift */; };
+		9BBCCA882FFB6AA0007E0EA5 /* MockMealDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA3F2FFB6AA0007E0EA5 /* MockMealDataService.swift */; };
+		9BBCCA892FFB6AA0007E0EA5 /* MealCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA312FFB6AA0007E0EA5 /* MealCard.swift */; };
+		9BBCCA8A2FFB6AA0007E0EA5 /* HistoryMaintenanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA3C2FFB6AA0007E0EA5 /* HistoryMaintenanceService.swift */; };
+		9BBCCA8B2FFB6AA0007E0EA5 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA5F2FFB6AA0007E0EA5 /* HistoryView.swift */; };
+		9BBCCA8C2FFB6AA0007E0EA5 /* HistoryWideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA602FFB6AA0007E0EA5 /* HistoryWideView.swift */; };
+		9BBCCA8D2FFB6AA0007E0EA5 /* EditWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA582FFB6AA0007E0EA5 /* EditWeekView.swift */; };
+		9BBCCA8E2FFB6AA0007E0EA5 /* EditWeekContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA4B2FFB6AA0007E0EA5 /* EditWeekContainerViewModel.swift */; };
+		9BBCCA8F2FFB6AA0007E0EA5 /* EditWeekWideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA592FFB6AA0007E0EA5 /* EditWeekWideView.swift */; };
+		9BBCCA902FFB6AA0007E0EA5 /* ProgressCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA332FFB6AA0007E0EA5 /* ProgressCircleView.swift */; };
+		9BBCCA912FFB6AA0007E0EA5 /* HistoryContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA512FFB6AA0007E0EA5 /* HistoryContainerViewModel.swift */; };
+		9BBCCA922FFB6AA0007E0EA5 /* MealTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA352FFB6AA0007E0EA5 /* MealTypeModel.swift */; };
+		9BBCCA932FFB6AA0007E0EA5 /* MealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA5B2FFB6AA0007E0EA5 /* MealDetailView.swift */; };
+		9BBCCA942FFB6AA0007E0EA5 /* DayRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA502FFB6AA0007E0EA5 /* DayRecordViewModel.swift */; };
+		9BBCCA952FFB6AA0007E0EA5 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA492FFB6AA0007E0EA5 /* Sizes.swift */; };
+		9BBCCA962FFB6AA0007E0EA5 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA522FFB6AA0007E0EA5 /* HistoryViewModel.swift */; };
+		9BBCCA972FFB6AA0007E0EA5 /* Arrays+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA432FFB6AA0007E0EA5 /* Arrays+Extensions.swift */; };
+		9BBCCA982FFB6AA0007E0EA5 /* SwiftDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA362FFB6AA0007E0EA5 /* SwiftDataModels.swift */; };
+		9BBCCA9A2FFB6AA0007E0EA5 /* DateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA3A2FFB6AA0007E0EA5 /* DateProvider.swift */; };
+		9BBCCA9B2FFB6AA0007E0EA5 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA672FFB6AA0007E0EA5 /* Item.swift */; };
+		9BBCCA9C2FFB6AA0007E0EA5 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA422FFB6AA0007E0EA5 /* AppColors.swift */; };
+		9BBCCA9E2FFB6AA0007E0EA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BBCCA652FFB6AA0007E0EA5 /* Assets.xcassets */; };
+		9BBCCA9F2FFB6AA0007E0EA5 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9BBCCA682FFB6AA0007E0EA5 /* Localizable.xcstrings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9BB7F0BE2FA01332003E89AB /* Orumi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orumi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BBCCA302FFB6AA0007E0EA5 /* AppInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInputField.swift; sourceTree = "<group>"; };
+		9BBCCA312FFB6AA0007E0EA5 /* MealCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCard.swift; sourceTree = "<group>"; };
+		9BBCCA322FFB6AA0007E0EA5 /* MealIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealIconView.swift; sourceTree = "<group>"; };
+		9BBCCA332FFB6AA0007E0EA5 /* ProgressCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircleView.swift; sourceTree = "<group>"; };
+		9BBCCA352FFB6AA0007E0EA5 /* MealTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTypeModel.swift; sourceTree = "<group>"; };
+		9BBCCA362FFB6AA0007E0EA5 /* SwiftDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataModels.swift; sourceTree = "<group>"; };
+		9BBCCA372FFB6AA0007E0EA5 /* TodayReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayReviewModel.swift; sourceTree = "<group>"; };
+		9BBCCA382FFB6AA0007E0EA5 /* WeekDaysModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDaysModel.swift; sourceTree = "<group>"; };
+		9BBCCA3A2FFB6AA0007E0EA5 /* DateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateProvider.swift; sourceTree = "<group>"; };
+		9BBCCA3C2FFB6AA0007E0EA5 /* HistoryMaintenanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryMaintenanceService.swift; sourceTree = "<group>"; };
+		9BBCCA3D2FFB6AA0007E0EA5 /* MealDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDataService.swift; sourceTree = "<group>"; };
+		9BBCCA3F2FFB6AA0007E0EA5 /* MockMealDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMealDataService.swift; sourceTree = "<group>"; };
+		9BBCCA422FFB6AA0007E0EA5 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		9BBCCA432FFB6AA0007E0EA5 /* Arrays+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Arrays+Extensions.swift"; sourceTree = "<group>"; };
+		9BBCCA442FFB6AA0007E0EA5 /* CardStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStyles.swift; sourceTree = "<group>"; };
+		9BBCCA452FFB6AA0007E0EA5 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		9BBCCA462FFB6AA0007E0EA5 /* Device+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Device+Extensions.swift"; sourceTree = "<group>"; };
+		9BBCCA472FFB6AA0007E0EA5 /* Image+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extensions.swift"; sourceTree = "<group>"; };
+		9BBCCA482FFB6AA0007E0EA5 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		9BBCCA492FFB6AA0007E0EA5 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
+		9BBCCA4B2FFB6AA0007E0EA5 /* EditWeekContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWeekContainerViewModel.swift; sourceTree = "<group>"; };
+		9BBCCA4C2FFB6AA0007E0EA5 /* EditWeekViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWeekViewModel.swift; sourceTree = "<group>"; };
+		9BBCCA4D2FFB6AA0007E0EA5 /* FoodItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemViewModel.swift; sourceTree = "<group>"; };
+		9BBCCA4E2FFB6AA0007E0EA5 /* MealDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailViewModel.swift; sourceTree = "<group>"; };
+		9BBCCA502FFB6AA0007E0EA5 /* DayRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRecordViewModel.swift; sourceTree = "<group>"; };
+		9BBCCA512FFB6AA0007E0EA5 /* HistoryContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryContainerViewModel.swift; sourceTree = "<group>"; };
+		9BBCCA522FFB6AA0007E0EA5 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
+		9BBCCA542FFB6AA0007E0EA5 /* TodayResumeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayResumeViewModel.swift; sourceTree = "<group>"; };
+		9BBCCA552FFB6AA0007E0EA5 /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
+		9BBCCA572FFB6AA0007E0EA5 /* EditWeekContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWeekContainerView.swift; sourceTree = "<group>"; };
+		9BBCCA582FFB6AA0007E0EA5 /* EditWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWeekView.swift; sourceTree = "<group>"; };
+		9BBCCA592FFB6AA0007E0EA5 /* EditWeekWideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWeekWideView.swift; sourceTree = "<group>"; };
+		9BBCCA5A2FFB6AA0007E0EA5 /* FoodItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemView.swift; sourceTree = "<group>"; };
+		9BBCCA5B2FFB6AA0007E0EA5 /* MealDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailView.swift; sourceTree = "<group>"; };
+		9BBCCA5D2FFB6AA0007E0EA5 /* DayRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRecordView.swift; sourceTree = "<group>"; };
+		9BBCCA5E2FFB6AA0007E0EA5 /* HistoryContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryContainerView.swift; sourceTree = "<group>"; };
+		9BBCCA5F2FFB6AA0007E0EA5 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		9BBCCA602FFB6AA0007E0EA5 /* HistoryWideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryWideView.swift; sourceTree = "<group>"; };
+		9BBCCA622FFB6AA0007E0EA5 /* TodayResumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayResumeView.swift; sourceTree = "<group>"; };
+		9BBCCA632FFB6AA0007E0EA5 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		9BBCCA652FFB6AA0007E0EA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9BBCCA662FFB6AA0007E0EA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BBCCA672FFB6AA0007E0EA5 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		9BBCCA682FFB6AA0007E0EA5 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		9BBCCA692FFB6AA0007E0EA5 /* OrumiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrumiApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9BB7F0BB2FA01332003E89AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9BB7F0B52FA01332003E89AB = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA6A2FFB6AA0007E0EA5 /* Orumi */,
+				9BB7F0BF2FA01332003E89AB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9BB7F0BF2FA01332003E89AB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9BB7F0BE2FA01332003E89AB /* Orumi.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9BBCCA342FFB6AA0007E0EA5 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA302FFB6AA0007E0EA5 /* AppInputField.swift */,
+				9BBCCA312FFB6AA0007E0EA5 /* MealCard.swift */,
+				9BBCCA322FFB6AA0007E0EA5 /* MealIconView.swift */,
+				9BBCCA332FFB6AA0007E0EA5 /* ProgressCircleView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		9BBCCA392FFB6AA0007E0EA5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA352FFB6AA0007E0EA5 /* MealTypeModel.swift */,
+				9BBCCA362FFB6AA0007E0EA5 /* SwiftDataModels.swift */,
+				9BBCCA372FFB6AA0007E0EA5 /* TodayReviewModel.swift */,
+				9BBCCA382FFB6AA0007E0EA5 /* WeekDaysModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9BBCCA3B2FFB6AA0007E0EA5 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA3A2FFB6AA0007E0EA5 /* DateProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		9BBCCA3E2FFB6AA0007E0EA5 /* Live */ = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA3C2FFB6AA0007E0EA5 /* HistoryMaintenanceService.swift */,
+				9BBCCA3D2FFB6AA0007E0EA5 /* MealDataService.swift */,
+			);
+			path = Live;
+			sourceTree = "<group>";
+		};
+		9BBCCA402FFB6AA0007E0EA5 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA3F2FFB6AA0007E0EA5 /* MockMealDataService.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		9BBCCA412FFB6AA0007E0EA5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA3E2FFB6AA0007E0EA5 /* Live */,
+				9BBCCA402FFB6AA0007E0EA5 /* Mock */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		9BBCCA4A2FFB6AA0007E0EA5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA422FFB6AA0007E0EA5 /* AppColors.swift */,
+				9BBCCA432FFB6AA0007E0EA5 /* Arrays+Extensions.swift */,
+				9BBCCA442FFB6AA0007E0EA5 /* CardStyles.swift */,
+				9BBCCA452FFB6AA0007E0EA5 /* Date+Extensions.swift */,
+				9BBCCA462FFB6AA0007E0EA5 /* Device+Extensions.swift */,
+				9BBCCA472FFB6AA0007E0EA5 /* Image+Extensions.swift */,
+				9BBCCA482FFB6AA0007E0EA5 /* Layout.swift */,
+				9BBCCA492FFB6AA0007E0EA5 /* Sizes.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		9BBCCA4F2FFB6AA0007E0EA5 /* EditWeek */ = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA4B2FFB6AA0007E0EA5 /* EditWeekContainerViewModel.swift */,
+				9BBCCA4C2FFB6AA0007E0EA5 /* EditWeekViewModel.swift */,
+				9BBCCA4D2FFB6AA0007E0EA5 /* FoodItemViewModel.swift */,
+				9BBCCA4E2FFB6AA0007E0EA5 /* MealDetailViewModel.swift */,
+			);
+			path = EditWeek;
+			sourceTree = "<group>";
+		};
+		9BBCCA532FFB6AA0007E0EA5 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA502FFB6AA0007E0EA5 /* DayRecordViewModel.swift */,
+				9BBCCA512FFB6AA0007E0EA5 /* HistoryContainerViewModel.swift */,
+				9BBCCA522FFB6AA0007E0EA5 /* HistoryViewModel.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		9BBCCA562FFB6AA0007E0EA5 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA4F2FFB6AA0007E0EA5 /* EditWeek */,
+				9BBCCA532FFB6AA0007E0EA5 /* History */,
+				9BBCCA542FFB6AA0007E0EA5 /* TodayResumeViewModel.swift */,
+				9BBCCA552FFB6AA0007E0EA5 /* TodayViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		9BBCCA5C2FFB6AA0007E0EA5 /* EditWeek */ = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA572FFB6AA0007E0EA5 /* EditWeekContainerView.swift */,
+				9BBCCA582FFB6AA0007E0EA5 /* EditWeekView.swift */,
+				9BBCCA592FFB6AA0007E0EA5 /* EditWeekWideView.swift */,
+				9BBCCA5A2FFB6AA0007E0EA5 /* FoodItemView.swift */,
+				9BBCCA5B2FFB6AA0007E0EA5 /* MealDetailView.swift */,
+			);
+			path = EditWeek;
+			sourceTree = "<group>";
+		};
+		9BBCCA612FFB6AA0007E0EA5 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA5D2FFB6AA0007E0EA5 /* DayRecordView.swift */,
+				9BBCCA5E2FFB6AA0007E0EA5 /* HistoryContainerView.swift */,
+				9BBCCA5F2FFB6AA0007E0EA5 /* HistoryView.swift */,
+				9BBCCA602FFB6AA0007E0EA5 /* HistoryWideView.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		9BBCCA642FFB6AA0007E0EA5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA5C2FFB6AA0007E0EA5 /* EditWeek */,
+				9BBCCA612FFB6AA0007E0EA5 /* History */,
+				9BBCCA622FFB6AA0007E0EA5 /* TodayResumeView.swift */,
+				9BBCCA632FFB6AA0007E0EA5 /* TodayView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9BBCCA6A2FFB6AA0007E0EA5 /* Orumi */ = {
+			isa = PBXGroup;
+			children = (
+				9BBCCA342FFB6AA0007E0EA5 /* Components */,
+				9BBCCA392FFB6AA0007E0EA5 /* Models */,
+				9BBCCA3B2FFB6AA0007E0EA5 /* Providers */,
+				9BBCCA412FFB6AA0007E0EA5 /* Services */,
+				9BBCCA4A2FFB6AA0007E0EA5 /* Utils */,
+				9BBCCA562FFB6AA0007E0EA5 /* ViewModels */,
+				9BBCCA642FFB6AA0007E0EA5 /* Views */,
+				9BBCCA652FFB6AA0007E0EA5 /* Assets.xcassets */,
+				9BBCCA662FFB6AA0007E0EA5 /* Info.plist */,
+				9BBCCA672FFB6AA0007E0EA5 /* Item.swift */,
+				9BBCCA682FFB6AA0007E0EA5 /* Localizable.xcstrings */,
+				9BBCCA692FFB6AA0007E0EA5 /* OrumiApp.swift */,
+			);
+			path = Orumi;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9BB7F0BD2FA01332003E89AB /* Orumi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BB7F0E12FA01333003E89AB /* Build configuration list for PBXNativeTarget "Orumi" */;
+			buildPhases = (
+				9BB7F0BA2FA01332003E89AB /* Sources */,
+				9BB7F0BB2FA01332003E89AB /* Frameworks */,
+				9BB7F0BC2FA01332003E89AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Orumi;
+			packageProductDependencies = (
+			);
+			productName = MealPlanning;
+			productReference = 9BB7F0BE2FA01332003E89AB /* Orumi.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9BB7F0B62FA01332003E89AB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2640;
+				LastUpgradeCheck = 2640;
+				TargetAttributes = {
+					9BB7F0BD2FA01332003E89AB = {
+						CreatedOnToolsVersion = 26.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 9BB7F0B92FA01332003E89AB /* Build configuration list for PBXProject "Orumi" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"es-419",
+			);
+			mainGroup = 9BB7F0B52FA01332003E89AB;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 9BB7F0BF2FA01332003E89AB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9BB7F0BD2FA01332003E89AB /* Orumi */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9BB7F0BC2FA01332003E89AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BBCCA9E2FFB6AA0007E0EA5 /* Assets.xcassets in Resources */,
+				9BBCCA9F2FFB6AA0007E0EA5 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9BB7F0BA2FA01332003E89AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BBCCA702FFB6AA0007E0EA5 /* TodayResumeViewModel.swift in Sources */,
+				9BBCCA712FFB6AA0007E0EA5 /* TodayViewModel.swift in Sources */,
+				9BBCCA722FFB6AA0007E0EA5 /* MealDataService.swift in Sources */,
+				9BBCCA742FFB6AA0007E0EA5 /* TodayReviewModel.swift in Sources */,
+				9BBCCA752FFB6AA0007E0EA5 /* TodayResumeView.swift in Sources */,
+				9BBCCA762FFB6AA0007E0EA5 /* HistoryContainerView.swift in Sources */,
+				9BBCCA772FFB6AA0007E0EA5 /* TodayView.swift in Sources */,
+				9BBCCA782FFB6AA0007E0EA5 /* Image+Extensions.swift in Sources */,
+				9BBCCA792FFB6AA0007E0EA5 /* Date+Extensions.swift in Sources */,
+				9BBCCA7A2FFB6AA0007E0EA5 /* FoodItemViewModel.swift in Sources */,
+				9BBCCA7B2FFB6AA0007E0EA5 /* MealIconView.swift in Sources */,
+				9BBCCA7C2FFB6AA0007E0EA5 /* Device+Extensions.swift in Sources */,
+				9BBCCA7D2FFB6AA0007E0EA5 /* Layout.swift in Sources */,
+				9BBCCA7E2FFB6AA0007E0EA5 /* OrumiApp.swift in Sources */,
+				9BBCCA7F2FFB6AA0007E0EA5 /* FoodItemView.swift in Sources */,
+				9BBCCA802FFB6AA0007E0EA5 /* AppInputField.swift in Sources */,
+				9BBCCA812FFB6AA0007E0EA5 /* CardStyles.swift in Sources */,
+				9BBCCA822FFB6AA0007E0EA5 /* MealDetailViewModel.swift in Sources */,
+				9BBCCA832FFB6AA0007E0EA5 /* DayRecordView.swift in Sources */,
+				9BBCCA852FFB6AA0007E0EA5 /* EditWeekViewModel.swift in Sources */,
+				9BBCCA862FFB6AA0007E0EA5 /* EditWeekContainerView.swift in Sources */,
+				9BBCCA872FFB6AA0007E0EA5 /* WeekDaysModel.swift in Sources */,
+				9BBCCA882FFB6AA0007E0EA5 /* MockMealDataService.swift in Sources */,
+				9BBCCA892FFB6AA0007E0EA5 /* MealCard.swift in Sources */,
+				9BBCCA8A2FFB6AA0007E0EA5 /* HistoryMaintenanceService.swift in Sources */,
+				9BBCCA8B2FFB6AA0007E0EA5 /* HistoryView.swift in Sources */,
+				9BBCCA8C2FFB6AA0007E0EA5 /* HistoryWideView.swift in Sources */,
+				9BBCCA8D2FFB6AA0007E0EA5 /* EditWeekView.swift in Sources */,
+				9BBCCA8E2FFB6AA0007E0EA5 /* EditWeekContainerViewModel.swift in Sources */,
+				9BBCCA8F2FFB6AA0007E0EA5 /* EditWeekWideView.swift in Sources */,
+				9BBCCA902FFB6AA0007E0EA5 /* ProgressCircleView.swift in Sources */,
+				9BBCCA912FFB6AA0007E0EA5 /* HistoryContainerViewModel.swift in Sources */,
+				9BBCCA922FFB6AA0007E0EA5 /* MealTypeModel.swift in Sources */,
+				9BBCCA932FFB6AA0007E0EA5 /* MealDetailView.swift in Sources */,
+				9BBCCA942FFB6AA0007E0EA5 /* DayRecordViewModel.swift in Sources */,
+				9BBCCA952FFB6AA0007E0EA5 /* Sizes.swift in Sources */,
+				9BBCCA962FFB6AA0007E0EA5 /* HistoryViewModel.swift in Sources */,
+				9BBCCA972FFB6AA0007E0EA5 /* Arrays+Extensions.swift in Sources */,
+				9BBCCA982FFB6AA0007E0EA5 /* SwiftDataModels.swift in Sources */,
+				9BBCCA9A2FFB6AA0007E0EA5 /* DateProvider.swift in Sources */,
+				9BBCCA9B2FFB6AA0007E0EA5 /* Item.swift in Sources */,
+				9BBCCA9C2FFB6AA0007E0EA5 /* AppColors.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9BB7F0DF2FA01333003E89AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 499H3YDN7T;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9BB7F0E02FA01333003E89AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 499H3YDN7T;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9BB7F0E22FA01333003E89AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 499H3YDN7T;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Orumi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Orumi;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.saavedev.orumi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9BB7F0E32FA01333003E89AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 499H3YDN7T;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Orumi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Orumi;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.saavedev.orumi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9BB7F0B92FA01332003E89AB /* Build configuration list for PBXProject "Orumi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BB7F0DF2FA01333003E89AB /* Debug */,
+				9BB7F0E02FA01333003E89AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9BB7F0E12FA01333003E89AB /* Build configuration list for PBXNativeTarget "Orumi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BB7F0E22FA01333003E89AB /* Debug */,
+				9BB7F0E32FA01333003E89AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9BB7F0B62FA01332003E89AB /* Project object */;
+}
