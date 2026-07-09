@@ -95,10 +95,9 @@ private struct WeekListView: View {
                 Button {
                     weekDayTapped(weekDay)
                 } label: {
-                    HeaderCardView(
+                    DayCardView(
                         mealsCount: viewModel.getMealsCountFor(weekDay: weekDay),
                         weekDay: weekDay,
-                        isSelected: false,
                         isToday: viewModel.isCurrentDay(weekDay)
                     )
                     .padding(.horizontal)
@@ -109,6 +108,47 @@ private struct WeekListView: View {
             .frame(maxHeight: .infinity)
         }
         .frame(width: 300)
+    }
+}
+
+private struct DayCardView: View {
+    
+    let mealsCount: Int
+    let weekDay: WeekDay
+    let isToday: Bool
+    var body: some View {
+        HStack(spacing: 16) {
+            ZStack {
+                Circle()
+                    .fill(AppColors.softSage)
+                    .frame(width: 40, height: 40)
+                Text(weekDay.shortTitle)
+                    .font(.system(size: 20))
+                    .foregroundStyle(AppColors.primaryText)
+            }
+            VStack(alignment: .leading) {
+                Text(weekDay.title)
+                    .font(.system(size: 16))
+                Text(.editWeekViewMealsCounter(mealsCount))
+                    .font(.system(size: 12, weight: .light))
+            }
+            if isToday {
+                ZStack {
+                    Rectangle()
+                        .fill(AppColors.primaryGreen.opacity(0.6))
+                        .frame(width: 60, height: 24)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                    Text(.todayTitle)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundStyle(AppColors.primaryGreen)
+                }
+            } else {
+                Spacer()
+            }
+            Image(systemName: "chevron.right")
+                .foregroundStyle(AppColors.primaryText)
+        }
+        .padding(.vertical)
     }
 }
 

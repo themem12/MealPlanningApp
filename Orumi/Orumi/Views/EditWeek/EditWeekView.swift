@@ -101,7 +101,7 @@ private struct DayCardView: View {
     }
 }
 
-struct HeaderCardView: View {
+private struct HeaderCardView: View {
     
     let mealsCount: Int
     let weekDay: WeekDay
