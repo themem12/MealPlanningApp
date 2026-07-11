@@ -22,6 +22,10 @@ class DebugDataService {
             loadPerfectWeek()
         case .fillWeekPlans:
             loadWeekPlans()
+        case .mockupPlans:
+            loadMockupPlans()
+        case .deleteAll:
+            deleteAll()
         }
     }
 
@@ -31,6 +35,104 @@ class DebugDataService {
 
     private func loadPerfectWeek() {
         
+    }
+
+    private func deleteAll() {
+        mealService.deleteAllData()
+        NotificationCenter.default.post(
+            name: .mealDataDidChange,
+            object: nil
+        )
+    }
+
+    private func loadMockupPlans() {
+        // First we clean the dataBase before adding anything else
+        mealService.deleteAllData()
+
+        for day in WeekDay.allCases {
+            print("Creating \(day)")
+            let dayPlan = mealService.getOrCreatePlan(for: day)
+            print("Got plan \(dayPlan.day)")
+            for meal in dayPlan.meals {
+                print("Meal: \(meal.type)")
+                switch meal.type {
+                case .breakfast:
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Avocado", portion: "1/3 of piece")
+                    )
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Mozzarella cheese", portion: "75 gr")
+                    )
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Strawberries", portion: "1 cup")
+                    )
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Turkey breast", portion: "75 gr")
+                    )
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Whole wheat bread", portion: "2 pieces")
+                    )
+                case .lunch:
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Broccoli", portion: "1 cup")
+                    )
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Brown rice", portion: "1 cup")
+                    )
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Chicken breast", portion: "75 gr")
+                    )
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Corn tortillas", portion: "3 pieces")
+                    )
+                case .dinner:
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Mixed greens", portion: "1 cup")
+                    )
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Sweet Potato", portion: "1 cup")
+                    )
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Turkey breast", portion: "75 gr")
+                    )
+                case .collationAM:
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Almonds", portion: "10 pieces")
+                    )
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Cucumber", portion: "Free")
+                    )
+                case .collationPM:
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Blueberries", portion: "1 cup")
+                    )
+                    mealService.addFoodItem(
+                        to: meal,
+                        foodItem: FoodItem(name: "Greek Yogurt", portion: "1 cup")
+                    )
+                }
+            }
+        }
+
+        NotificationCenter.default.post(
+            name: .mealDataDidChange,
+            object: nil
+        )
     }
 
     private func loadWeekPlans() {

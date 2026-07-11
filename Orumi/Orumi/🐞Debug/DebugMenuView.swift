@@ -14,12 +14,13 @@ struct DebugMenuView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Button {
-                    debugService.load(.fillWeekPlans)
-                } label: {
-                    Text("Set complete DayPlans")
+                ForEach(DebugPreset.allCases) { preset in
+                    Button {
+                        debugService.load(preset)
+                    } label: {
+                        Text(preset.title)
+                    }
                 }
-
             }
         }.padding()
     }

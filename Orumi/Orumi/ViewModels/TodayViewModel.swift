@@ -145,6 +145,10 @@ final class TodayViewModel {
             titleIcon = "moon.zzz"
             titleIconColor = .indigo
         }
+
+        title = String(localized: .todayViewTitleMorning)
+        titleIcon = "sun.horizon"
+        titleIconColor = .yellow
     }
 
     private func setDateTitle() {

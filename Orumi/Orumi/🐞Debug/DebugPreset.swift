@@ -9,6 +9,8 @@ enum DebugPreset: String, CaseIterable, Identifiable {
     case firstLaunch
     case perfectWeek
     case fillWeekPlans
+    case mockupPlans
+    case deleteAll
 
     var id: Self { self }
 
@@ -21,6 +23,10 @@ enum DebugPreset: String, CaseIterable, Identifiable {
             "Perfect Week"
         case .fillWeekPlans:
             "Fill Week Plans"
+        case .mockupPlans:
+            "Instagram plans 💅🏼"
+        case .deleteAll:
+            "🚨🚨 Delete all 💣 🚨🚨"
         }
     }
 }
