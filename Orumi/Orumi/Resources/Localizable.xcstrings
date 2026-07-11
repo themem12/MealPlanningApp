@@ -997,7 +997,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Some meals haven't been completed yet. \\nYou can still finish the day if you're done."
+            "value" : "Some meals haven't been completed yet. You can still finish the day if you're done."
           }
         },
         "es-419" : {
