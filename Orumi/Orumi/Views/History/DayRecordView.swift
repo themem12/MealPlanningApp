@@ -53,7 +53,7 @@ struct DayRecordView: View {
 
                 ScrollView {
                     ForEach(viewModel.meals) { meal in
-                        MealCard(meal: meal, isRecord: true) { }
+                        MealCard(meal: meal, isRecord: true)
                             .padding(.horizontal)
                             .padding(.top, viewModel.meals.isFirst(meal) ? SpaceSize.medium.rawValue : SpaceSize.small.rawValue)
                             .padding(.bottom, viewModel.meals.isLast(meal) ? SpaceSize.medium.rawValue : SpaceSize.small.rawValue)

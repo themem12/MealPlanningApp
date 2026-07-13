@@ -132,19 +132,16 @@ private struct TodayContentView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     ScrollView {
                         ForEach(viewModel.sortedMeals) { meal in
-                            ZStack(alignment: .topTrailing) {
-                                Button {
-                                    mealSelected(meal)
-                                } label: {
-                                    MealCard(meal: meal) {
-                                        viewModel.completeMeal(meal)
-                                    }
-                                }
-                                .buttonStyle(.plain)
-                                .padding(.top, viewModel.sortedMeals.isFirst(meal) ? SpaceSize.medium.rawValue : SpaceSize.xSmall.rawValue)
-                                .padding(.bottom, viewModel.sortedMeals.isLast(meal) ? SpaceSize.medium.rawValue : SpaceSize.xSmall.rawValue)
-                                .padding(.horizontal)
-                                .accessibilitySortPriority(2)
+                            Button {
+                                mealSelected(meal)
+                            } label: {
+                                MealCard(meal: meal)
+                            }
+                            .buttonStyle(.plain)
+                            .padding(.top, viewModel.sortedMeals.isFirst(meal) ? SpaceSize.medium.rawValue : SpaceSize.xSmall.rawValue)
+                            .padding(.bottom, viewModel.sortedMeals.isLast(meal) ? SpaceSize.medium.rawValue : SpaceSize.xSmall.rawValue)
+                            .padding(.horizontal)
+                            .overlay(alignment: .topTrailing) {
                                 Button {
                                     viewModel.completeMeal(meal)
                                 } label: {
@@ -164,16 +161,16 @@ private struct TodayContentView: View {
                                         }
                                     }
                                 }
+                                .frame(width: 44, height: 44)
                                 .buttonStyle(.plain)
                                 .accessibilityLabel(
                                     meal.isCompleted
                                     ? String(localized: .accessibilityTodayViewMealCompletedButton)
                                     : String(localized: .accessibilityTodayViewMealIncompletedButton)
                                 )
-                                .accessibilitySortPriority(1)
                                 .padding(.top, viewModel.sortedMeals.isFirst(meal) ? SpaceSize.xLarge.rawValue : SpaceSize.large.rawValue)
                                 .padding(.trailing, SpaceSize.xLarge.rawValue)
-                            }.accessibilityElement(children: .contain)
+                            }
                         }
                     }
                     Button {
