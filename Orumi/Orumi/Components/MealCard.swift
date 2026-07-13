@@ -73,29 +73,26 @@ struct MealCard: View {
             }
             .padding()
             Spacer()
-            Button {
-                if hasItems && !isRecord {
-                    onToggleCompletion()
-                }
-            } label: {
-                if !hasItems {
-                    Image(systemName: "circle")
-                        .foregroundStyle(Color.gray.opacity(0.2))
-                        .font(.system(size: 30))
-                } else {
-                    if meal.isCompleted {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(AppColors.lunch)
+            if isRecord {
+                Group {
+                    if !hasItems {
+                        Image(systemName: "circle")
+                            .foregroundStyle(Color.gray.opacity(0.2))
                             .font(.system(size: 30))
                     } else {
-                        Image(systemName: "circle")
-                            .foregroundStyle(Color.gray.opacity(0.5))
-                            .font(.system(size: 30))
+                        if meal.isCompleted {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundStyle(AppColors.lunch)
+                                .font(.system(size: 30))
+                        } else {
+                            Image(systemName: "circle")
+                                .foregroundStyle(Color.gray.opacity(0.5))
+                                .font(.system(size: 30))
+                        }
                     }
                 }
+                .padding(.top)
             }
-            .buttonStyle(.plain)
-            .padding(.top)
         }
         .padding(.trailing)
         .clipShape(RoundedRectangle(cornerRadius: 20))

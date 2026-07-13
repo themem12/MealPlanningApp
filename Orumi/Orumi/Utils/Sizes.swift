@@ -25,4 +25,8 @@ enum SpaceSize: CGFloat {
     case small = 8
     /// medium: 16
     case medium = 16
+    /// large: 24
+    case large = 24
+    /// xLarge: 32
+    case xLarge = 32
 }

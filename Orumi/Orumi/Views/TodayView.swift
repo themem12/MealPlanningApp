@@ -132,17 +132,48 @@ private struct TodayContentView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     ScrollView {
                         ForEach(viewModel.sortedMeals) { meal in
-                            Button {
-                                mealSelected(meal)
-                            } label: {
-                                MealCard(meal: meal) {
-                                    viewModel.completeMeal(meal)
+                            ZStack(alignment: .topTrailing) {
+                                Button {
+                                    mealSelected(meal)
+                                } label: {
+                                    MealCard(meal: meal) {
+                                        viewModel.completeMeal(meal)
+                                    }
                                 }
-                            }
-                            .buttonStyle(.plain)
-                            .padding(.top, viewModel.sortedMeals.isFirst(meal) ? SpaceSize.medium.rawValue : SpaceSize.xSmall.rawValue)
-                            .padding(.bottom, viewModel.sortedMeals.isLast(meal) ? SpaceSize.medium.rawValue : SpaceSize.xSmall.rawValue)
-                            .padding(.horizontal)
+                                .buttonStyle(.plain)
+                                .padding(.top, viewModel.sortedMeals.isFirst(meal) ? SpaceSize.medium.rawValue : SpaceSize.xSmall.rawValue)
+                                .padding(.bottom, viewModel.sortedMeals.isLast(meal) ? SpaceSize.medium.rawValue : SpaceSize.xSmall.rawValue)
+                                .padding(.horizontal)
+                                .accessibilitySortPriority(2)
+                                Button {
+                                    viewModel.completeMeal(meal)
+                                } label: {
+                                    if meal.items.isEmpty {
+                                        Image(systemName: "circle")
+                                            .foregroundStyle(Color.gray.opacity(0.2))
+                                            .font(.system(size: 30))
+                                    } else {
+                                        if meal.isCompleted {
+                                            Image(systemName: "checkmark.circle.fill")
+                                                .foregroundStyle(AppColors.lunch)
+                                                .font(.system(size: 30))
+                                        } else {
+                                            Image(systemName: "circle")
+                                                .foregroundStyle(Color.gray.opacity(0.5))
+                                                .font(.system(size: 30))
+                                        }
+                                    }
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityLabel(
+                                    meal.isCompleted
+                                    ? String(localized: .accessibilityTodayViewMealCompletedButton)
+                                    : String(localized: .accessibilityTodayViewMealIncompletedButton)
+                                )
+                                .accessibilitySortPriority(1)
+                                .padding(.top, viewModel.sortedMeals.isFirst(meal) ? SpaceSize.xLarge.rawValue : SpaceSize.large.rawValue)
+                                .padding(.trailing, SpaceSize.xLarge.rawValue)
+                            }.accessibilityElement(children: .contain)
                         }
                     }
                     Button {

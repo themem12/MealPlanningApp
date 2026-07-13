@@ -76,28 +76,27 @@ private struct DayCardView: View {
     @State private var selectedMeal: Meal?
     
     var body: some View {
-        Button {
-            selectDay()
-        } label: {
-            VStack {
+        VStack {
+            Button {
+                selectDay()
+            } label: {
                 HeaderCardView(
                     mealsCount: mealsCount,
                     weekDay: weekDay,
                     isSelected: isSelected,
                     isToday: isToday
                 )
-                
-                if isSelected {
-                    MealsCardView(
-                        meals: meals,
-                        mealTapped: mealTapped
-                    ).padding(.bottom, 8)
-                }
+            }.buttonStyle(.plain)
+            if isSelected {
+                MealsCardView(
+                    meals: meals,
+                    mealTapped: mealTapped
+                ).padding(.bottom, 8)
             }
-            .padding(.horizontal)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .appCardStyle()
-        }.buttonStyle(.plain)
+        }
+        .padding(.horizontal)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .appCardStyle()
     }
 }
 
@@ -162,7 +161,9 @@ struct MealsCardView: View {
                         mealTapped(meal)
                     } label: {
                         EditWeekMealCardView(meal: meal)
-                    }.buttonStyle(.plain)
+                    }
+                    .accessibilityLabel(Text("\(meal.type.title), \(String(localized: .accessibilityEditWeekViewOpenMealDetail))"))
+                    .buttonStyle(.plain)
                 } else {
                     Text(.somethingWentWrong)
                         .font(.system(size: 24, weight: .bold))
