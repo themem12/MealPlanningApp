@@ -19,7 +19,9 @@ struct DebugMenuView: View {
                         debugService.load(preset)
                     } label: {
                         Text(preset.title)
-                    }
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                    }.buttonStyle(.glassProminent)
                 }
             }
         }.padding()
@@ -28,6 +30,7 @@ struct DebugMenuView: View {
 
 #Preview {
     DebugMenuView(
-        debugService: DebugDataService(mealService: MockMealDataService())
+        debugService:
+            DebugDataService(mealService: MockMealDataService(), debugDateProvider: DebugDateProvider())
     )
 }

@@ -9,9 +9,11 @@ import Foundation
 
 class DebugDataService {
     let mealService: MealDataServiceProtocol
+    let debugDateProvider: DebugDateProvider
 
-    init(mealService: MealDataServiceProtocol) {
+    init(mealService: MealDataServiceProtocol, debugDateProvider: DebugDateProvider) {
         self.mealService = mealService
+        self.debugDateProvider = debugDateProvider
     }
 
     func load(_ preset: DebugPreset) {
@@ -26,6 +28,14 @@ class DebugDataService {
             loadMockupPlans()
         case .deleteAll:
             deleteAll()
+        case .addOneDay:
+            addOneDay()
+        case .removeOneDay:
+            removeOneDay()
+        case .setLiveDate:
+            setLiveDate()
+        case .removeTodayRecord:
+            removeTodayRecord()
         }
     }
 
@@ -39,10 +49,7 @@ class DebugDataService {
 
     private func deleteAll() {
         mealService.deleteAllData()
-        NotificationCenter.default.post(
-            name: .mealDataDidChange,
-            object: nil
-        )
+        notifyUI()
     }
 
     private func loadMockupPlans() {
@@ -50,11 +57,11 @@ class DebugDataService {
         mealService.deleteAllData()
 
         for day in WeekDay.allCases {
-            print("Creating \(day)")
+            Log.database("Creating \(day)")
             let dayPlan = mealService.getOrCreatePlan(for: day)
-            print("Got plan \(dayPlan.day)")
+            Log.database("Got plan \(dayPlan.day)")
             for meal in dayPlan.meals {
-                print("Meal: \(meal.type)")
+                Log.database("Meal: \(meal.type)")
                 switch meal.type {
                 case .breakfast:
                     mealService.addFoodItem(
@@ -129,10 +136,7 @@ class DebugDataService {
             }
         }
 
-        NotificationCenter.default.post(
-            name: .mealDataDidChange,
-            object: nil
-        )
+        notifyUI()
     }
 
     private func loadWeekPlans() {
@@ -141,11 +145,11 @@ class DebugDataService {
         mealService.deleteAllData()
 
         for day in WeekDay.allCases {
-            print("Creating \(day)")
+            Log.database("Creating \(day)")
             let dayPlan = mealService.getOrCreatePlan(for: day)
-            print("Got plan \(dayPlan.day)")
+            Log.database("Got plan \(dayPlan.day)")
             for meal in dayPlan.meals {
-                print("Meal: \(meal.type)")
+                Log.database("Meal: \(meal.type)")
                 switch meal.type {
                 case .breakfast:
                     for item in Meal.breakfast.items {
@@ -170,7 +174,36 @@ class DebugDataService {
                 }
             }
         }
+        notifyUI()
+    }
 
+    private func addOneDay() {
+        debugDateProvider.useMock(date: Calendar.current.date(byAdding: .day, value: 1, to: debugDateProvider.today) ?? .now)
+
+        notifyUI()
+    }
+
+    private func removeOneDay() {
+        debugDateProvider.useMock(date: Calendar.current.date(byAdding: .day, value: -1, to: debugDateProvider.today) ?? .now)
+
+        notifyUI()
+    }
+
+    private func setLiveDate() {
+        debugDateProvider.useLive()
+
+        notifyUI()
+    }
+
+    private func removeTodayRecord() {
+        mealService.deleteTodayRecord()
+
+        notifyUI()
+    }
+}
+
+extension DebugDataService {
+    private func notifyUI() {
         NotificationCenter.default.post(
             name: .mealDataDidChange,
             object: nil

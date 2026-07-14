@@ -22,9 +22,34 @@ struct LiveDateProvider: DateProvider {
     }
 }
 
-struct MockDateProvider: DateProvider {
-    let today: Date
+final class DebugDateProvider: DateProvider {
+
+    enum Mode {
+        case live
+        case custom(Date)
+    }
+
+    private let liveProvider = LiveDateProvider()
+    private var mode: Mode = .live
+
+    var today: Date {
+        switch mode {
+        case .live:
+            return liveProvider.today
+        case .custom(let date):
+            return date
+        }
+    }
+
     var weekDay: WeekDay {
         WeekDay(rawValue: Calendar.current.component(.weekday, from: today)) ?? .monday
+    }
+
+    func useLive() {
+        mode = .live
+    }
+    
+    func useMock(date: Date) {
+        mode = .custom(date)
     }
 }

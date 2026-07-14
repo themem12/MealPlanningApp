@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B51AC843006AF6700BDF082 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B51AC833006AF6400BDF082 /* Logger.swift */; };
 		9BBCCA702FFB6AA0007E0EA5 /* TodayResumeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA542FFB6AA0007E0EA5 /* TodayResumeViewModel.swift */; };
 		9BBCCA712FFB6AA0007E0EA5 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA552FFB6AA0007E0EA5 /* TodayViewModel.swift */; };
 		9BBCCA722FFB6AA0007E0EA5 /* MealDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBCCA3D2FFB6AA0007E0EA5 /* MealDataService.swift */; };
@@ -60,6 +61,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B51AC833006AF6400BDF082 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		9BB7F0BE2FA01332003E89AB /* Orumi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orumi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBCCA302FFB6AA0007E0EA5 /* AppInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInputField.swift; sourceTree = "<group>"; };
 		9BBCCA312FFB6AA0007E0EA5 /* MealCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCard.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 		9BBCCAA12FFB9883007E0EA5 /* 🐞Debug */ = {
 			isa = PBXGroup;
 			children = (
+				9B51AC833006AF6400BDF082 /* Logger.swift */,
 				9BBCCAAD2FFB9F6A007E0EA5 /* DebugPreset.swift */,
 				9BBCCAAA2FFB9F16007E0EA5 /* Services */,
 				9BBCCAA22FFB98D3007E0EA5 /* Fixtures */,
@@ -434,6 +437,7 @@
 				9BBCCAAC2FFB9F27007E0EA5 /* DebugDataService.swift in Sources */,
 				9BBCCAAE2FFB9F6E007E0EA5 /* DebugPreset.swift in Sources */,
 				9BBCCA862FFB6AA0007E0EA5 /* EditWeekContainerView.swift in Sources */,
+				9B51AC843006AF6700BDF082 /* Logger.swift in Sources */,
 				9BBCCA872FFB6AA0007E0EA5 /* WeekDaysModel.swift in Sources */,
 				9BBCCA882FFB6AA0007E0EA5 /* MockMealDataService.swift in Sources */,
 				9BBCCA892FFB6AA0007E0EA5 /* MealCard.swift in Sources */,

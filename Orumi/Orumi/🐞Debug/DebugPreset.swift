@@ -11,6 +11,10 @@ enum DebugPreset: String, CaseIterable, Identifiable {
     case fillWeekPlans
     case mockupPlans
     case deleteAll
+    case addOneDay
+    case removeOneDay
+    case setLiveDate
+    case removeTodayRecord
 
     var id: Self { self }
 
@@ -18,7 +22,6 @@ enum DebugPreset: String, CaseIterable, Identifiable {
         switch self {
         case .firstLaunch:
             "First Launch"
-
         case .perfectWeek:
             "Perfect Week"
         case .fillWeekPlans:
@@ -27,6 +30,14 @@ enum DebugPreset: String, CaseIterable, Identifiable {
             "Instagram plans 💅🏼"
         case .deleteAll:
             "🚨🚨 Delete all 💣 🚨🚨"
+        case .addOneDay:
+            "Add one day"
+        case .removeOneDay:
+            "Remove one day"
+        case .setLiveDate:
+            "Set live date"
+        case .removeTodayRecord:
+            "Remove today record"
         }
     }
 }

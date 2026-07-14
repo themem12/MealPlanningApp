@@ -12,11 +12,11 @@ import SwiftUI
 @Observable
 final class TodayViewModel {
     private(set) var service: MealDataServiceProtocol
+    private(set) var selectedFoodItem: FoodItem?
     private let dateProvider: DateProvider
     private var currentDayPlan: DayPlan?
     private var foodItemMode: FoodItemViewModel.FoodItemMode = .create
     private var meal: Meal?
-    private(set) var selectedFoodItem: FoodItem?
     
     var title = ""
     var titleIcon = ""
@@ -78,10 +78,6 @@ final class TodayViewModel {
 
     func makeResumeViewModel(with dayRecord: DayRecord) -> TodayResumeViewModel {
         TodayResumeViewModel(dayRecord: dayRecord)
-    }
-
-    func makeDebugDataService() -> DebugDataService {
-        DebugDataService(mealService: service)
     }
 
     func getEditWeekContainerViewModel() -> EditWeekContainerViewModel {

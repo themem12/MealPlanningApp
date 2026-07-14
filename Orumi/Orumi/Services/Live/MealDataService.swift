@@ -52,6 +52,8 @@ protocol MealDataServiceProtocol {
     func getLastRecord() -> DayRecord?
 
     func deleteAllData()
+
+    func deleteTodayRecord()
 }
 
 final class LiveMealDataService: MealDataServiceProtocol {
@@ -72,11 +74,6 @@ final class LiveMealDataService: MealDataServiceProtocol {
 
         let fetchedPlans = (try? context.fetch(descriptor)) ?? []
 
-        print("Plans in database:")
-        fetchedPlans.forEach {
-            print($0.day)
-        }
-        
         if let existingPlan = fetchedPlans.first(where: {
             $0.day == day
         }) {
@@ -198,6 +195,21 @@ final class LiveMealDataService: MealDataServiceProtocol {
     func deleteAllData() {
         deleteAll(DayPlan.self)
         deleteAll(DayRecord.self)
+
+        save()
+    }
+
+    func deleteTodayRecord() {
+        var descriptor = FetchDescriptor<DayRecord>(
+            sortBy: [
+                SortDescriptor(\.date, order: .reverse)
+            ]
+        )
+        
+        descriptor.fetchLimit = 1
+        
+        guard let todayRecord = try? context.fetch(descriptor).first else { return }
+        context.delete(todayRecord)
 
         save()
     }

@@ -29,7 +29,7 @@ struct EditWeekContainerView: View {
     EditWeekContainerView(
         viewModel: EditWeekContainerViewModel(
             service: MockMealDataService(),
-            dateProvider: MockDateProvider(today: .now)
+            dateProvider: DebugDateProvider()
         )
     )
 }
