@@ -73,6 +73,9 @@ struct TodayView: View {
                     }
                 }
             }
+            .onReceive(NotificationCenter.default.publisher(for: .mealDataDidChange), perform: { _ in
+                viewModel.loadTodayPlan()
+            })
             .navigationDestination(item: $selectedMeal) { meal in
                 MealDetailView(
                     viewModel: viewModel.makeMealDetailViewModel(for: meal)
@@ -301,6 +304,6 @@ private struct TodaySidebarView: View {
 #Preview {
     TodayView(viewModel: TodayViewModel(
         service: MockMealDataService(),
-        dateProvider: MockDateProvider(today: .now)
+        dateProvider: DebugDateProvider()
     ))
 }

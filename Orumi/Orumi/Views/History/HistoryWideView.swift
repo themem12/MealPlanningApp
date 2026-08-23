@@ -108,7 +108,7 @@ private struct UnselectedDayView: View {
     HistoryWideView(
         historyViewModel: HistoryViewModel(
             service: MockMealDataService(),
-            dateProvider: MockDateProvider(today: .now)
+            dateProvider: DebugDateProvider()
         )
     )
 }

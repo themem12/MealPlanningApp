@@ -12,11 +12,11 @@ import SwiftUI
 @Observable
 final class TodayViewModel {
     private(set) var service: MealDataServiceProtocol
+    private(set) var selectedFoodItem: FoodItem?
     private let dateProvider: DateProvider
     private var currentDayPlan: DayPlan?
     private var foodItemMode: FoodItemViewModel.FoodItemMode = .create
     private var meal: Meal?
-    private(set) var selectedFoodItem: FoodItem?
     
     var title = ""
     var titleIcon = ""
@@ -141,6 +141,10 @@ final class TodayViewModel {
             titleIcon = "moon.zzz"
             titleIconColor = .indigo
         }
+
+        title = String(localized: .todayViewTitleMorning)
+        titleIcon = "sun.horizon"
+        titleIconColor = .yellow
     }
 
     private func setDateTitle() {

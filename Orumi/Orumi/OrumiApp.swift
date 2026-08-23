@@ -13,10 +13,13 @@ struct OrumiApp: App {
 
     @Environment(\.scenePhase) private var scenePhase
 
+    @State private var showDebugMenu: Bool = false
+
     let sharedModelContainer: ModelContainer
     let service: MealDataServiceProtocol
     let historyMaintenanceService: HistoryMaintenanceServiceProtocol
-    let dateProvider: DateProvider
+    let dateProvider: DebugDateProvider
+    let debugDataService: DebugDataService
     
     init() {
         let schema = Schema([
@@ -40,34 +43,22 @@ struct OrumiApp: App {
             )
             
             let context = ModelContext(sharedModelContainer)
-            
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy/MM/dd"
 
-//            let debugDay = formatter.date(from: "2026/07/13")!
-//            dateProvider = MockDateProvider(today: debugDay)
+            dateProvider = DebugDateProvider()
 
-            dateProvider = LiveDateProvider()
-            
             service = LiveMealDataService(
                 context: context,
                 dateProvider: dateProvider
             )
 
-//            for weekDay in WeekDay.orderedCases {
-//                let dayPlan = service.getOrCreatePlan(for: weekDay)
-//                for meal in dayPlan.meals {
-//                    service.addFoodItem(
-//                        to: meal, foodItem: FoodItem(
-//                            name: "\(meal.type.title), \(weekDay.title)", portion: "123 gr"
-//                        )
-//                    )
-//                }
-//            }
-
             historyMaintenanceService = LiveHistoryMaintenanceService(
                 mealService: service,
                 dateProvider: dateProvider
+            )
+
+            debugDataService = DebugDataService(
+                mealService: service,
+                debugDateProvider: dateProvider
             )
             
         } catch {
@@ -85,6 +76,28 @@ struct OrumiApp: App {
                     )
             )
             .preferredColorScheme(.light)
+#if DEBUG
+            .overlay(alignment: .bottomTrailing) {
+                HStack {
+                    Spacer()
+                    Button {
+                        showDebugMenu = true
+                    } label: {
+                        Image(systemName: "ladybug")
+                            .font(.system(size: 30))
+                            .background(.red)
+                            .clipShape(.circle)
+                    }
+                    .buttonStyle(.plain)
+                    .padding()
+                }
+            }
+            .sheet(isPresented: $showDebugMenu, content: {
+                DebugMenuView(
+                    debugService: debugDataService
+                )
+            })
+#endif
         }
         .modelContainer(sharedModelContainer)
         .onChange(of: scenePhase) { _, newValue in

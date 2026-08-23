@@ -226,7 +226,7 @@ private struct EditWeekMealCardView: View {
     EditWeekView(
         viewModel: EditWeekViewModel(
             service: MockMealDataService(),
-            dateProvider: MockDateProvider(today: .now)
+            dateProvider: DebugDateProvider()
         )
     )
 }

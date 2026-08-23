@@ -44,4 +44,10 @@ final class MockMealDataService: MealDataServiceProtocol {
     }
 
     func getLastRecord() -> DayRecord? { return nil }
+
+    func deleteAllData() { }
+
+    func deleteTodayRecord() { }
+
+    func deleteRecordFor(date: Date) { }
 }

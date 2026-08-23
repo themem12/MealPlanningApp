@@ -33,7 +33,7 @@ struct HistoryContainerView: View {
 #Preview {
     HistoryContainerView(
         viewModel: HistoryContainerViewModel(
-            service: MockMealDataService(), dateProvider: MockDateProvider(today: .now)
+            service: MockMealDataService(), dateProvider: DebugDateProvider()
         )
     )
 }

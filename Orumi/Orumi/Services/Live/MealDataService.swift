@@ -50,6 +50,12 @@ protocol MealDataServiceProtocol {
     func getMonthRecord(month: Date) -> [DayRecord]
 
     func getLastRecord() -> DayRecord?
+
+    func deleteAllData()
+
+    func deleteTodayRecord()
+
+    func deleteRecordFor(date: Date)
 }
 
 final class LiveMealDataService: MealDataServiceProtocol {
@@ -69,7 +75,7 @@ final class LiveMealDataService: MealDataServiceProtocol {
         let descriptor = FetchDescriptor<DayPlan>()
 
         let fetchedPlans = (try? context.fetch(descriptor)) ?? []
-        
+
         if let existingPlan = fetchedPlans.first(where: {
             $0.day == day
         }) {
@@ -188,6 +194,43 @@ final class LiveMealDataService: MealDataServiceProtocol {
         return try? context.fetch(descriptor).first
     }
 
+    func deleteAllData() {
+        deleteAll(DayPlan.self)
+        deleteAll(DayRecord.self)
+
+        save()
+    }
+
+    func deleteTodayRecord() {
+        var descriptor = FetchDescriptor<DayRecord>(
+            sortBy: [
+                SortDescriptor(\.date, order: .reverse)
+            ]
+        )
+        
+        descriptor.fetchLimit = 1
+        
+        guard let todayRecord = try? context.fetch(descriptor).first else { return }
+        context.delete(todayRecord)
+
+        save()
+    }
+
+    func deleteRecordFor(date: Date) {
+        var descriptor = FetchDescriptor<DayRecord>(
+            predicate: #Predicate {
+                $0.date == date
+            }
+        )
+
+        descriptor.fetchLimit = 1
+
+        guard let dateRecord = try? context.fetch(descriptor).first else { return }
+        context.delete(dateRecord)
+
+        save()
+    }
+
     private func save() {
         do {
             try context.save()
@@ -202,5 +245,13 @@ final class LiveMealDataService: MealDataServiceProtocol {
             Meal(type: .collationPM),
             Meal(type: .dinner),
         ]
+    }
+
+    private func deleteAll<T: PersistentModel>(_ type: T.Type) {
+        let descriptor = FetchDescriptor<T>()
+
+        guard let objects = try? context.fetch(descriptor) else { return }
+
+        objects.forEach { context.delete($0) }
     }
 }

@@ -177,7 +177,7 @@ private struct UnselectedMealView: View {
         editWeekViewModel:
             EditWeekWideViewModel(
                 service: MockMealDataService(),
-                dateProvider: MockDateProvider(today: .now)
+                dateProvider: DebugDateProvider()
             )
     )
 }

@@ -237,7 +237,7 @@ private struct ArrowButton: View {
     HistoryView(
         viewModel: HistoryViewModel(
             service: MockMealDataService(),
-            dateProvider: MockDateProvider(today: .now)
+            dateProvider: DebugDateProvider()
         )
     )
 }
