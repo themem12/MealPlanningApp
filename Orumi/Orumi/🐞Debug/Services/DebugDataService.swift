@@ -40,11 +40,34 @@ class DebugDataService {
     }
 
     private func loadFirstLaunch() {
-        
+        deleteAll()
     }
 
     private func loadPerfectWeek() {
-        
+        let calendar = Calendar.current
+        let todayWeekDay = calendar.component(.weekday, from: debugDateProvider.today)
+
+        guard var date = calendar.date(byAdding: .day, value: -todayWeekDay, to: debugDateProvider.today) else {
+            return
+        }
+
+        for day in 1...todayWeekDay {
+            guard let weekDay = WeekDay(rawValue: day) else { return }
+            
+            let dayPlan = DayPlan.getDayPlanFrom(weekDay: weekDay)
+            for meal in dayPlan.meals {
+                meal.isCompleted = true
+            }
+            debugDateProvider.useMock(date: date)
+            mealService.deleteRecordFor(date: date)
+            mealService.endDay(for: dayPlan, date: date)
+            guard let newDate = calendar.date(byAdding: .day, value: 1, to: debugDateProvider.today) else {
+                debugDateProvider.useLive()
+                continue
+            }
+            date = newDate
+        }
+        debugDateProvider.useLive()
     }
 
     private func deleteAll() {

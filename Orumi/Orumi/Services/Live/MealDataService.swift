@@ -54,6 +54,8 @@ protocol MealDataServiceProtocol {
     func deleteAllData()
 
     func deleteTodayRecord()
+
+    func deleteRecordFor(date: Date)
 }
 
 final class LiveMealDataService: MealDataServiceProtocol {
@@ -210,6 +212,21 @@ final class LiveMealDataService: MealDataServiceProtocol {
         
         guard let todayRecord = try? context.fetch(descriptor).first else { return }
         context.delete(todayRecord)
+
+        save()
+    }
+
+    func deleteRecordFor(date: Date) {
+        var descriptor = FetchDescriptor<DayRecord>(
+            predicate: #Predicate {
+                $0.date == date
+            }
+        )
+
+        descriptor.fetchLimit = 1
+
+        guard let dateRecord = try? context.fetch(descriptor).first else { return }
+        context.delete(dateRecord)
 
         save()
     }

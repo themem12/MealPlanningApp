@@ -19,4 +19,23 @@ extension DayPlan {
     static let saturday = DayPlan(day: .saturday, meals: [.breakfast, .morningSnack, .lunch, .afternoonSnack, .dinner])
 
     static let sunday = DayPlan(day: .sunday, meals: [.breakfast, .morningSnack, .lunch, .afternoonSnack, .dinner])
+
+    static func getDayPlanFrom(weekDay: WeekDay) -> DayPlan {
+        switch weekDay {
+        case .sunday:
+                .sunday
+        case .monday:
+                .monday
+        case .tuesday:
+                .tuesday
+        case .wednesday:
+                .wednesday
+        case .thursday:
+                .thursday
+        case .friday:
+                .friday
+        case .saturday:
+                .saturday
+        }
+    }
 }
