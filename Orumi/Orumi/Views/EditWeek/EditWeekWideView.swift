@@ -22,10 +22,10 @@ struct EditWeekWideView: View {
         VStack(alignment: .leading) {
             // Header
             Text(.editWeekViewTitle)
-                .font(.system(size: 24, weight: .bold))
+                .font(.title.weight(.bold))
                 .foregroundStyle(AppColors.primaryText)
             Text(.editWeekViewSubtitle)
-                .font(.system(size: 16, weight: .bold))
+                .font(.callout.weight(.bold))
                 .foregroundStyle(AppColors.primaryText)
 
             // Content View
@@ -123,14 +123,14 @@ private struct DayCardView: View {
                     .fill(AppColors.softSage)
                     .frame(width: 40, height: 40)
                 Text(weekDay.shortTitle)
-                    .font(.system(size: 20))
+                    .font(.title3)
                     .foregroundStyle(AppColors.primaryText)
             }
             VStack(alignment: .leading) {
                 Text(weekDay.title)
-                    .font(.system(size: 16))
+                    .font(.callout)
                 Text(.editWeekViewMealsCounter(mealsCount))
-                    .font(.system(size: 12, weight: .light))
+                    .font(.caption.weight(.light))
             }
             if isToday {
                 ZStack {
@@ -139,7 +139,7 @@ private struct DayCardView: View {
                         .frame(width: 60, height: 24)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                     Text(.todayTitle)
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.subheadline.weight(.medium))
                         .foregroundStyle(AppColors.primaryGreen)
                 }
             } else {
@@ -159,10 +159,10 @@ private struct UnselectedMealView: View {
                 .font(.system(size: 170))
                 .foregroundStyle(AppColors.primaryGreen)
             Text(.unselectedMealViewTitle)
-                .font(.system(size: 32, weight: .bold))
+                .font(.largeTitle.weight(.bold))
                 .foregroundStyle(AppColors.primaryText)
             Text(.unselectedMealViewSubtitle)
-                .font(.system(size: 24, weight: .semibold))
+                .font(.title2.weight(.semibold))
                 .foregroundStyle(AppColors.secondaryText)
         }
         .padding()

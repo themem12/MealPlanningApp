@@ -25,7 +25,7 @@ struct TodayResumeView: View {
                         .foregroundStyle(AppColors.dinner.opacity(0.9))
                         .padding(.bottom, 10)
                     Text(.todayResumeViewTitle)
-                        .font(.system(size: 32, weight: .bold))
+                        .font(.largeTitle.weight(.bold))
                         .foregroundStyle(AppColors.primaryText)
                     Text(viewModel.dateString)
                         .font(
@@ -74,10 +74,10 @@ struct EmptyRecordDayView: View {
                     .padding(.bottom, 17)
             }
             Text(.todayResumeViewEmptyTitle)
-                .font(.system(size: 24, weight: .semibold))
+                .font(.title2.weight(.semibold))
                 .foregroundStyle(AppColors.primaryText)
             Text(.todayResumeViewEmptyMessage)
-                .font(.system(size: 16, weight: .light))
+                .font(.callout.weight(.light))
                 .foregroundStyle(AppColors.primaryText)
         }.frame(maxWidth: .infinity)
     }
@@ -108,11 +108,11 @@ private struct DayDataView: View {
                 Image(systemName: "heart")
                     .foregroundStyle(.yellow)
             }
-            .font(.system(size: 14, weight: .light))
+            .font(.subheadline.weight(.light))
             .padding(.top, 12)
             Label(.todayResumeViewSummaryTitle, systemImage: "leaf")
                 .foregroundStyle(AppColors.deepGreen)
-                .font(.system(size: 14))
+                .font(.subheadline)
                 .padding(.top, 8)
             HStack {
                 ForEach(viewModel.meals) { meal in
@@ -209,7 +209,7 @@ private struct MealResumeCard: View {
                 .padding(.bottom, isWideLayout ? 8 : 16)
             if isWideLayout {
                 Text(meal.mealType.title)
-                    .font(.system(size: 24, weight: .bold))
+                    .font(.title2.weight(.bold))
                     .foregroundStyle(AppColors.primaryText)
                     .padding(.bottom)
             }

@@ -62,6 +62,7 @@ struct TodayView: View {
                     } label: {
                         Image(systemName: "slider.horizontal.3")
                     }
+                    .accessibilityLabel(String(localized: "Edit Week plan"))
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     NavigationLink {
@@ -71,6 +72,7 @@ struct TodayView: View {
                     } label: {
                         Image(systemName: "calendar.badge.checkmark")
                     }
+                    .accessibilityLabel(String(localized: "See your history"))
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: .mealDataDidChange), perform: { _ in
@@ -116,9 +118,10 @@ private struct HeaderView: View {
                 Image(systemName: viewModel.titleIcon)
                     .font(.title3)
                     .foregroundStyle(viewModel.titleIconColor)
+                    .accessibilityHidden(true)
             }
             Text(viewModel.dateTitle)
-                .font(.system(size: 12, weight: .light))
+                .font(.caption.weight(.light))
                 .foregroundStyle(AppColors.primaryText)
         }.padding(.horizontal)
     }
@@ -173,7 +176,7 @@ private struct TodayContentView: View {
                                 )
                                 .padding(.top, viewModel.sortedMeals.isFirst(meal) ? SpaceSize.xLarge.rawValue : SpaceSize.large.rawValue)
                                 .padding(.trailing, SpaceSize.xLarge.rawValue)
-                            }
+                            }.accessibilityElement(children: .contain)
                         }
                     }
                     Button {
@@ -220,9 +223,9 @@ private struct TodaySidebarView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(.todayTitle)
-                .font(.system(size: 30, weight: .bold))
+                .font(.title.weight(.bold))
             Text(.todayViewSidebarSubtitle)
-                .font(.system(size: 20, weight: .regular))
+                .font(.title3)
 
             Spacer()
             HStack {
@@ -242,7 +245,7 @@ private struct TodaySidebarView: View {
                 .overlay(.gray.opacity(0.3))
 
             Text(.todayViewSidebarMealsTitle)
-                .font(.system(size: 14, weight: .bold))
+                .font(.footnote.weight(.bold))
                 .padding(.top)
 
             ForEach(MealType.completeMealsOrdered) { mealType in

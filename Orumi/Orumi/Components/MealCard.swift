@@ -38,15 +38,16 @@ struct MealCard: View {
                     .foregroundStyle(
                         meal.type.color.opacity(hasItems ? 1 : 0.55)
                     )
-                    .font(.system(size: 26, weight: .semibold))
+                    .font(.title.weight(.semibold))
             }.padding(.top)
             VStack(alignment: .leading) {
                 Text(meal.type.title)
-                    .font(.system(size: 18, weight: .bold))
+                    .font(.headline.weight(.semibold))
                     .foregroundStyle(AppColors.primaryText)
+                    .accessibilitySortPriority(1)
                 if !hasItems {
                     Text(.mealCardAddFoods)
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.callout.weight(.semibold))
                         .foregroundStyle(AppColors.secondaryText.opacity(0.7))
                 } else {
                     Grid(alignment: .leading, horizontalSpacing: 40) {
@@ -56,14 +57,12 @@ struct MealCard: View {
                                     Text("•")
                                         .foregroundStyle(meal.type.color)
                                     Text(item.name)
-                                        .font(.system(size: 14, weight: .light))
+                                        .font(.footnote.weight(.light))
                                         .foregroundStyle(AppColors.secondaryText)
                                 }
-                                if isRecord {
-                                    Text(item.portion)
-                                        .font(.system(size: 14, weight: .light))
-                                        .foregroundStyle(AppColors.secondaryText)
-                                }
+                                Text(item.portion)
+                                    .font(.footnote)
+                                    .foregroundStyle(AppColors.secondaryText)
                             }
                         }
                     }

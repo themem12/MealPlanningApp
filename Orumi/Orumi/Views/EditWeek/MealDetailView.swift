@@ -31,15 +31,17 @@ struct MealDetailView: View {
             } else {
                 ScrollView {
                     ForEach(viewModel.meal.items) { foodItem in
-                        MealItemCardView(
-                            foodItem: foodItem,
-                            mealType: viewModel.meal.type
-                        )
+                        Button {
+                            addFoodTapped(foodItem)
+                        } label: {
+                            MealItemCardView(
+                                foodItem: foodItem,
+                                mealType: viewModel.meal.type
+                            )
+                        }
+                        .accessibilityHint("Edit this food")
                         .padding(.horizontal)
                         .padding(.top, viewModel.meal.items.isFirst(foodItem) ? SpaceSize.medium.rawValue : SpaceSize.small.rawValue)
-                        .onTapGesture {
-                            addFoodTapped(foodItem)
-                        }
                         .contextMenu {
                             Button(.mealDetailViewContextEdit) {
                                 addFoodTapped(foodItem)
@@ -88,17 +90,19 @@ private struct MealHeaderView: View {
                 Image(systemName: meal.type.icon)
                     .font(.system(size: 70))
                     .foregroundStyle(meal.type.color)
-            }.frame(width: 130, height: 130)
+            }
+            .frame(width: 130, height: 130)
+            .accessibilityHidden(true)
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(meal.type.title)
-                    .font(.system(size: 34, weight: .bold))
+                    .font(.largeTitle.weight(.bold))
                     .foregroundStyle(AppColors.primaryText)
                 Text(meal.type.comment)
-                    .font(.system(size: 18))
+                    .font(.headline)
                     .foregroundStyle(AppColors.secondaryText)
                 Text(.mealDetailViewFoodCounter(meal.items.count))
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.subheadline.weight(.semibold))
                     .foregroundStyle(meal.type.color)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
@@ -121,10 +125,10 @@ private struct MealItemCardView: View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 10) {
                 Text(foodItem.name)
-                    .font(.system(size: 22, weight: .semibold))
+                    .font(.title2.weight(.semibold))
                     .foregroundStyle(AppColors.primaryText)
                 Text(foodItem.portion)
-                    .font(.system(size: 16))
+                    .font(.callout)
                     .foregroundStyle(AppColors.secondaryText)
             }
             .padding(.leading)
@@ -141,28 +145,30 @@ private struct AddMealItemCardView: View {
     let newMealTapped: () -> Void
 
     var body: some View {
-        HStack {
-            Image(systemName: "plus.circle.fill")
-                .foregroundStyle(mealType.color)
-                .font(.system(size: 30))
-                .padding(.leading)
-            VStack(alignment: .leading, spacing: 10) {
-                Text(.mealDetailViewAddFoodTitle)
-                    .font(.system(size: 20, weight: .semibold))
+        Button {
+            newMealTapped()
+        } label: {
+            HStack {
+                Image(systemName: "plus.circle.fill")
                     .foregroundStyle(mealType.color)
-                Text(.mealDetailViewAddFoodSubtitle(mealType.title))
-                    .font(.system(size: 15))
-                    .foregroundStyle(AppColors.secondaryText)
-            }.padding()
-            Spacer()
+                    .font(.system(size: 30))
+                    .padding(.leading)
+                    .accessibilityHidden(true)
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(.mealDetailViewAddFoodTitle)
+                        .font(.title3.weight(.semibold))
+                        .foregroundStyle(mealType.color)
+                    Text(.mealDetailViewAddFoodSubtitle(mealType.title))
+                        .font(.subheadline)
+                        .foregroundStyle(AppColors.secondaryText)
+                }.padding()
+                Spacer()
+            }
         }
         .appSoftPointedCardStyle(
             background: mealType.color.opacity(0.1),
             strokeColor: mealType.color.opacity(0.35)
         )
-        .onTapGesture {
-            newMealTapped()
-        }
     }
 }
 
@@ -176,16 +182,16 @@ private struct EmptyMealView: View {
             Spacer()
             VStack(alignment: .center) {
                 Text(.mealDetailViewEmptyMealTitle)
-                    .font(.system(size: 28, weight: .bold))
+                    .font(.title.weight(.bold))
                     .foregroundStyle(AppColors.primaryText)
                 Text(.mealDetailViewEmptyMealSubtitle(mealType.title))
-                    .font(.system(size: 18))
+                    .font(.headline)
                     .foregroundStyle(AppColors.secondaryText)
                 Button {
                     newMealTapped()
                 } label: {
                     Label(.mealDetailViewAddFoodTitle, systemImage: "plus")
-                        .font(.system(size: 18, weight: .semibold))
+                        .font(.headline.weight(.semibold))
                         .foregroundStyle(.white)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)

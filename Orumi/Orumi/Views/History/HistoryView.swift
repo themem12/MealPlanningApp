@@ -20,7 +20,7 @@ struct HistoryView: View {
                 Text(.historyViewTitle)
                     .font(.system(size: 40, weight: .bold))
                 Text(.historyViewSubtitle)
-                    .font(.system(size: 12, weight: .light))
+                    .font(.caption.weight(.light))
                 
                 CalendarView(viewModel: viewModel) { dayProgress in
                     guard dayProgress.dateState != .isFuture else { return }
@@ -151,7 +151,7 @@ private struct MonthOverviewCard: View {
                     Text("\(numberOfDays)")
                         .foregroundStyle(color)
                     Text(categoryText.lowercased())
-                        .font(.system(size: 12, weight: .light))
+                        .font(.caption.weight(.light))
                 }
             }.frame(maxWidth: .infinity)
         }
@@ -162,7 +162,7 @@ private struct WeekDayCardView: View {
     let weekDay: String
     var body: some View {
         Text(weekDay)
-            .font(.system(size: 14, weight: .heavy))
+            .font(.subheadline.weight(.semibold))
             .foregroundStyle(.black.opacity(0.4))
     }
 }
@@ -182,10 +182,10 @@ private struct DayCardView: View {
     var body: some View {
         VStack {
             Text("\(dayData.day)")
-                .font(.system(size: 14, weight: .semibold))
+                .font(.subheadline.weight(.semibold))
             if dayData.dateState == .isPast || dayData.dateState == .isTodayFinished {
                 Text(dayData.percentage)
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.subheadline.weight(.semibold))
                     .foregroundStyle(dayData.accentColor)
                     .padding(.top, 4)
             }

@@ -23,7 +23,7 @@ struct EditWeekView: View {
                     .font(.largeTitle)
                     .foregroundStyle(AppColors.primaryText)
                 Text(.editWeekViewSubtitle)
-                    .font(.system(size: 14, weight: .light))
+                    .font(.subheadline.weight(.light))
                     .foregroundStyle(AppColors.secondaryText)
             }.padding(.horizontal)
 
@@ -86,7 +86,9 @@ private struct DayCardView: View {
                     isSelected: isSelected,
                     isToday: isToday
                 )
-            }.buttonStyle(.plain)
+            }
+            .buttonStyle(.plain)
+            .accessibilityHint(isSelected ? "Closes this day's meal plan." : "Opens this day's meal plan.")
             if isSelected {
                 MealsCardView(
                     meals: meals,
@@ -113,15 +115,15 @@ private struct HeaderCardView: View {
                     .fill(AppColors.softSage)
                     .frame(width: 40, height: 40)
                 Text(weekDay.shortTitle)
-                    .font(.system(size: 20))
+                    .font(.title3)
                     .foregroundStyle(AppColors.primaryText)
-            }
+            }.accessibilityHidden(true)
             VStack(alignment: .leading) {
                 Text(weekDay.title)
-                    .font(.system(size: 16))
+                    .font(.callout)
                 if !isSelected {
                     Text(.editWeekViewMealsCounter(mealsCount))
-                        .font(.system(size: 12, weight: .light))
+                        .font(.caption.weight(.light))
                 }
             }
             if isToday {
@@ -131,7 +133,7 @@ private struct HeaderCardView: View {
                         .frame(width: 60, height: 24)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                     Text(.todayTitle)
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.subheadline.weight(.medium))
                         .foregroundStyle(AppColors.primaryGreen)
                 }
             }
@@ -166,7 +168,7 @@ struct MealsCardView: View {
                     .buttonStyle(.plain)
                 } else {
                     Text(.somethingWentWrong)
-                        .font(.system(size: 24, weight: .bold))
+                        .font(.title2.weight(.bold))
                         .foregroundStyle(AppColors.primaryText)
                 }
             }
@@ -192,17 +194,17 @@ private struct EditWeekMealCardView: View {
                 }
                 VStack(alignment: .leading) {
                     Text(meal.type.title)
-                        .font(.system(size: 14))
+                        .font(.subheadline)
                         .foregroundStyle(AppColors.primaryText)
                     if meal.items.isEmpty {
                         Text(.mealCardAddFoods)
-                            .font(.system(size: 12))
+                            .font(.caption)
                             .foregroundStyle(AppColors.secondaryText.opacity(0.6))
                     } else {
                         Text(
                             meal.items.map(\.name).joined(separator: " · ")
                         )
-                        .font(.system(size: 12))
+                        .font(.caption)
                         .foregroundStyle(AppColors.secondaryText)
                     }
                 }

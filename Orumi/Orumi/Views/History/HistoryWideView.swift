@@ -76,7 +76,7 @@ private struct CalendarSideView: View {
                     .frame(width: 10, height: 10)
                 HStack(spacing: 0) {
                     Text(categoryText)
-                        .font(.system(size: 12, weight: .light))
+                        .font(.caption.weight(.light))
                 }
                 Spacer()
             }
@@ -91,10 +91,10 @@ private struct UnselectedDayView: View {
                 .font(.system(size: 170))
                 .foregroundStyle(AppColors.primaryGreen)
             Text(.unselectedDayTitle)
-                .font(.system(size: 32, weight: .bold))
+                .font(.largeTitle.weight(.bold))
                 .foregroundStyle(AppColors.primaryText)
             Text(.unselectedDaySubtitle)
-                .font(.system(size: 24, weight: .semibold))
+                .font(.title2.weight(.semibold))
                 .foregroundStyle(AppColors.secondaryText)
         }
         .padding()
