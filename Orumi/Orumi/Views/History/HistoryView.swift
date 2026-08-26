@@ -59,7 +59,9 @@ struct CalendarView: View {
                         viewModel.fetchPreviousMonth()
                     } label: {
                         ArrowButton(direction: .left)
-                    }.buttonStyle(.plain)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Previews month")
                 }
 
                 Spacer()
@@ -71,7 +73,9 @@ struct CalendarView: View {
                         viewModel.fetchNextMonth()
                     } label: {
                         ArrowButton(direction: .right)
-                    }.buttonStyle(.plain)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Next month")
                 }
             }
             .padding(.vertical, 8)
@@ -79,6 +83,7 @@ struct CalendarView: View {
             LazyVGrid(columns: columns, spacing: 8) {
                 ForEach(WeekDay.orderedCases) { weekDay in
                     WeekDayCardView(weekDay: weekDay.shortTitle)
+                        .accessibilityHidden(true)
                 }
                 ForEach(viewModel.monthData) { dayProgress in
                     Button {
@@ -89,7 +94,18 @@ struct CalendarView: View {
                         } else {
                             DayCardView(dayData: dayProgress)
                         }
-                    }.buttonStyle(.plain)
+                    }
+                    .buttonStyle(.plain)
+                    //The days marked as 0 are placeholders or spaces before or after the actual days,
+                    //This makes the calendar show the same format of the week starting in Monday
+                    //If the day is a future one or is today but not finished, we don't add this button since the button won't do anything
+                    .accessibilityHidden(
+                        dayProgress.day == 0 ||
+                        dayProgress.dateState == .isFuture ||
+                        dayProgress.dateState == .isToday
+                    )
+                    .accessibilityLabel("Day \(dayProgress.day), \(dayProgress.percentage) meals completed")
+                    .accessibilityHint("Opens day record")
                 }
             }
             MonthOverviewCard(
