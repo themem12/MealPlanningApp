@@ -29,6 +29,16 @@ final class DayRecordViewModel {
         completedDaysTitle = String(localized: .dayRecordViewCompletedMealsFraction(mealsCounts.completedMeals, mealsCounts.totalMeals))
     }
 
+    func getAccessibilityLabel(from meal: Meal) -> String {
+        var accessibilityLabel: String = ""
+        
+        accessibilityLabel.append("\(meal.type.title), ")
+        accessibilityLabel.append(meal.isCompleted ? "Completed, " : "Not completed, ")
+        accessibilityLabel.append(meal.items.map({ "\($0.name), \($0.portion)" }).joined(separator: ", "))
+        
+        return accessibilityLabel
+    }
+
     private func setActualMeals(mealRecords: [MealRecord]) {
         let notEmptyMeals = mealRecords.filter({ $0.items.count > 0 })
         let actualMeals = notEmptyMeals.map({ Meal(mealRecord: $0) })

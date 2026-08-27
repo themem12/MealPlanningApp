@@ -57,6 +57,8 @@ struct DayRecordView: View {
                             .padding(.horizontal)
                             .padding(.top, viewModel.meals.isFirst(meal) ? SpaceSize.medium.rawValue : SpaceSize.small.rawValue)
                             .padding(.bottom, viewModel.meals.isLast(meal) ? SpaceSize.medium.rawValue : SpaceSize.small.rawValue)
+                            .accessibilityElement(children: .ignore)
+                            .accessibilityLabel(viewModel.getAccessibilityLabel(from: meal))
                     }
                 }
             } else {

@@ -24,6 +24,7 @@ struct TodayResumeView: View {
                         .font(.system(size: 76))
                         .foregroundStyle(AppColors.dinner.opacity(0.9))
                         .padding(.bottom, 10)
+                        .accessibilityHidden(true)
                     Text(.todayResumeViewTitle)
                         .font(.largeTitle.weight(.bold))
                         .foregroundStyle(AppColors.primaryText)
@@ -72,7 +73,7 @@ struct EmptyRecordDayView: View {
                     .foregroundStyle(AppColors.primaryGreen)
                     .padding(.trailing, 23)
                     .padding(.bottom, 17)
-            }
+            }.accessibilityHidden(true)
             Text(.todayResumeViewEmptyTitle)
                 .font(.title2.weight(.semibold))
                 .foregroundStyle(AppColors.primaryText)
@@ -101,12 +102,13 @@ private struct DayDataView: View {
                 totalMeals: viewModel.totalMeals,
                 size: layoutMode == .compact ? 160 : 200,
                 progressBarColor: animatedColor
-            )
+            ).accessibilityElement(children: .combine)
             HStack {
                 Text(.todayResumeViewComment)
                     .foregroundStyle(AppColors.secondaryText)
                 Image(systemName: "heart")
                     .foregroundStyle(.yellow)
+                    .accessibilityHidden(true)
             }
             .font(.subheadline.weight(.light))
             .padding(.top, 12)
@@ -140,7 +142,7 @@ private struct DayDataView: View {
             }
 
             animationTask = Task {
-                for (index, meal) in viewModel.meals.enumerated() {
+                for (index, _) in viewModel.meals.enumerated() {
 
                     try? await Task.sleep(for: .milliseconds(400))
 
@@ -216,6 +218,8 @@ private struct MealResumeCard: View {
         }
         .frame(maxWidth: .infinity)
         .appSoftCardStyle(background: meal.mealType.color.opacity(0.08))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(meal.mealType.title), \(meal.isCompleted ? "Completed" : "Not completed")")
         .scaleEffect(
             shouldHighlight
             ? 1.2

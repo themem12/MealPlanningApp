@@ -104,7 +104,7 @@ struct CalendarView: View {
                         dayProgress.dateState == .isFuture ||
                         dayProgress.dateState == .isToday
                     )
-                    .accessibilityLabel("Day \(dayProgress.day), \(dayProgress.percentage) meals completed")
+                    .accessibilityLabel(viewModel.getDayCellAccessibilityLabel(from: dayProgress))
                     .accessibilityHint("Opens day record")
                 }
             }

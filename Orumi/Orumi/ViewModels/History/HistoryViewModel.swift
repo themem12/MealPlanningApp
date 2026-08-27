@@ -63,6 +63,14 @@ final class HistoryViewModel {
         selectedDayRecord = getDayRecordFromDayNumber(dayNumber: day)
     }
 
+    func getDayCellAccessibilityLabel(from progress: DayProgress) -> String {
+        guard progress.accentColor != .gray else {
+            return "Day \(progress.day), No record set for this day"
+        }
+
+        return "Day \(progress.day), \(progress.percentage) meals completed"
+    }
+
     private func loadMonth() {
         // Clear month data before adding more data
         monthData = []
